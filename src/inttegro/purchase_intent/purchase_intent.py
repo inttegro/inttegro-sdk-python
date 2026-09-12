@@ -20,8 +20,6 @@ class PurchaseIntent(ApiModel):
     Fields not returned by the API remain absent and can still be queried
     through mapping-style access.
     """
-    activity: PurchaseIntentActivityLog | None = field(init=False)
-    """Recent authenticated-owner activity for the purchase intent. Optional; nullable. Python type: ``PurchaseIntentActivityLog | None``; wire name: ``activity``; JSON type: object (PurchaseIntentActivityLog)"""
     allow_variants: bool = field(init=False)
     """Whether the intent was configured with a variant set. Required. Python type: ``bool``; wire name: ``allow_variants``; JSON type: boolean"""
     created_at: datetime = field(init=False)
@@ -65,7 +63,6 @@ class PurchaseIntent(ApiModel):
         order_id = getattr(order, "id", None)
         return order_id if order_id else None
 
-from inttegro.purchase_intent.activity_log import ActivityLog as PurchaseIntentActivityLog
 from inttegro.purchase_intent.merchant import Merchant as PurchaseIntentMerchant
 from inttegro.purchase_intent.price import Price as PurchaseIntentPrice
 from inttegro.purchase_intent.product import Product as PurchaseIntentProduct
