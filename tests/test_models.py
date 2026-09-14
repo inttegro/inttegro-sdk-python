@@ -80,10 +80,15 @@ class TypedModelTest(unittest.TestCase):
                 "id": "rf_1",
                 "order_id": "or_1",
                 "reason": "custom",
-                "status": "pending",
+                "status": "failed",
                 "total": {"currency": "ghs", "value": 100},
                 "line_items": [],
                 "created_at": "2026-09-02T12:00:00Z",
+                "failure": {
+                    "reason": "unknown",
+                    "detail": "The refund could not be completed.",
+                    "retryable": False,
+                },
                 "future_field": {"enabled": True},
             }
         )
@@ -91,6 +96,8 @@ class TypedModelTest(unittest.TestCase):
         self.assertEqual({"enabled": True}, response["future_field"])
         self.assertEqual({"enabled": True}, response.to_dict()["future_field"])
         self.assertEqual("2026-09-02T12:00:00Z", response.to_dict()["created_at"])
+        self.assertEqual("unknown", response.failure.reason)
+        self.assertEqual(False, response.failure.retryable)
 
     def test_timestamp_fields_reject_values_without_an_offset(self):
         with self.assertRaisesRegex(ValueError, "UTC offset"):

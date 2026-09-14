@@ -9,6 +9,8 @@ if TYPE_CHECKING:
     from .cancel_request import CancelRequest as CancelRequest
     from .create_line_item_input import CreateLineItemInput as CreateLineItemInput
     from .create_request import CreateRequest as CreateRequest
+    from .failure import Failure as Failure
+    from .failure_reason import FailureReason as FailureReason
     from .line_item import LineItem as LineItem
     from .lookup_request import LookupRequest as LookupRequest
     from .page import Page as Page
@@ -27,6 +29,8 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "CancelRequest": ("inttegro.refund.cancel_request", "CancelRequest"),
     "CreateLineItemInput": ("inttegro.refund.create_line_item_input", "CreateLineItemInput"),
     "CreateRequest": ("inttegro.refund.create_request", "CreateRequest"),
+    "Failure": ("inttegro.refund.failure", "Failure"),
+    "FailureReason": ("inttegro.refund.failure_reason", "FailureReason"),
     "LineItem": ("inttegro.refund.line_item", "LineItem"),
     "LookupRequest": ("inttegro.refund.lookup_request", "LookupRequest"),
     "Page": ("inttegro.refund.page", "Page"),
@@ -45,6 +49,8 @@ __all__ = [
     "CancelRequest",
     "CreateLineItemInput",
     "CreateRequest",
+    "Failure",
+    "FailureReason",
     "LineItem",
     "LookupRequest",
     "Page",

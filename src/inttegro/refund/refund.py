@@ -31,6 +31,8 @@ class Refund(ApiModel):
     """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     failed_at: datetime | None = field(init=False)
     """Omitted unless processing failed. Optional; nullable. Python type: ``datetime | None``; wire name: ``failed_at``; JSON type: string (date-time)"""
+    failure: RefundFailure | None = field(init=False)
+    """Sanitized terminal failure information. Optional; nullable. Python type: ``RefundFailure | None``; wire name: ``failure``; JSON type: object (RefundFailure)"""
     id: str = field(init=False)
     """Unique identifier for this refund. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
     line_items: list[RefundLineItem] = field(init=False)
@@ -55,4 +57,5 @@ class Refund(ApiModel):
     """Monetary total, represented by a currency and an integer minor-unit value. Required. Python type: ``Amount``; wire name: ``total``; JSON type: object (Amount)"""
 
 from inttegro.refund.line_item import LineItem as RefundLineItem
+from inttegro.refund.failure import Failure as RefundFailure
 from inttegro.refund.reason_value import ReasonValue as RefundReasonValue

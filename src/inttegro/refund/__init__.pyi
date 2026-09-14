@@ -5,6 +5,8 @@ The primary returned object is ``inttegro.refund.Refund``. Related request types
 from .cancel_request import CancelRequest as CancelRequest
 from .create_line_item_input import CreateLineItemInput as CreateLineItemInput
 from .create_request import CreateRequest as CreateRequest
+from .failure import Failure as Failure
+from .failure_reason import FailureReason as FailureReason
 from .line_item import LineItem as LineItem
 from .lookup_request import LookupRequest as LookupRequest
 from .page import Page as Page
