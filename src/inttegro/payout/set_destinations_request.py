@@ -18,5 +18,7 @@ class SetDestinationsRequest(ApiRequest):
 
     API contract schema: ``SetPayoutDestinationsRequest``.
     """
-    destinations: dict[str, str]
-    """Currency-to-financial-account destination assignments. Required. Python type: ``dict[str, str]``; wire name: ``destinations``; JSON type: object (PayoutDestinations)"""
+    destinations: PayoutDestinationsInput
+    """Supported currency-to-financial-account assignments. Required. Python type: ``PayoutDestinationsInput``; wire name: ``destinations``; JSON type: object (PayoutDestinations)."""
+
+from inttegro.payout.destinations_input import DestinationsInput as PayoutDestinationsInput

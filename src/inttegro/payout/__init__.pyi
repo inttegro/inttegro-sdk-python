@@ -6,6 +6,8 @@ from .cancel_request import CancelRequest as CancelRequest
 from .cancel_response import CancelResponse as CancelResponse
 from .disable_automatic_request import DisableAutomaticRequest as DisableAutomaticRequest
 from .disable_automatic_response import DisableAutomaticResponse as DisableAutomaticResponse
+from .destinations import Destinations as Destinations
+from .destinations_input import DestinationsInput as DestinationsInput
 from .enable_automatic_request import EnableAutomaticRequest as EnableAutomaticRequest
 from .enable_automatic_response import EnableAutomaticResponse as EnableAutomaticResponse
 from .error import Error as Error
