@@ -10,6 +10,8 @@ if TYPE_CHECKING:
     from .cancel_response import CancelResponse as CancelResponse
     from .disable_automatic_request import DisableAutomaticRequest as DisableAutomaticRequest
     from .disable_automatic_response import DisableAutomaticResponse as DisableAutomaticResponse
+    from .destinations import Destinations as Destinations
+    from .destinations_input import DestinationsInput as DestinationsInput
     from .enable_automatic_request import EnableAutomaticRequest as EnableAutomaticRequest
     from .enable_automatic_response import EnableAutomaticResponse as EnableAutomaticResponse
     from .error import Error as Error
@@ -37,6 +39,8 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "CancelResponse": ("inttegro.payout.cancel_response", "CancelResponse"),
     "DisableAutomaticRequest": ("inttegro.payout.disable_automatic_request", "DisableAutomaticRequest"),
     "DisableAutomaticResponse": ("inttegro.payout.disable_automatic_response", "DisableAutomaticResponse"),
+    "Destinations": ("inttegro.payout.destinations", "Destinations"),
+    "DestinationsInput": ("inttegro.payout.destinations_input", "DestinationsInput"),
     "EnableAutomaticRequest": ("inttegro.payout.enable_automatic_request", "EnableAutomaticRequest"),
     "EnableAutomaticResponse": ("inttegro.payout.enable_automatic_response", "EnableAutomaticResponse"),
     "Error": ("inttegro.payout.error", "Error"),
@@ -64,6 +68,8 @@ __all__ = [
     "CancelResponse",
     "DisableAutomaticRequest",
     "DisableAutomaticResponse",
+    "Destinations",
+    "DestinationsInput",
     "EnableAutomaticRequest",
     "EnableAutomaticResponse",
     "Error",

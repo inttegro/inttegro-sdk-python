@@ -20,7 +20,9 @@ from inttegro import (
 )
 from inttegro.order import DocumentDeliveryResult as OrderDocumentDeliveryResult
 from inttegro.order import Order, Page as OrderPage
+from inttegro.payout import DestinationsInput, PageRequest
 from inttegro.refund import Refund
+from inttegro.schedule import PayoutRequest
 from inttegro.client import InttegroClient
 from inttegro._telemetry import _request_details
 
@@ -446,15 +448,19 @@ class InttegroClientTest(unittest.TestCase):
         client.payment_methods.delete("pm_1")
         client.payment_methods.settings()
 
-        client.payouts.schedule({"destination_id": "fa_1", "max_amount": 100, "reference": "PAYOUT-1"})
+        client.payouts.schedule(
+            PayoutRequest(destination_id="fa_1", max_amount=100, reference="PAYOUT-1")
+        )
         client.payouts.lookup("po_1")
-        client.payouts.set_destinations({"ghs": "dest"})
+        client.payouts.set_destinations(
+            DestinationsInput(ghs="dest")
+        )
         client.payouts.settings()
         client.payouts.disable_automatic()
         client.payouts.enable_automatic()
         client.payouts.enable_fx()
         client.payouts.disable_fx()
-        client.payouts.page({})
+        client.payouts.page(PageRequest(page_number=1))
         client.payouts.cancel("po_1")
 
         client.balance_transactions.lookup("bt_1")
