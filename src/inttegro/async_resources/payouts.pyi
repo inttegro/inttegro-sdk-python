@@ -8,6 +8,7 @@ from inttegro.payout.settings_lookup import SettingsLookup
 from inttegro.payout.settings_mutation import SettingsMutation
 from inttegro.schedule.payout_request import PayoutRequest
 from inttegro.payout.set_destinations_request import SetDestinationsRequest
+from inttegro.payout.destinations_input import DestinationsInput
 from inttegro.payout.page_request import PageRequest
 
 class AsyncPayouts:
@@ -15,7 +16,7 @@ class AsyncPayouts:
     def __init__(self, http: AsyncHttpClient) -> None:
         ...
 
-    async def set_destinations(self, destinations: SetDestinationsRequest | dict[str, str]) -> SettingsMutation:
+    async def set_destinations(self, destinations: SetDestinationsRequest | DestinationsInput) -> SettingsMutation:
         ...
 
     async def settings(self) -> SettingsLookup:
@@ -33,13 +34,13 @@ class AsyncPayouts:
     async def enable_automatic(self) -> SettingsMutation:
         ...
 
-    async def enable_fx(self) -> SettingsLookup:
+    async def enable_fx(self) -> SettingsMutation:
         ...
 
-    async def disable_fx(self) -> SettingsLookup:
+    async def disable_fx(self) -> SettingsMutation:
         ...
 
-    async def page(self, payload: PageRequest | None=None) -> Page:
+    async def page(self, payload: PageRequest) -> Page:
         ...
 
     async def cancel(self, payout_id: str) -> Payout:
