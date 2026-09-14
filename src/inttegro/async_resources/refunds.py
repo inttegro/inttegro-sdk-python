@@ -35,7 +35,7 @@ class AsyncRefunds:
         """
         return await self.http.post_with_headers('/refunds/create', payload, self._idempotency_headers(idempotency_key))
 
-    async def cancel(self, refund_id: str, idempotency_key: str | None=None) -> Refund:
+    async def cancel(self, refund_id: str, idempotency_key: str | None=None, *, reason: str | None=None) -> Refund:
         """Cancel a pending refund.
 
         API endpoint: ``/refunds/cancel``.
@@ -43,6 +43,7 @@ class AsyncRefunds:
         Args:
             refund_id (str): Unique identifier of the refund.
             idempotency_key (str | None): Optional stable key to reuse when retrying the same logical write.
+            reason (str | None): Optional explanation for canceling the refund.
 
         Returns:
             ``Refund`` decoded from the documented response shape.
@@ -52,7 +53,10 @@ class AsyncRefunds:
             NetworkError: The request could not reach the Inttegro API.
             TimeoutError: The configured request deadline elapsed.
         """
-        return await self.http.post_with_headers('/refunds/cancel', {'refund_id': refund_id}, self._idempotency_headers(idempotency_key))
+        payload = {'refund_id': refund_id}
+        if reason is not None:
+            payload['reason'] = reason
+        return await self.http.post_with_headers('/refunds/cancel', payload, self._idempotency_headers(idempotency_key))
 
     async def lookup(self, refund_id: str) -> Refund:
         """Look up a refund by ID.

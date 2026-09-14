@@ -41,7 +41,13 @@ class Refunds:
             self._idempotency_headers(idempotency_key),
         )
 
-    def cancel(self, refund_id: str, idempotency_key: str | None = None) -> Refund:
+    def cancel(
+        self,
+        refund_id: str,
+        idempotency_key: str | None = None,
+        *,
+        reason: str | None = None,
+    ) -> Refund:
         """Cancel a pending refund.
 
         API endpoint: ``/refunds/cancel``.
@@ -49,6 +55,7 @@ class Refunds:
         Args:
             refund_id (str): Unique identifier of the refund.
             idempotency_key (str | None): Optional stable key to reuse when retrying the same logical write.
+            reason (str | None): Optional explanation for canceling the refund.
 
         Returns:
             ``Refund`` decoded from the documented response shape.
@@ -58,9 +65,12 @@ class Refunds:
             NetworkError: The request could not reach the Inttegro API.
             TimeoutError: The configured request deadline elapsed.
         """
+        payload = {"refund_id": refund_id}
+        if reason is not None:
+            payload["reason"] = reason
         return self.http.post_with_headers(
             "/refunds/cancel",
-            {"refund_id": refund_id},
+            payload,
             self._idempotency_headers(idempotency_key),
         )
 

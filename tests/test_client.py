@@ -594,7 +594,18 @@ class InttegroClientTest(unittest.TestCase):
                 "refund_amount": {"currency": "ghs", "value": 100},
             }],
         })
-        client.refunds.cancel("rf_1")
+        client.refunds.cancel("rf_1", reason="Customer no longer wants the refund")
+        cancel_request = next(
+            req
+            for req in recorder.requests
+            if urllib.parse.urlparse(req.full_url).path == "/refunds/cancel"
+        )
+        cancel_body = json.loads(cancel_request.data.decode("utf-8"))
+        self.assertEqual("rf_1", cancel_body["refund_id"])
+        self.assertEqual(
+            "Customer no longer wants the refund",
+            cancel_body["reason"],
+        )
         client.refunds.lookup("rf_1")
         client.refunds.page({"page_number": 1})
 
