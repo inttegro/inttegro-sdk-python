@@ -132,6 +132,15 @@ def decode_value(annotation: Any, value: Any) -> Any:
             object.__setattr__(instance, model_field.name, decode_value(field_type, value[wire_name]))
             present.add(model_field.name)
             consumed.add(wire_name)
+        if getattr(annotation, "_strict_wire_shape", False):
+            expected = {_wire_name(model_field) for model_field in fields(cast(Any, annotation))}
+            missing = expected.difference(value)
+            unexpected = set(value).difference(expected)
+            if missing or unexpected:
+                raise ModelDecodeError(
+                    f"invalid {annotation.__name__} shape: "
+                    f"missing={sorted(missing)!r}, unexpected={sorted(unexpected)!r}"
+                )
         object.__setattr__(instance, "_present_fields", frozenset(present))
         object.__setattr__(instance, "_extra", {key: item for key, item in value.items() if key not in consumed})
         return instance

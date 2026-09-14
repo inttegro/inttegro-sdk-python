@@ -12,7 +12,11 @@ from inttegro import InttegroClient
 from inttegro.balance_transaction import BalanceTransaction
 from inttegro.chime import EmailMailboxInput, EmailMessageInput
 from inttegro.purchase_intent import UpdateRequest
-from inttegro.refund import Refund
+from inttegro.refund import (
+    PaymentMethodSettlement,
+    Refund,
+    SettlementBankAccountPaymentMethod,
+)
 
 
 class StaticTransport:
@@ -53,6 +57,7 @@ class TypedModelTest(unittest.TestCase):
                         "id": "rf_1",
                         "order_id": "or_1",
                         "reason": "requested_by_customer",
+                        "settlement": {"type": "offline"},
                         "status": "pending",
                         "total": {"currency": "ghs", "value": 2500},
                         "line_items": [],
@@ -80,6 +85,7 @@ class TypedModelTest(unittest.TestCase):
                 "id": "rf_1",
                 "order_id": "or_1",
                 "reason": "custom",
+                "settlement": {"type": "offline"},
                 "status": "failed",
                 "total": {"currency": "ghs", "value": 100},
                 "line_items": [],
@@ -99,6 +105,74 @@ class TypedModelTest(unittest.TestCase):
         self.assertEqual("unknown", response.failure.reason)
         self.assertEqual(False, response.failure.retryable)
 
+    def test_refund_settlement_is_discriminated_and_strict(self):
+        refund = Refund.from_dict(
+            {
+                "id": "rf_1",
+                "order_id": "or_1",
+                "reason": "requested_by_customer",
+                "settlement": {
+                    "type": "payment_method",
+                    "payment_method": {
+                        "id": "pm_123",
+                        "type": "bank_account",
+                        "bank_account": {
+                            "type": "ghana_bank_account",
+                            "ghana_bank_account": {
+                                "account_number": "****1234",
+                                "last4": "1234",
+                            },
+                        },
+                    },
+                },
+                "status": "pending",
+                "total": {"currency": "ghs", "value": 100},
+                "line_items": [],
+                "created_at": "2026-09-02T12:00:00Z",
+            }
+        )
+
+        self.assertIsInstance(refund.settlement, PaymentMethodSettlement)
+        self.assertIsInstance(
+            refund.settlement.payment_method,
+            SettlementBankAccountPaymentMethod,
+        )
+        self.assertEqual(
+            "****1234",
+            refund.settlement.payment_method.bank_account.ghana_bank_account.account_number,
+        )
+
+        with self.assertRaisesRegex(ValueError, "invalid OfflineSettlement shape"):
+            Refund.from_dict(
+                {
+                    "id": "rf_1",
+                    "order_id": "or_1",
+                    "reason": "requested_by_customer",
+                    "settlement": {
+                        "type": "offline",
+                        "payment_method": {"id": "pm_123"},
+                    },
+                    "status": "pending",
+                    "total": {"currency": "ghs", "value": 100},
+                    "line_items": [],
+                    "created_at": "2026-09-02T12:00:00Z",
+                }
+            )
+
+        with self.assertRaisesRegex(ValueError, "PaymentMethodSettlement"):
+            Refund.from_dict(
+                {
+                    "id": "rf_1",
+                    "order_id": "or_1",
+                    "reason": "requested_by_customer",
+                    "settlement": {"type": "payment_method"},
+                    "status": "pending",
+                    "total": {"currency": "ghs", "value": 100},
+                    "line_items": [],
+                    "created_at": "2026-09-02T12:00:00Z",
+                }
+            )
+
     def test_timestamp_fields_reject_values_without_an_offset(self):
         with self.assertRaisesRegex(ValueError, "UTC offset"):
             Refund.from_dict(
@@ -106,6 +180,7 @@ class TypedModelTest(unittest.TestCase):
                     "id": "rf_1",
                     "order_id": "or_1",
                     "reason": "custom",
+                    "settlement": {"type": "offline"},
                     "status": "pending",
                     "total": {"currency": "ghs", "value": 100},
                     "line_items": [],

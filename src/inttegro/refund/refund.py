@@ -49,6 +49,8 @@ class Refund(ApiModel):
     """The reason details associated with this refund. Optional; nullable. Python type: ``str | None``; wire name: ``reason_details``; JSON type: string. Constraints: maximum length 2048"""
     reference: str | None = field(init=False)
     """Merchant-defined external reference for the refund. Optional; nullable. Python type: ``str | None``; wire name: ``reference``; JSON type: string"""
+    settlement: RefundSettlement = field(init=False)
+    """Immutable refund destination. Required. Python type: ``RefundSettlement``; wire name: ``settlement``; JSON type: object (RefundSettlement) selected by the required ``type`` discriminator"""
     status: Literal['canceled', 'failed', 'pending', 'processing', 'succeeded'] = field(init=False)
     """Current lifecycle status of the refund. Required. Python type: ``Literal['canceled', 'failed', 'pending', 'processing', 'succeeded']``; wire name: ``status``; JSON type: string. Constraints: allowed values ``canceled``, ``failed``, ``pending``, ``processing``, ``succeeded``"""
     succeeded_at: datetime | None = field(init=False)
@@ -59,3 +61,4 @@ class Refund(ApiModel):
 from inttegro.refund.line_item import LineItem as RefundLineItem
 from inttegro.refund.failure import Failure as RefundFailure
 from inttegro.refund.reason_value import ReasonValue as RefundReasonValue
+from inttegro.refund.settlement import Settlement as RefundSettlement

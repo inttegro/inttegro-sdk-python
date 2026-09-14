@@ -39,6 +39,7 @@ REFUND_BODY = {
     "id": "rf_123",
     "order_id": "or_123",
     "reason": "requested_by_customer",
+    "settlement": {"type": "offline"},
     "status": "pending",
     "total": {"currency": "ghs", "value": 100},
     "line_items": [],
