@@ -6,11 +6,6 @@ from importlib import import_module
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from .activity import Activity as Activity
-    from .activity_attribution import ActivityAttribution as ActivityAttribution
-    from .activity_log import ActivityLog as ActivityLog
-    from .activity_type import ActivityType as ActivityType
-    from .activity_visitor import ActivityVisitor as ActivityVisitor
     from .cancel_request import CancelRequest as CancelRequest
     from .create_request import CreateRequest as CreateRequest
     from .create_request_price import CreateRequestPrice as CreateRequestPrice
@@ -41,11 +36,6 @@ if TYPE_CHECKING:
 
 
 _EXPORTS: dict[str, tuple[str, str]] = {
-    "Activity": ("inttegro.purchase_intent.activity", "Activity"),
-    "ActivityAttribution": ("inttegro.purchase_intent.activity_attribution", "ActivityAttribution"),
-    "ActivityLog": ("inttegro.purchase_intent.activity_log", "ActivityLog"),
-    "ActivityType": ("inttegro.purchase_intent.activity_type", "ActivityType"),
-    "ActivityVisitor": ("inttegro.purchase_intent.activity_visitor", "ActivityVisitor"),
     "CancelRequest": ("inttegro.purchase_intent.cancel_request", "CancelRequest"),
     "CreateRequest": ("inttegro.purchase_intent.create_request", "CreateRequest"),
     "CreateRequestPrice": ("inttegro.purchase_intent.create_request_price", "CreateRequestPrice"),
@@ -76,11 +66,6 @@ _EXPORTS: dict[str, tuple[str, str]] = {
 }
 
 __all__ = [
-    "Activity",
-    "ActivityAttribution",
-    "ActivityLog",
-    "ActivityType",
-    "ActivityVisitor",
     "CancelRequest",
     "CreateRequest",
     "CreateRequestPrice",

@@ -2,11 +2,6 @@
 
 The primary returned object is ``inttegro.purchase_intent.PurchaseIntent``. Related request types, nested response shapes, and string-backed enums are exported from this singular namespace. Public members load lazily, so importing one resource does not eagerly import the entire SDK."""
 
-from .activity import Activity as Activity
-from .activity_attribution import ActivityAttribution as ActivityAttribution
-from .activity_log import ActivityLog as ActivityLog
-from .activity_type import ActivityType as ActivityType
-from .activity_visitor import ActivityVisitor as ActivityVisitor
 from .cancel_request import CancelRequest as CancelRequest
 from .create_request import CreateRequest as CreateRequest
 from .create_request_price import CreateRequestPrice as CreateRequestPrice

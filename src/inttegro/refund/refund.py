@@ -21,6 +21,8 @@ class Refund(ApiModel):
     Fields not returned by the API remain absent and can still be queried
     through mapping-style access.
     """
+    cancel_reason: str | None = field(init=False)
+    """Omitted unless a reason was supplied when the refund was canceled. Optional; nullable. Python type: ``str | None``; wire name: ``cancel_reason``; JSON type: string"""
     canceled_at: datetime | None = field(init=False)
     """Omitted unless the refund was canceled before processing began. Optional; nullable. Python type: ``datetime | None``; wire name: ``canceled_at``; JSON type: string (date-time)"""
     created_at: datetime = field(init=False)
@@ -35,6 +37,8 @@ class Refund(ApiModel):
     """One or more immutable line-level refund allocations. Required. Python type: ``list[RefundLineItem]``; wire name: ``line_items``; JSON type: array of object (RefundLineItem) values"""
     order_id: str = field(init=False)
     """Identifier of the related order. Required. Python type: ``str``; wire name: ``order_id``; JSON type: string"""
+    order_amount: Amount | None = field(init=False)
+    """Total amount of the originating order captured when the refund was created. Optional; nullable. Python type: ``Amount | None``; wire name: ``order_amount``; JSON type: object (Amount)"""
     processing_at: datetime | None = field(init=False)
     """Omitted until processing starts. Optional; nullable. Python type: ``datetime | None``; wire name: ``processing_at``; JSON type: string (date-time)"""
     reason: RefundReasonValue = field(init=False)

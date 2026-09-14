@@ -18,6 +18,8 @@ class CancelRequest(ApiRequest):
 
     API contract schema: ``CancelRefundRequest``.
     """
+    reason: str | UnsetType = field(default=UNSET)
+    """Optional explanation for canceling the refund. Leading and trailing whitespace is removed. Optional. Python type: ``str``; wire name: ``reason``; JSON type: string. Constraints: minimum length 1; maximum length 2048"""
     request_meta: RefundRequestMetaInput | UnsetType = field(default=UNSET)
     """The request meta associated with this cancel request. Optional. Python type: ``RefundRequestMetaInput``; wire name: ``request_meta``; JSON type: object (RefundRequestMeta)"""
     refund_id: str

@@ -52,17 +52,6 @@ BALANCE_BODY = {
     }
 }
 PURCHASE_INTENT_BODY = {
-    "activity": {
-        "recent": [
-            {
-                "created_at": "2026-09-09T12:01:00Z",
-                "id": "saleevt_123",
-                "purchase_intent_id": "sale_123",
-                "type": "viewed",
-                "visitor": {"ip_address": "203.0.113.7"},
-            }
-        ]
-    },
     "allow_variants": False,
     "created_at": "2026-09-09T12:00:00Z",
     "id": "sale_123",
@@ -584,9 +573,6 @@ class InttegroClientTest(unittest.TestCase):
         client.purchase_intents.update({"id": "sale_1", "quantity": {"min": 1}})
         client.purchase_intents.cancel("sale_1")
         purchase_intent = client.purchase_intents.lookup("sale_1")
-        self.assertEqual(
-            "203.0.113.7", purchase_intent.activity.recent[0].visitor.ip_address
-        )
         self.assertEqual("Tea House Ltd", purchase_intent.merchant.organization_name)
         self.assertEqual(1024, purchase_intent.product.dimensions.digital.bytes)
         self.assertEqual("or_123", purchase_intent.usage.order.id)
@@ -608,7 +594,18 @@ class InttegroClientTest(unittest.TestCase):
                 "refund_amount": {"currency": "ghs", "value": 100},
             }],
         })
-        client.refunds.cancel("rf_1")
+        client.refunds.cancel("rf_1", reason="Customer no longer wants the refund")
+        cancel_request = next(
+            req
+            for req in recorder.requests
+            if urllib.parse.urlparse(req.full_url).path == "/refunds/cancel"
+        )
+        cancel_body = json.loads(cancel_request.data.decode("utf-8"))
+        self.assertEqual("rf_1", cancel_body["refund_id"])
+        self.assertEqual(
+            "Customer no longer wants the refund",
+            cancel_body["reason"],
+        )
         client.refunds.lookup("rf_1")
         client.refunds.page({"page_number": 1})
 
