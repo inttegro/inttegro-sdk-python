@@ -11,3 +11,5 @@ SettlementPaymentMethod: TypeAlias = (
     SettlementMobileMoneyPaymentMethod | SettlementBankAccountPaymentMethod
 )
 """Caller-safe original method selected by its required ``type`` discriminator."""
+
+__all__ = ["SettlementPaymentMethod"]

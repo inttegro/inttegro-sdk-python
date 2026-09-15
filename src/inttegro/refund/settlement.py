@@ -9,3 +9,5 @@ from inttegro.refund.payment_method_settlement import PaymentMethodSettlement
 
 Settlement: TypeAlias = OfflineSettlement | PaymentMethodSettlement
 """Immutable refund destination selected by the required ``type`` discriminator."""
+
+__all__ = ["Settlement"]
