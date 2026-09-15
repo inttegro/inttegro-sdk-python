@@ -38,6 +38,8 @@ class PaymentMethod(ApiModel):
     """Whether the method is limited to its originating flow and cannot be reused. Optional; nullable. Python type: ``bool | None``; wire name: ``ephemeral``; JSON type: boolean"""
     expires_on: datetime | None = field(init=False)
     """When this payment method expires. Omitted when no expiry is available. Optional; nullable. Python type: ``datetime | None``; wire name: ``expires_on``; JSON type: string (date-time)"""
+    fingerprint: str = field(init=False)
+    """App-customer-local fingerprint. Required; empty when unavailable. Python type: ``str``; wire name: ``fingerprint``; JSON type: string"""
     id: str = field(init=False)
     """Unique identifier for this payment method. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
     mobile_money: PaymentMethodMobileMoney | None = field(init=False)
