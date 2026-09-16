@@ -36,8 +36,8 @@ class EmbeddedProduct(ApiModel):
     """Product category. Optional; nullable. Python type: ``str | None``; wire name: ``category``; JSON type: string"""
     created_at: datetime = field(init=False)
     """Product creation timestamp. Required. Python type: ``datetime``; wire name: ``created_at``; JSON type: string (date-time)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     description: str | None = field(init=False)
     """Short description. Optional; nullable. Python type: ``str | None``; wire name: ``description``; JSON type: string"""
     dimensions: ProductDimensions | None = field(init=False)
@@ -65,3 +65,4 @@ from inttegro.price.embedded_product_attributes_item import EmbeddedProductAttri
 from inttegro.product.dimensions import Dimensions as ProductDimensions
 from inttegro.product.media import Media as ProductMedia
 from inttegro.product.shipment import Shipment as ProductShipment
+from inttegro.custom_data import CustomData

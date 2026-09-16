@@ -27,8 +27,8 @@ class Refund(ApiModel):
     """Omitted unless the refund was canceled before processing began. Optional; nullable. Python type: ``datetime | None``; wire name: ``canceled_at``; JSON type: string (date-time)"""
     created_at: datetime = field(init=False)
     """When the refund was created. Required. Python type: ``datetime``; wire name: ``created_at``; JSON type: string (date-time)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     failed_at: datetime | None = field(init=False)
     """Omitted unless processing failed. Optional; nullable. Python type: ``datetime | None``; wire name: ``failed_at``; JSON type: string (date-time)"""
     failure: RefundFailure | None = field(init=False)
@@ -62,3 +62,4 @@ from inttegro.refund.line_item import LineItem as RefundLineItem
 from inttegro.refund.failure import Failure as RefundFailure
 from inttegro.refund.reason_value import ReasonValue as RefundReasonValue
 from inttegro.refund.settlement import Settlement as RefundSettlement
+from inttegro.custom_data import CustomData

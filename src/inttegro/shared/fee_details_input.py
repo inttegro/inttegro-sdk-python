@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 from typing import Any
 from inttegro._request_base import ApiRequest, UNSET, UnsetType
 from inttegro.money import AmountParams
+from inttegro.custom_data import CustomData
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -26,7 +27,7 @@ class FeeDetailsInput(ApiRequest):
     """The tax classification code for the shipping fee. Optional. Python type: ``str``; wire name: ``tax_code``; JSON type: string"""
     description: str | UnsetType = field(default=UNSET)
     """Customer-facing description for this fee. Optional. Python type: ``str``; wire name: ``description``; JSON type: string"""
-    custom_data: dict[str, Any] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``dict[str, Any]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     amount: AmountParams
     """Monetary amount, represented by a currency and an integer minor-unit value. Required. Python type: ``AmountParams``; wire name: ``amount``; JSON type: object (AmountParams)"""

@@ -43,8 +43,8 @@ class UpdateRequest(ApiRequest):
     """Legacy image list. Mutually exclusive with `media`. Optional. Python type: ``list[str]``; wire name: ``images``; JSON type: array of string values"""
     attributes: list[ProductAttributeInput] | UnsetType = field(default=UNSET)
     """Product attributes. Optional. Python type: ``list[ProductAttributeInput]``; wire name: ``attributes``; JSON type: array of object (ProductAttribute) values"""
-    custom_data: dict[str, str] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``dict[str, str]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     product_id: str
     """Product ID to update. Required. Python type: ``str``; wire name: ``product_id``; JSON type: string"""
 
@@ -53,3 +53,4 @@ from inttegro.product.dimensions_input import DimensionsInput as ProductDimensio
 from inttegro.product.media_input import MediaInput as ProductMediaInput
 from inttegro.product.shipment_input import ShipmentInput as ProductShipmentInput
 from inttegro.product.type import Type as ProductType
+from inttegro.custom_data import CustomData

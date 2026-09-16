@@ -28,8 +28,8 @@ class Order(ApiModel):
     """When the order was completed. Omitted otherwise. Optional; nullable. Python type: ``datetime | None``; wire name: ``completed_at``; JSON type: string (date-time)"""
     created_from: OrderCreatedFrom | None = field(init=False)
     """Attribution for the public resource that created this order, when available. Optional; nullable. Python type: ``OrderCreatedFrom | None``; wire name: ``created_from``; JSON type: object"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     customer: OrderCustomer = field(init=False)
     """The customer associated with this order. Required. Python type: ``OrderCustomer``; wire name: ``customer``; JSON type: object"""
     expires_at: datetime | None = field(init=False)
@@ -89,3 +89,4 @@ from inttegro.order.line_item_group import LineItemGroup as OrderLineItemGroup
 from inttegro.payment.payment import Payment
 from inttegro.payment.next_action import NextAction as PaymentNextAction
 from inttegro.refund.refund import Refund
+from inttegro.custom_data import CustomData

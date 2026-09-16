@@ -18,8 +18,8 @@ class CreateRequest(ApiRequest):
 
     API contract schema: ``CreateRefundRequest``.
     """
-    custom_data: dict[str, str] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``dict[str, str]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     reason_details: str | UnsetType = field(default=UNSET)
     """Overall explanation. Required when `reason` is `custom`. Optional. Python type: ``str``; wire name: ``reason_details``; JSON type: string. Constraints: maximum length 2048"""
     reference: str | UnsetType = field(default=UNSET)
@@ -36,3 +36,4 @@ class CreateRequest(ApiRequest):
 from inttegro.refund.create_line_item_input import CreateLineItemInput as CreateRefundLineItemInput
 from inttegro.refund.reason_input import ReasonInput as RefundReasonInput
 from inttegro.refund.request_meta_input import RequestMetaInput as RefundRequestMetaInput
+from inttegro.custom_data import CustomData

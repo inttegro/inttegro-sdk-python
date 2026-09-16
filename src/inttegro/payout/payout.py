@@ -27,8 +27,8 @@ class Payout(ApiModel):
     """Balance transaction IDs linked to this payout. Optional; nullable. Python type: ``list[str] | None``; wire name: ``balance_transactions``; JSON type: array of string values"""
     canceled_at: datetime | None = field(init=False)
     """When the payout was canceled. Optional; nullable. Python type: ``datetime | None``; wire name: ``canceled_at``; JSON type: string (date-time)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     destination_id: str = field(init=False)
     """Financial account receiving the funds. Required. Python type: ``str``; wire name: ``destination_id``; JSON type: string"""
     error: PayoutError | None = field(init=False)
@@ -67,3 +67,4 @@ class Payout(ApiModel):
     """When the payout succeeded. Optional; nullable. Python type: ``datetime | None``; wire name: ``succeeded_at``; JSON type: string (date-time)"""
 
 from inttegro.payout.error import Error as PayoutError
+from inttegro.custom_data import CustomData

@@ -19,8 +19,8 @@ class DoshRequest(ApiRequest):
 
     API contract schema: ``FinancialAccountDoshRequest``.
     """
-    custom_data: dict[str, Any] | UnsetType = field(default=UNSET)
-    """Merchant-defined values accepted on resource creation. Values are serialized to strings before storage. Optional. Python type: ``dict[str, Any]``; wire name: ``custom_data``; JSON type: object (CustomDataInput)"""
+    custom_data: CustomDataInput | UnsetType = field(default=UNSET)
+    """Merchant-defined values accepted on resource creation. Values are serialized to strings before storage. Optional. Python type: ``CustomDataInput``; wire name: ``custom_data``; JSON type: object (CustomDataInput)"""
     description: str | UnsetType = field(default=UNSET)
     """Human-readable description of the dosh request. Optional. Python type: ``str``; wire name: ``description``; JSON type: string. Constraints: maximum length 200"""
     pull_configuration: FinancialAccountDoshRequestPullConfiguration | UnsetType = field(default=UNSET)
@@ -44,3 +44,4 @@ from inttegro.financial_account.dosh_request_pull_configuration import DoshReque
 from inttegro.financial_account.dosh_request_push_configuration import DoshRequestPushConfiguration as FinancialAccountDoshRequestPushConfiguration
 from inttegro.bank_account.owner_params import OwnerParams as FinancialAccountOwnerInput
 from inttegro.financial_account.type import Type as FinancialAccountType
+from inttegro.custom_data import CustomDataInput

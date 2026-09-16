@@ -28,8 +28,8 @@ class ConnectedResponse(ApiModel):
     """When the connected response was created. Required. Python type: ``datetime``; wire name: ``created_at``; JSON type: string (date-time)"""
     currency: str = field(init=False)
     """The currency associated with this connected response. Required. Python type: ``str``; wire name: ``currency``; JSON type: string"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     description: str | None = field(init=False)
     """Human-readable description of the connected response. Optional; nullable. Python type: ``str | None``; wire name: ``description``; JSON type: string"""
     id: str = field(init=False)
@@ -66,3 +66,4 @@ from inttegro.financial_account.push_configuration import PushConfiguration as F
 from inttegro.wallet.wallet import Wallet as FinancialAccountWallet
 from inttegro.financial_account.financial_institution import FinancialInstitution
 from inttegro.shared.resource_supply import ResourceSupply
+from inttegro.custom_data import CustomData

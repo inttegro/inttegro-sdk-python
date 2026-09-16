@@ -7,6 +7,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 from inttegro._request_base import ApiRequest, UNSET, UnsetType
+from inttegro.custom_data import CustomDataInput
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -21,8 +22,8 @@ class DataInput(ApiRequest):
     """
     reference: str | UnsetType = field(default=UNSET)
     """External reference ID for the customer. Optional. Python type: ``str``; wire name: ``reference``; JSON type: string"""
-    custom_data: dict[str, Any] | UnsetType = field(default=UNSET)
-    """Merchant-defined values accepted on resource creation. Values are serialized to strings before storage. Optional. Python type: ``dict[str, Any]``; wire name: ``custom_data``; JSON type: object (CustomDataInput)"""
+    custom_data: CustomDataInput | UnsetType = field(default=UNSET)
+    """Merchant-defined values accepted on resource creation. Values are serialized to strings before storage. Optional. Python type: ``CustomDataInput``; wire name: ``custom_data``; JSON type: object (CustomDataInput)"""
     name: str
     """Customer's full name. Required. Python type: ``str``; wire name: ``name``; JSON type: string"""
     email_address: str

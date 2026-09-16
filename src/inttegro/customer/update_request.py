@@ -21,8 +21,8 @@ class UpdateRequest(ApiRequest):
     """
     billing_address: CustomerAddressInput | UnsetType = field(default=UNSET)
     """The billing address associated with this update request. Optional. Python type: ``CustomerAddressInput``; wire name: ``billing_address``; JSON type: object (CustomerAddressInput)"""
-    custom_data: dict[str, Any] | UnsetType = field(default=UNSET)
-    """Merchant-defined values accepted on resource creation. Values are serialized to strings before storage. Optional. Python type: ``dict[str, Any]``; wire name: ``custom_data``; JSON type: object (CustomDataInput)"""
+    custom_data: CustomDataInput | UnsetType = field(default=UNSET)
+    """Merchant-defined values accepted on resource creation. Values are serialized to strings before storage. Optional. Python type: ``CustomDataInput``; wire name: ``custom_data``; JSON type: object (CustomDataInput)"""
     email_address: str | UnsetType = field(default=UNSET)
     """Customer or recipient email address. Optional. Python type: ``str``; wire name: ``email_address``; JSON type: string. Constraints: minimum length 3; maximum length 254"""
     name: str | UnsetType = field(default=UNSET)
@@ -41,3 +41,4 @@ class UpdateRequest(ApiRequest):
     """Identifier of the related customer. Required. Python type: ``str``; wire name: ``customer_id``; JSON type: string"""
 
 from inttegro.customer.address_input import AddressInput as CustomerAddressInput
+from inttegro.custom_data import CustomDataInput

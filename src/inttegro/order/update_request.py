@@ -20,8 +20,8 @@ class UpdateRequest(ApiRequest):
     """
     clear_payment_method: bool | UnsetType = field(default=UNSET)
     """Whether clear payment method. Optional. Python type: ``bool``; wire name: ``clear_payment_method``; JSON type: boolean"""
-    custom_data: dict[str, str] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``dict[str, str]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     invoice_settings: InvoiceSettingsInput | UnsetType = field(default=UNSET)
     """Order-level invoice rendering data. Pages uses this data when rendering invoice web and download views. Optional. Python type: ``InvoiceSettingsInput``; wire name: ``invoice_settings``; JSON type: object (InvoiceSettings)"""
     finalize: bool | UnsetType = field(default=UNSET)
@@ -46,3 +46,4 @@ class UpdateRequest(ApiRequest):
 from inttegro.order.invoice_settings_input import InvoiceSettingsInput
 from inttegro.shared.line_item_input import LineItemInput
 from inttegro.order.update_request_payment_method_data import UpdateRequestPaymentMethodData as UpdateOrderRequestPaymentMethodData
+from inttegro.custom_data import CustomData

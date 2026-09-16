@@ -19,8 +19,8 @@ class UpdateRequest(ApiRequest):
 
     API contract schema: ``FinancialAccountUpdateRequest``.
     """
-    custom_data: dict[str, Any] | UnsetType = field(default=UNSET)
-    """Changes to merchant-defined data. JSON null removes a key; every other JSON value is serialized to a string. Optional. Python type: ``dict[str, Any]``; wire name: ``custom_data``; JSON type: object (CustomDataPatch)"""
+    custom_data: CustomDataPatch | UnsetType = field(default=UNSET)
+    """Changes to merchant-defined data. JSON null removes a key; every other JSON value is serialized to a string. Optional. Python type: ``CustomDataPatch``; wire name: ``custom_data``; JSON type: object (CustomDataPatch)"""
     description: str | UnsetType = field(default=UNSET)
     """Human-readable description of the update request. Optional. Python type: ``str``; wire name: ``description``; JSON type: string"""
     label: str | UnsetType = field(default=UNSET)
@@ -33,3 +33,4 @@ class UpdateRequest(ApiRequest):
     """Identifier of the related account. Required. Python type: ``str``; wire name: ``account_id``; JSON type: string"""
 
 from inttegro.bank_account.owner_update_params import OwnerUpdateParams as FinancialAccountOwnerUpdateInput
+from inttegro.custom_data import CustomDataPatch

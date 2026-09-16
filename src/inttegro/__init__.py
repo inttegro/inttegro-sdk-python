@@ -8,6 +8,7 @@ a flat package-level model namespace.
 from .async_client import AsyncInttegroClient
 from .async_http_client import AsyncHTTPClient
 from .client import InttegroClient
+from .custom_data import CustomData, CustomDataInput, CustomDataPatch
 from .response import InttegroResponse
 from .error_reporting import (
     APIErrorReportContext,
@@ -63,6 +64,9 @@ __all__ = [
     "AsyncHTTPClient",
     "AsyncInttegroClient",
     "AuthenticationError",
+    "CustomData",
+    "CustomDataInput",
+    "CustomDataPatch",
     "ErrorReport",
     "ErrorReporter",
     "ErrorReportingPolicy",

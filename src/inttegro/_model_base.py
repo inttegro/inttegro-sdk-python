@@ -7,6 +7,8 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Literal, TypeVar, Union, cast, get_args, get_origin, get_type_hints
 
+from .custom_data import _CustomDataMapping
+
 
 ModelT = TypeVar("ModelT", bound="ApiModel")
 
@@ -116,6 +118,11 @@ def decode_value(annotation: Any, value: Any) -> Any:
             decode_value(key_type, key): decode_value(value_type, item)
             for key, item in value.items()
         }
+
+    if isinstance(annotation, type) and issubclass(annotation, _CustomDataMapping):
+        if not isinstance(value, Mapping):
+            raise ModelDecodeError(f"expected object for {annotation.__name__}")
+        return annotation.from_mapping(value)
 
     if isinstance(annotation, type) and issubclass(annotation, ApiModel):
         if not isinstance(value, Mapping):

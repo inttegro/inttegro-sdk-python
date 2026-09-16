@@ -33,8 +33,8 @@ class CreateRequest(ApiRequest):
     """The requester associated with this create request. Optional. Python type: ``FileActorInput``; wire name: ``requester``; JSON type: object (FileActorInput)"""
     attempts: UploadRequestAttemptsRequest | UnsetType = field(default=UNSET)
     """The attempts associated with this create request. Optional. Python type: ``UploadRequestAttemptsRequest``; wire name: ``attempts``; JSON type: object (UploadRequestAttemptsRequest)"""
-    custom_data: dict[str, str] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``dict[str, str]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     expires_at: datetime | UnsetType = field(default=UNSET)
     """Timestamp for expires at. Optional. Python type: ``datetime``; wire name: ``expires_at``; JSON type: string (date-time)"""
     purpose: str
@@ -46,3 +46,4 @@ from inttegro.file.resource_input import ResourceInput as FileResourceInput
 from inttegro.upload_request.attempts_request import AttemptsRequest as UploadRequestAttemptsRequest
 from inttegro.upload_request.constraints_input import ConstraintsInput as UploadRequestConstraintsInput
 from inttegro.upload_request.display_input import DisplayInput as UploadRequestDisplayInput
+from inttegro.custom_data import CustomData

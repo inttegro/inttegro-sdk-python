@@ -8,9 +8,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from inttegro import InttegroClient
+from inttegro import CustomData, CustomDataInput, CustomDataPatch, InttegroClient
 from inttegro.balance_transaction import BalanceTransaction
 from inttegro.chime import EmailMailboxInput, EmailMessageInput
+from inttegro.customer import CreateRequest as CreateCustomerRequest
+from inttegro.customer import Customer
 from inttegro.purchase_intent import UpdateRequest
 from inttegro.refund import (
     PaymentMethodSettlement,
@@ -29,6 +31,39 @@ class StaticTransport:
 
 
 class TypedModelTest(unittest.TestCase):
+    def test_customer_addresses_and_custom_data_keep_semantic_types(self):
+        request = CreateCustomerRequest(
+            name="Ama Mensah",
+            custom_data=CustomDataInput({"segment": "vip", "visits": 3}),
+        )
+        self.assertEqual(
+            {"segment": "vip", "visits": 3},
+            request.to_dict()["custom_data"],
+        )
+
+        customer = Customer.from_dict(
+            {
+                "balance": {},
+                "billing_address": {"country": "gh", "city": "Accra"},
+                "created_at": "2026-09-02T12:00:00Z",
+                "custom_data": {"segment": "vip"},
+                "guest": False,
+                "id": "cu_1",
+                "name": "Ama Mensah",
+                "shipping_address": {"country": "gh", "city": "Kumasi"},
+            }
+        )
+        self.assertIsInstance(customer.custom_data, CustomData)
+        self.assertEqual("Accra", customer.billing_address.city)
+        self.assertEqual("Kumasi", customer.shipping_address.city)
+
+    def test_custom_data_patch_distinguishes_unset_from_omission(self):
+        patch = CustomDataPatch().set("segment", "returning").unset("legacy")
+        self.assertEqual(
+            {"segment": "returning", "legacy": None},
+            patch.to_dict(),
+        )
+
     def test_request_objects_are_frozen_and_preserve_wire_field_names(self):
         request = EmailMessageInput(
             subject="Payment receipt",

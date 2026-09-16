@@ -50,8 +50,8 @@ class UploadRequest(ApiModel):
     """The latest error associated with this upload request. Optional; nullable. Python type: ``UploadRequestLatestError | None``; wire name: ``latest_error``; JSON type: object (UploadRequestLatestError)"""
     canceled_by: UploadRequestActor | None = field(init=False)
     """The canceled by associated with this upload request. Optional; nullable. Python type: ``UploadRequestActor | None``; wire name: ``canceled_by``; JSON type: object (UploadRequestActor)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     metadata: dict[str, str] | None = field(init=False)
     """System-managed string metadata attached to a file resource. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``metadata``; JSON type: object (FileMetadata)"""
     created_at: datetime = field(init=False)
@@ -79,3 +79,4 @@ from inttegro.upload_request.attempts import Attempts as UploadRequestAttempts
 from inttegro.upload_request.constraints import Constraints as UploadRequestConstraints
 from inttegro.upload_request.display import Display as UploadRequestDisplay
 from inttegro.upload_request.latest_error import LatestError as UploadRequestLatestError
+from inttegro.custom_data import CustomData

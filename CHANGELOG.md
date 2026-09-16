@@ -1,5 +1,14 @@
 ## [Unreleased]
 
+## [10.0.0] - 2026-09-16
+
+- Breaking: replaced generic custom-data dictionaries with immutable
+  `CustomData`, `CustomDataInput`, and `CustomDataPatch` mappings.
+- Preserved open-ended JSON request values while making replacement and merge
+  behavior explicit and validating custom-data size and key limits.
+- Kept customer billing and shipping addresses represented by their native
+  typed request and response models throughout serialization.
+
 ## [9.0.0] - 2026-09-14
 
 - Breaking: replaced payout dictionaries and generic payloads with named
