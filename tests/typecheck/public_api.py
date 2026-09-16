@@ -14,7 +14,7 @@ def custom_data(
     request: CustomDataInput,
     patch: CustomDataPatch,
 ) -> None:
-    del response, request, patch
+    return None
 
 
 def refund(client: InttegroClient) -> tuple[str, int]:
