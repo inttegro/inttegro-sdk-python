@@ -31,6 +31,9 @@ from . import wallet as wallet
 from .async_client import AsyncInttegroClient as AsyncInttegroClient
 from .async_http_client import AsyncHTTPClient as AsyncHTTPClient
 from .client import InttegroClient as InttegroClient
+from .custom_data import CustomData as CustomData
+from .custom_data import CustomDataInput as CustomDataInput
+from .custom_data import CustomDataPatch as CustomDataPatch
 from .error_reporting import APIErrorReportContext as APIErrorReportContext
 from .error_reporting import ErrorReport as ErrorReport
 from .error_reporting import ErrorReporter as ErrorReporter

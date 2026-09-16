@@ -1,6 +1,20 @@
 import inttegro
-from inttegro import AsyncInttegroClient, InttegroClient
+from inttegro import (
+    AsyncInttegroClient,
+    CustomData,
+    CustomDataInput,
+    CustomDataPatch,
+    InttegroClient,
+)
 from inttegro.refund import Refund
+
+
+def custom_data(
+    response: CustomData,
+    request: CustomDataInput,
+    patch: CustomDataPatch,
+) -> None:
+    del response, request, patch
 
 
 def refund(client: InttegroClient) -> tuple[str, int]:
