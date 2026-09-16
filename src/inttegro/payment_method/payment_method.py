@@ -30,8 +30,8 @@ class PaymentMethod(ApiModel):
     """Card marker. Nested card credentials are not returned. Optional; nullable. Python type: ``PaymentMethodCard | None``; wire name: ``card``; JSON type: object (PaymentMethodCard)"""
     created_at: datetime = field(init=False)
     """When this payment method was tokenized. Required. Python type: ``datetime``; wire name: ``created_at``; JSON type: string (date-time)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     customer_id: str = field(init=False)
     """Customer who owns this payment method. Required. Python type: ``str``; wire name: ``customer_id``; JSON type: string"""
     ephemeral: bool | None = field(init=False)
@@ -73,3 +73,4 @@ from inttegro.payment_method.mobile_money import MobileMoney as PaymentMethodMob
 from inttegro.payment_method.owner import Owner as PaymentMethodOwner
 from inttegro.payment_method.supplied import Supplied as PaymentMethodSupplied
 from inttegro.payment_method.verification import Verification as PaymentMethodVerification
+from inttegro.custom_data import CustomData

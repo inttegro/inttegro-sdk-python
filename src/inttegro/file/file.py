@@ -50,8 +50,8 @@ class File(ApiModel):
     """Purpose-authorized public delivery metadata for browser-rendered assets. Callers should store file IDs as canonical references and treat these URLs as render URLs. Optional; nullable. Python type: ``FileDeliveryDetails | None``; wire name: ``delivery``; JSON type: object (FileDelivery)"""
     latest_error: FileLatestError | None = field(init=False)
     """The latest error associated with this file. Optional; nullable. Python type: ``FileLatestError | None``; wire name: ``latest_error``; JSON type: object (FileLatestError)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     metadata: dict[str, str] | None = field(init=False)
     """System-managed string metadata attached to a file resource. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``metadata``; JSON type: object (FileMetadata)"""
     created_at: datetime = field(init=False)
@@ -69,3 +69,4 @@ from inttegro.file.latest_error import LatestError as FileLatestError
 from inttegro.file.media import Media as FileMedia
 from inttegro.file.source import Source as FileSource
 from inttegro.file.public_storage import PublicStorage as PublicFileStorage
+from inttegro.custom_data import CustomData

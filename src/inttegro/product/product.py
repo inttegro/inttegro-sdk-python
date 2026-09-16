@@ -46,8 +46,8 @@ class Product(ApiModel):
     """Product attributes. Optional; nullable. Python type: ``list[ProductAttribute] | None``; wire name: ``attributes``; JSON type: array of object (ProductAttribute) values"""
     dimensions: ProductDimensions | None = field(init=False)
     """At most one of `physical`, `digital`, or `custom`. Optional; nullable. Python type: ``ProductDimensions | None``; wire name: ``dimensions``; JSON type: object (ProductDimensions)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     active: bool = field(init=False)
     """Whether product is published and available. Required. Python type: ``bool``; wire name: ``active``; JSON type: boolean"""
     created_at: datetime = field(init=False)
@@ -78,3 +78,4 @@ from inttegro.product.dimensions import Dimensions as ProductDimensions
 from inttegro.product.media import Media as ProductMedia
 from inttegro.product.price_summary import PriceSummary as ProductPriceSummary
 from inttegro.product.shipment import Shipment as ProductShipment
+from inttegro.custom_data import CustomData

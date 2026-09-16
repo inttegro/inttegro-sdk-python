@@ -19,8 +19,8 @@ class WalletRequest(ApiRequest):
 
     API contract schema: ``FinancialAccountWalletRequest``.
     """
-    custom_data: dict[str, Any] | UnsetType = field(default=UNSET)
-    """Merchant-defined values accepted on resource creation. Values are serialized to strings before storage. Optional. Python type: ``dict[str, Any]``; wire name: ``custom_data``; JSON type: object (CustomDataInput)"""
+    custom_data: CustomDataInput | UnsetType = field(default=UNSET)
+    """Merchant-defined values accepted on resource creation. Values are serialized to strings before storage. Optional. Python type: ``CustomDataInput``; wire name: ``custom_data``; JSON type: object (CustomDataInput)"""
     description: str | UnsetType = field(default=UNSET)
     """Human-readable description of the wallet request. Optional. Python type: ``str``; wire name: ``description``; JSON type: string. Constraints: maximum length 200"""
     pull_configuration: FinancialAccountWalletRequestPullConfiguration | UnsetType = field(default=UNSET)
@@ -45,3 +45,4 @@ from inttegro.financial_account.type import Type as FinancialAccountType
 from inttegro.financial_account.wallet_request_pull_configuration import WalletRequestPullConfiguration as FinancialAccountWalletRequestPullConfiguration
 from inttegro.financial_account.wallet_request_push_configuration import WalletRequestPushConfiguration as FinancialAccountWalletRequestPushConfiguration
 from inttegro.wallet.params import Params as FinancialAccountWalletRequestWallet
+from inttegro.custom_data import CustomDataInput

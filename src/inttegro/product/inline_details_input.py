@@ -22,8 +22,8 @@ class InlineDetailsInput(ApiRequest):
     """
     about: str | UnsetType = field(default=UNSET)
     """Long-form description or marketing copy. Optional. Python type: ``str``; wire name: ``about``; JSON type: string"""
-    custom_data: dict[str, Any] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``dict[str, Any]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     reference: str | UnsetType = field(default=UNSET)
     """Your SKU or internal product reference. Optional. Python type: ``str``; wire name: ``reference``; JSON type: string"""
     tax_code: str | UnsetType = field(default=UNSET)
@@ -38,3 +38,4 @@ class InlineDetailsInput(ApiRequest):
     """Product type—affects shipping requirements. Required. Python type: ``Literal['physical', 'digital', 'service', 'voucher', 'custom', 'cause', ProductType.PHYSICAL, ProductType.DIGITAL, ProductType.SERVICE, ProductType.VOUCHER, ProductType.CUSTOM, ProductType.CAUSE]``; wire name: ``type``; JSON type: string. Constraints: allowed values ``physical``, ``digital``, ``service``, ``voucher``, ``custom``, ``cause``"""
 
 from inttegro.product.type import Type as ProductType
+from inttegro.custom_data import CustomData

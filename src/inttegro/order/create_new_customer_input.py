@@ -38,8 +38,8 @@ class CreateNewCustomerInput(ApiRequest):
     """Order-level invoice rendering data. Pages uses this data when rendering invoice web and download views. Optional. Python type: ``InvoiceSettingsInput``; wire name: ``invoice_settings``; JSON type: object (InvoiceSettings)"""
     payout_settings: OrderPayoutSettingsRequest | UnsetType = field(default=UNSET)
     """The payout settings associated with this create new customer input. Optional. Python type: ``OrderPayoutSettingsRequest``; wire name: ``payout_settings``; JSON type: object (OrderPayoutSettingsRequest)"""
-    custom_data: dict[str, str] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``dict[str, str]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     billing_details: BillingDetailsInput | UnsetType = field(default=UNSET)
     """The billing details associated with this create new customer input. Optional. Python type: ``BillingDetailsInput``; wire name: ``billing_details``; JSON type: object (BillingDetails)"""
     shipping: ShippingInput | UnsetType = field(default=UNSET)
@@ -60,3 +60,4 @@ from inttegro.shared.line_item_input import LineItemInput
 from inttegro.order.payout_settings_request import PayoutSettingsRequest as OrderPayoutSettingsRequest
 from inttegro.payment_method.data_input import DataInput as PaymentMethodDataInput
 from inttegro.shared.shipping_input import ShippingInput
+from inttegro.custom_data import CustomData

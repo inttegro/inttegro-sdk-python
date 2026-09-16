@@ -6,6 +6,7 @@ Generated from the Inttegro API contract; do not edit by hand.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from inttegro._model_base import ApiModel
+from inttegro.custom_data import CustomData
 
 
 @dataclass(frozen=True, slots=True, init=False, repr=False, eq=False)
@@ -24,5 +25,5 @@ class InvoiceSettings(ApiModel):
     """Optional invoice memo. Optional; nullable. Python type: ``str | None``; wire name: ``memo``; JSON type: string"""
     footer: str | None = field(init=False)
     """Optional invoice footer. Optional; nullable. Python type: ``str | None``; wire name: ``footer``; JSON type: string"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""

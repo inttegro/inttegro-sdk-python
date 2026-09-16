@@ -28,8 +28,8 @@ class SendRequest(ApiRequest):
     """Sender identifier shown to recipient. Uses default sender if not provided. Optional. Python type: ``str``; wire name: ``sender_id``; JSON type: string"""
     purpose: str | UnsetType = field(default=UNSET)
     """Purpose of this chime for categorization and analytics. Optional. Python type: ``str``; wire name: ``purpose``; JSON type: string"""
-    custom_data: dict[str, str] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``dict[str, str]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     request_meta: SendChimeRequestRequestMeta | UnsetType = field(default=UNSET)
     """Optional metadata controlling request processing. Optional. Python type: ``SendChimeRequestRequestMeta``; wire name: ``request_meta``; JSON type: object"""
     recipient: ChimeRecipientInput
@@ -39,3 +39,4 @@ from inttegro.chime.email_message_input import EmailMessageInput as ChimeEmailMe
 from inttegro.chime.recipient_input import RecipientInput as ChimeRecipientInput
 from inttegro.message_template.reference_input import ReferenceInput as MessageTemplateReferenceInput
 from inttegro.chime.send_request_request_meta import SendRequestRequestMeta as SendChimeRequestRequestMeta
+from inttegro.custom_data import CustomData

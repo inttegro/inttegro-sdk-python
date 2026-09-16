@@ -19,8 +19,8 @@ class TokenizeMobileMoneyRequest(ApiRequest):
 
     API contract schema: ``TokenizeMobileMoneyPaymentMethodRequest``.
     """
-    custom_data: dict[str, str] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``dict[str, str]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     customer_id: str
     """Existing customer in the authenticated application who will own the payment method. Required. Python type: ``str``; wire name: ``customer_id``; JSON type: string. Constraints: minimum length 1"""
     type: Literal['mobile_money', PaymentMethodType.MOBILE_MONEY]
@@ -33,3 +33,4 @@ class TokenizeMobileMoneyRequest(ApiRequest):
 from inttegro.payment_method.owner_input import OwnerInput as PaymentMethodOwnerInput
 from inttegro.payment_method.type import Type as PaymentMethodType
 from inttegro.payment_method.tokenize_mobile_money_request_mobile_money import TokenizeMobileMoneyRequestMobileMoney as TokenizeMobileMoneyPaymentMethodRequestMobileMoney
+from inttegro.custom_data import CustomData

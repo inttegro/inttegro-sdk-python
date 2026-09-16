@@ -25,8 +25,8 @@ class Customer(ApiModel):
     """The billing address associated with this customer. Optional; nullable. Python type: ``CustomerAddress | None``; wire name: ``billing_address``; JSON type: object (CustomerAddress)"""
     created_at: datetime = field(init=False)
     """When the customer was created. Required. Python type: ``datetime``; wire name: ``created_at``; JSON type: string (date-time)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     email_address: str | None = field(init=False)
     """Customer or recipient email address. Optional; nullable. Python type: ``str | None``; wire name: ``email_address``; JSON type: string"""
     guest: bool = field(init=False)
@@ -50,3 +50,4 @@ class Customer(ApiModel):
 
 from inttegro.customer.address import Address as CustomerAddress
 from inttegro.customer.balance_value import BalanceValue as CustomerBalanceValue
+from inttegro.custom_data import CustomData

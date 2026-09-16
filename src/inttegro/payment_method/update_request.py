@@ -18,8 +18,8 @@ class UpdateRequest(ApiRequest):
 
     API contract schema: ``UpdatePaymentMethodRequest``.
     """
-    custom_data: dict[str, str | None] | UnsetType = field(default=UNSET)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str | None]``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | UnsetType = field(default=UNSET)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     active: bool | UnsetType = field(default=UNSET)
     """Whether this payment method is active and reusable in new payment flows. Optional. Python type: ``bool``; wire name: ``active``; JSON type: boolean"""
     archived: bool | UnsetType = field(default=UNSET)
@@ -30,3 +30,4 @@ class UpdateRequest(ApiRequest):
     """Identifier of the related payment method. Required. Python type: ``str``; wire name: ``payment_method_id``; JSON type: string"""
 
 from inttegro.payment_method.update_request_owner import UpdateRequestOwner as UpdatePaymentMethodRequestOwner
+from inttegro.custom_data import CustomData

@@ -40,8 +40,8 @@ class FileLink(ApiModel):
     """The created by associated with this file link. Required. Python type: ``FileLinkActor``; wire name: ``created_by``; JSON type: object (FileLinkActor)"""
     revoked_by: FileLinkActor | None = field(init=False)
     """The revoked by associated with this file link. Optional; nullable. Python type: ``FileLinkActor | None``; wire name: ``revoked_by``; JSON type: object (FileLinkActor)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     metadata: dict[str, str] | None = field(init=False)
     """System-managed string metadata attached to a file resource. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``metadata``; JSON type: object (FileMetadata)"""
     created_at: datetime = field(init=False)
@@ -56,3 +56,4 @@ class FileLink(ApiModel):
 from inttegro.file_link.access import Access as FileLinkAccess
 from inttegro.file_link.actor import Actor as FileLinkActor
 from inttegro.file_link.delivery import Delivery as FileLinkDelivery
+from inttegro.custom_data import CustomData

@@ -7,6 +7,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from inttegro._model_base import ApiModel
 from inttegro.price.inline import Inline as Price
+from inttegro.custom_data import CustomData
 
 
 @dataclass(frozen=True, slots=True, init=False, repr=False, eq=False)
@@ -31,8 +32,8 @@ class ProductLineItemProduct(ApiModel):
     """Merchant-defined external reference for the product line item product. Optional; nullable. Python type: ``str | None``; wire name: ``reference``; JSON type: string"""
     about: str | None = field(init=False)
     """The about associated with this product line item product. Optional; nullable. Python type: ``str | None``; wire name: ``about``; JSON type: string"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     tax_code: str | None = field(init=False)
     """The tax code associated with this product line item product. Optional; nullable. Python type: ``str | None``; wire name: ``tax_code``; JSON type: string"""
     name: str = field(init=False)

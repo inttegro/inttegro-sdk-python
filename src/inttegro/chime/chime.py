@@ -21,8 +21,8 @@ class Chime(ApiModel):
     """
     created_at: datetime = field(init=False)
     """When the chime was created. Required. Python type: ``datetime``; wire name: ``created_at``; JSON type: string (date-time)"""
-    custom_data: dict[str, str] | None = field(init=False)
-    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``dict[str, str] | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
+    custom_data: CustomData | None = field(init=False)
+    """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     customer_id: str | None = field(init=False)
     """Identifier of the related customer. Optional; nullable. Python type: ``str | None``; wire name: ``customer_id``; JSON type: string"""
     email: ChimeEmailMessage | None = field(init=False)
@@ -45,3 +45,4 @@ class Chime(ApiModel):
 from inttegro.chime.email_message import EmailMessage as ChimeEmailMessage
 from inttegro.chime.recipient import Recipient as ChimeRecipient
 from inttegro.chime.transmission import Transmission as ChimeTransmission
+from inttegro.custom_data import CustomData
