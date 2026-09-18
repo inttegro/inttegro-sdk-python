@@ -10,6 +10,13 @@ from .failure_reason import FailureReason as FailureReason
 from .line_item import LineItem as LineItem
 from .lookup_request import LookupRequest as LookupRequest
 from .offline_settlement import OfflineSettlement as OfflineSettlement
+from .order_fee_line_item import OrderFeeLineItem as OrderFeeLineItem
+from .order_fee_line_item_fee import OrderFeeLineItemFee as OrderFeeLineItemFee
+from .order_line_item import OrderLineItem as OrderLineItem
+from .order_product_line_item import OrderProductLineItem as OrderProductLineItem
+from .order_product_line_item_product import OrderProductLineItemProduct as OrderProductLineItemProduct
+from .order_shipping_line_item import OrderShippingLineItem as OrderShippingLineItem
+from .order_shipping_line_item_shipping import OrderShippingLineItemShipping as OrderShippingLineItemShipping
 from .page import Page as Page
 from .page_request import PageRequest as PageRequest
 from .page_response import PageResponse as PageResponse

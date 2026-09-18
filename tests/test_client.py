@@ -21,7 +21,7 @@ from inttegro import (
 from inttegro.order import DocumentDeliveryResult as OrderDocumentDeliveryResult
 from inttegro.order import Order, Page as OrderPage
 from inttegro.payout import DestinationsInput, PageRequest
-from inttegro.refund import Refund
+from inttegro.refund import OrderProductLineItem, Refund
 from inttegro.schedule import PayoutRequest
 from inttegro.client import InttegroClient
 from inttegro._telemetry import _request_details
@@ -42,7 +42,18 @@ REFUND_BODY = {
     "settlement": {"type": "offline"},
     "status": "pending",
     "total": {"currency": "ghs", "value": 100},
-    "line_items": [],
+    "line_items": [{
+        "id": "rli_123",
+        "order_line_item_id": "oli_123",
+        "order_line_item": {
+            "id": "oli_123",
+            "type": "product",
+            "quantity": 2,
+            "product": {"id": "prod_123", "name": "Premium subscription"},
+        },
+        "original_amount_paid": {"currency": "ghs", "value": 200},
+        "refund_amount": {"currency": "ghs", "value": 100},
+    }],
     "created_at": "2026-09-02T12:00:00Z",
 }
 BALANCE_BODY = {
@@ -231,6 +242,14 @@ def read_openapi_paths(path: Path) -> list[str]:
 
 
 class InttegroClientTest(unittest.TestCase):
+    def test_refund_line_items_expose_typed_order_snapshots(self):
+        refund = Refund.from_dict(REFUND_BODY)
+
+        line_item = refund.line_items[0].order_line_item
+        self.assertIsInstance(line_item, OrderProductLineItem)
+        self.assertEqual(2, line_item.quantity)
+        self.assertEqual("prod_123", line_item.product.id)
+
     def test_response_envelope_exposes_response_only_metadata(self):
         class ResponseTransport:
             def __call__(self, req, timeout):

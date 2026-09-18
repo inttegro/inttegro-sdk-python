@@ -14,6 +14,13 @@ if TYPE_CHECKING:
     from .line_item import LineItem as LineItem
     from .lookup_request import LookupRequest as LookupRequest
     from .offline_settlement import OfflineSettlement as OfflineSettlement
+    from .order_fee_line_item import OrderFeeLineItem as OrderFeeLineItem
+    from .order_fee_line_item_fee import OrderFeeLineItemFee as OrderFeeLineItemFee
+    from .order_line_item import OrderLineItem as OrderLineItem
+    from .order_product_line_item import OrderProductLineItem as OrderProductLineItem
+    from .order_product_line_item_product import OrderProductLineItemProduct as OrderProductLineItemProduct
+    from .order_shipping_line_item import OrderShippingLineItem as OrderShippingLineItem
+    from .order_shipping_line_item_shipping import OrderShippingLineItemShipping as OrderShippingLineItemShipping
     from .page import Page as Page
     from .page_request import PageRequest as PageRequest
     from .page_response import PageResponse as PageResponse
@@ -43,6 +50,13 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "LineItem": ("inttegro.refund.line_item", "LineItem"),
     "LookupRequest": ("inttegro.refund.lookup_request", "LookupRequest"),
     "OfflineSettlement": ("inttegro.refund.offline_settlement", "OfflineSettlement"),
+    "OrderFeeLineItem": ("inttegro.refund.order_fee_line_item", "OrderFeeLineItem"),
+    "OrderFeeLineItemFee": ("inttegro.refund.order_fee_line_item_fee", "OrderFeeLineItemFee"),
+    "OrderLineItem": ("inttegro.refund.order_line_item", "OrderLineItem"),
+    "OrderProductLineItem": ("inttegro.refund.order_product_line_item", "OrderProductLineItem"),
+    "OrderProductLineItemProduct": ("inttegro.refund.order_product_line_item_product", "OrderProductLineItemProduct"),
+    "OrderShippingLineItem": ("inttegro.refund.order_shipping_line_item", "OrderShippingLineItem"),
+    "OrderShippingLineItemShipping": ("inttegro.refund.order_shipping_line_item_shipping", "OrderShippingLineItemShipping"),
     "Page": ("inttegro.refund.page", "Page"),
     "PageRequest": ("inttegro.refund.page_request", "PageRequest"),
     "PageResponse": ("inttegro.refund.page_response", "PageResponse"),
@@ -72,6 +86,13 @@ __all__ = [
     "LineItem",
     "LookupRequest",
     "OfflineSettlement",
+    "OrderFeeLineItem",
+    "OrderFeeLineItemFee",
+    "OrderLineItem",
+    "OrderProductLineItem",
+    "OrderProductLineItemProduct",
+    "OrderShippingLineItem",
+    "OrderShippingLineItemShipping",
     "Page",
     "PageRequest",
     "PageResponse",
