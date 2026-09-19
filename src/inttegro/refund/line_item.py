@@ -24,7 +24,9 @@ class LineItem(ApiModel):
     id: str = field(init=False)
     """Server-generated refund line-item identifier. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
     order_line_item_id: str = field(init=False)
-    """Identifier of the related order line item. Required. Python type: ``str``; wire name: ``order_line_item_id``; JSON type: string"""
+    """Deprecated compatibility identifier. Use ``order_line_item.id`` when available. Required. Python type: ``str``; wire name: ``order_line_item_id``; JSON type: string"""
+    order_line_item: RefundOrderLineItem | None = field(init=False)
+    """Immutable display snapshot of the refunded order line. Optional; nullable. Python type: ``RefundOrderLineItem | None``; wire name: ``order_line_item``; JSON type: object (RefundOrderLineItem)"""
     original_amount_paid: Amount = field(init=False)
     """Monetary original amount paid, represented by a currency and an integer minor-unit value. Required. Python type: ``Amount``; wire name: ``original_amount_paid``; JSON type: object (Amount)"""
     reason: RefundReasonValue | None = field(init=False)
@@ -35,3 +37,4 @@ class LineItem(ApiModel):
     """Monetary refund amount, represented by a currency and an integer minor-unit value. Required. Python type: ``Amount``; wire name: ``refund_amount``; JSON type: object (Amount)"""
 
 from inttegro.refund.reason_value import ReasonValue as RefundReasonValue
+from inttegro.refund.order_line_item import OrderLineItem as RefundOrderLineItem
