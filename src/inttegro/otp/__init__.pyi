@@ -7,6 +7,7 @@ from .initiate_request import InitiateRequest as InitiateRequest
 from .initiate_response import InitiateResponse as InitiateResponse
 from .lookup_request import LookupRequest as LookupRequest
 from .lookup_response import LookupResponse as LookupResponse
+from .purpose import Purpose as Purpose
 from .status import Status as Status
 from .transaction import Transaction as Transaction
 from .transmission import Transmission as Transmission
