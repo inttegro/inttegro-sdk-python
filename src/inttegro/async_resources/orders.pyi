@@ -12,6 +12,7 @@ from inttegro.order.complete_request import CompleteRequest
 from inttegro.order.document_delivery_request import DocumentDeliveryRequest
 from inttegro.order.page_request import PageRequest
 from inttegro.order.create_request import CreateRequest
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 class AsyncOrders:
 
@@ -52,4 +53,7 @@ class AsyncOrders:
         ...
 
     async def page(self, payload: PageRequest | None=None) -> Page:
+        ...
+
+    async def search(self, payload: SearchRequest) -> SearchPage:
         ...

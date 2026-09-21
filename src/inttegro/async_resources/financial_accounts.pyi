@@ -9,6 +9,7 @@ from inttegro.financial_account.page_request import PageRequest
 from inttegro.financial_account.update_request import UpdateRequest
 from inttegro.financial_account.disable_request import DisableRequest
 from inttegro.financial_account.create_request import CreateRequest
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 class AsyncFinancialAccounts:
 
@@ -28,6 +29,9 @@ class AsyncFinancialAccounts:
         ...
 
     async def page(self, payload: PageRequest | None=None) -> Page:
+        ...
+
+    async def search(self, payload: SearchRequest) -> SearchPage:
         ...
 
     async def verify(self, payload: IDRequest) -> FinancialAccount:

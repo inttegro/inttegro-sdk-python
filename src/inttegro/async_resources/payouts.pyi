@@ -10,6 +10,7 @@ from inttegro.schedule.payout_request import PayoutRequest
 from inttegro.payout.set_destinations_request import SetDestinationsRequest
 from inttegro.payout.destinations_input import DestinationsInput
 from inttegro.payout.page_request import PageRequest
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 class AsyncPayouts:
 
@@ -41,6 +42,9 @@ class AsyncPayouts:
         ...
 
     async def page(self, payload: PageRequest) -> Page:
+        ...
+
+    async def search(self, payload: SearchRequest) -> SearchPage:
         ...
 
     async def cancel(self, payout_id: str) -> Payout:

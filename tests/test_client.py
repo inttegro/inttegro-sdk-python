@@ -100,7 +100,23 @@ class TransportRecorder:
             except Exception:
                 body = {}
         path = urllib.parse.urlparse(req.full_url).path
-        if path == "/orders/page":
+        if path.endswith("/search"):
+            resource_type = path.split("/")[1].removesuffix("s")
+            response = {
+                "search": {
+                    "resource_types": [resource_type],
+                    "sort": {"field": "relevance", "direction": "desc"},
+                    "page_size": 20,
+                    "result_count": 0,
+                    "has_more": False,
+                    "total": {"value": 0, "relation": "exact"},
+                    "resource_totals": [],
+                    "results": [],
+                    "facets": [],
+                    "freshness": {"state": "current"},
+                }
+            }
+        elif path == "/orders/page":
             response = {"page": {"number": 0, "size": 1, "orders": [ORDER_BODY]}}
         elif path in {"/orders/send_invoice", "/orders/send_receipt"}:
             response = {"order": ORDER_BODY, "delivery": {}}
@@ -454,6 +470,7 @@ class InttegroClientTest(unittest.TestCase):
         client.orders.send_invoice({"order_id": "or_1"})
         client.orders.send_receipt({"order_id": "or_1"})
         client.orders.page({})
+        client.orders.search(inttegro.search.Request(text="ORDER-1"))
 
         client.payment_methods.tokenize({"type": "mobile_money"})
         client.payment_methods.verify("pm_1")
@@ -481,6 +498,7 @@ class InttegroClientTest(unittest.TestCase):
         client.payouts.enable_fx()
         client.payouts.disable_fx()
         client.payouts.page(PageRequest(page_number=1))
+        client.payouts.search(inttegro.search.Request(text="PAYOUT-1"))
         client.payouts.cancel("po_1")
 
         client.balance_transactions.lookup("bt_1")
@@ -490,6 +508,7 @@ class InttegroClientTest(unittest.TestCase):
         client.financial_accounts.lookup("fa_1")
         client.financial_accounts.archive({"account_id": "fa_1"})
         client.financial_accounts.page({})
+        client.financial_accounts.search(inttegro.search.Request(text="Account"))
         client.financial_accounts.verify({"account_id": "fa_1"})
         client.financial_accounts.connect({"name": "Account"})
         client.financial_accounts.update({"account_id": "fa_1", "label": "Updated"})
@@ -504,6 +523,7 @@ class InttegroClientTest(unittest.TestCase):
         client.customers.lookup("cu_1")
         client.customers.update({"customer_id": "cu_1", "name": "Jane Smith"})
         client.customers.page({"page_number": 1})
+        client.customers.search(inttegro.search.Request(text="Jane"))
 
         client.products.create({"type": "physical", "name": "Product"})
         client.products.add_price({
@@ -518,6 +538,7 @@ class InttegroClientTest(unittest.TestCase):
         client.products.unpublish("prod_1")
         client.products.archive("prod_1")
         client.products.page({"page_number": 1})
+        client.products.search(inttegro.search.Request(text="Product"))
 
         client.chimes.send({"message": "hi"})
         client.chimes.lookup("ch_1")
@@ -727,10 +748,12 @@ class InttegroClientTest(unittest.TestCase):
         client = InttegroClient(api_key="test", base_url="https://api.inttegro.com", transport=recorder)
 
         client.orders.lookup("or_1")
+        client.orders.search(inttegro.search.Request(text="tea"))
 
-        body = json.loads(recorder.requests[0].data.decode("utf-8"))
-        self.assertNotIn("request_meta", body)
-        self.assertNotIn("idempotency_key", body)
+        for request in recorder.requests:
+            body = json.loads(request.data.decode("utf-8"))
+            self.assertNotIn("request_meta", body)
+            self.assertNotIn("idempotency_key", body)
 
     def test_message_templates_create_uses_request_meta_idempotency_by_default(self):
         recorder = TransportRecorder()

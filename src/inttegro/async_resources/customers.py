@@ -2,6 +2,7 @@
 """Customers resource for creating and managing customer records."""
 from __future__ import annotations
 from ..async_http_client import AsyncHttpClient
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 class AsyncCustomers:
     """Customers resource for creating, updating, looking up, and paging customers.
@@ -85,3 +86,7 @@ class AsyncCustomers:
             TimeoutError: The configured request deadline elapsed.
         """
         return await self.http.post('/customers/page', payload or {})
+
+    async def search(self, payload: SearchRequest) -> SearchPage:
+        """Search customer projections owned by the authenticated application."""
+        return await self.http.post('/customers/search', payload)

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from ..http_client import HttpClient
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 
 class FinancialAccounts:
@@ -230,6 +231,10 @@ class FinancialAccounts:
             - connect(): Add new financial accounts
         """
         return self.http.post("/financial_accounts/page", payload or {})
+
+    def search(self, payload: SearchRequest) -> SearchPage:
+        """Search financial-account projections owned by the authenticated application."""
+        return self.http.post("/financial_accounts/search", payload)
 
     def verify(self, payload: dict):
         """

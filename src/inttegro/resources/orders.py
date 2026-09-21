@@ -9,6 +9,7 @@ from ..http_client import HttpClient
 from ..response import InttegroResponse
 from inttegro.order.order import Order
 from inttegro.order.page import Page
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 from .._dynamic_value import DynamicValue
 
 
@@ -602,3 +603,7 @@ class Orders:
             - https://studio.inttegro.com/api/orders/page
         """
         return _resource(self.http.post("/orders/page", payload or {}), "page", Page)
+
+    def search(self, payload: SearchRequest) -> SearchPage:
+        """Search order projections owned by the authenticated application."""
+        return self.http.post("/orders/search", payload)

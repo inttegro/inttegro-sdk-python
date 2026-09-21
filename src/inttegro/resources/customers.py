@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from ..http_client import HttpClient
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 
 class Customers:
@@ -87,3 +88,7 @@ class Customers:
             TimeoutError: The configured request deadline elapsed.
         """
         return self.http.post("/customers/page", payload or {})
+
+    def search(self, payload: SearchRequest) -> SearchPage:
+        """Search customer projections owned by the authenticated application."""
+        return self.http.post("/customers/search", payload)

@@ -305,7 +305,7 @@ class HttpClient:
     def _is_idempotent_mutation_path(self, path_or_url: str) -> bool:
         path = urllib.parse.urlparse(path_or_url).path if path_or_url.startswith(("http://", "https://")) else path_or_url
         action = next((part for part in reversed(path.split("/")) if part), "")
-        return action not in {"", "lookup", "page", "settings", "countries", "contents", "balances", "render_preview", "usage"}
+        return action not in {"", "lookup", "page", "search", "settings", "countries", "contents", "balances", "render_preview", "usage"}
 
     def _has_header(self, headers: dict[str, str], name: str) -> bool:
         return any(key.lower() == name.lower() and bool(str(value).strip()) for key, value in headers.items())

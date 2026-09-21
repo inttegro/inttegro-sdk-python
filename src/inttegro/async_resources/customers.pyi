@@ -7,6 +7,7 @@ from inttegro.customer.page import Page
 from inttegro.customer.create_request import CreateRequest
 from inttegro.customer.update_request import UpdateRequest
 from inttegro.customer.page_request import PageRequest
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 class AsyncCustomers:
 
@@ -23,4 +24,7 @@ class AsyncCustomers:
         ...
 
     async def page(self, payload: PageRequest | None=None) -> Page:
+        ...
+
+    async def search(self, payload: SearchRequest) -> SearchPage:
         ...

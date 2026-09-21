@@ -2,6 +2,7 @@
 """Products resource for managing catalog products."""
 from __future__ import annotations
 from ..async_http_client import AsyncHttpClient
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 class AsyncProducts:
     """Products resource for creating, updating, and managing products.
@@ -173,3 +174,7 @@ class AsyncProducts:
             TimeoutError: The configured request deadline elapsed.
         """
         return await self.http.post('/products/page', payload or {})
+
+    async def search(self, payload: SearchRequest) -> SearchPage:
+        """Search product projections owned by the authenticated application."""
+        return await self.http.post('/products/search', payload)
