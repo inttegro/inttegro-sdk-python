@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from .initiate_response import InitiateResponse as InitiateResponse
     from .lookup_request import LookupRequest as LookupRequest
     from .lookup_response import LookupResponse as LookupResponse
+    from .purpose import Purpose as Purpose
     from .status import Status as Status
     from .transaction import Transaction as Transaction
     from .transmission import Transmission as Transmission
@@ -28,6 +29,7 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "InitiateResponse": ("inttegro.otp.initiate_response", "InitiateResponse"),
     "LookupRequest": ("inttegro.otp.lookup_request", "LookupRequest"),
     "LookupResponse": ("inttegro.otp.lookup_response", "LookupResponse"),
+    "Purpose": ("inttegro.otp.purpose", "Purpose"),
     "Status": ("inttegro.otp.status", "Status"),
     "Transaction": ("inttegro.otp.transaction", "Transaction"),
     "Transmission": ("inttegro.otp.transmission", "Transmission"),
@@ -45,6 +47,7 @@ __all__ = [
     "InitiateResponse",
     "LookupRequest",
     "LookupResponse",
+    "Purpose",
     "Status",
     "Transaction",
     "Transmission",

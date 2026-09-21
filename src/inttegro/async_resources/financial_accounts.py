@@ -2,6 +2,7 @@
 """Financial accounts resource for connecting payout destinations."""
 from __future__ import annotations
 from ..async_http_client import AsyncHttpClient
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 class AsyncFinancialAccounts:
     """
@@ -228,6 +229,10 @@ class AsyncFinancialAccounts:
             - connect(): Add new financial accounts
         """
         return await self.http.post('/financial_accounts/page', payload or {})
+
+    async def search(self, payload: SearchRequest) -> SearchPage:
+        """Search financial-account projections owned by the authenticated application."""
+        return await self.http.post('/financial_accounts/search', payload)
 
     async def verify(self, payload: dict):
         """

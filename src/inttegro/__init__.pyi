@@ -24,6 +24,7 @@ from . import product as product
 from . import purchase_intent as purchase_intent
 from . import refund as refund
 from . import schedule as schedule
+from . import search as search
 from . import secret_key as secret_key
 from . import shared as shared
 from . import upload_request as upload_request

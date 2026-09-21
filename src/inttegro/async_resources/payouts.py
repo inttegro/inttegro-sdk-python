@@ -10,6 +10,7 @@ from inttegro.payout.set_destinations_request import SetDestinationsRequest
 from inttegro.payout.settings_lookup import SettingsLookup
 from inttegro.payout.settings_mutation import SettingsMutation
 from inttegro.schedule.payout_request import PayoutRequest
+from inttegro.search import Page as SearchPage, Request as SearchRequest
 
 class AsyncPayouts:
     """Configure payout routing and inspect payout lifecycle state.
@@ -93,6 +94,10 @@ class AsyncPayouts:
                 print(payout.id, payout.status, payout.initiated_at)
         """
         return await self.http.post('/payouts/page', payload)
+
+    async def search(self, payload: SearchRequest) -> SearchPage:
+        """Search payout projections owned by the authenticated application."""
+        return await self.http.post('/payouts/search', payload)
 
     async def cancel(self, payout_id: str) -> Payout:
         """Cancel a scheduled payout and return its updated typed representation."""
