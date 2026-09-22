@@ -244,3 +244,35 @@ class TypedModelTest(unittest.TestCase):
 
         self.assertFalse(hasattr(response, "refund_id"))
         self.assertNotIn("refund_id", response)
+
+    def test_balance_transaction_decodes_public_allocations(self):
+	response = BalanceTransaction.from_dict(
+	    {
+		"id": "bt_1",
+		"type": "payment",
+		"payment_id": "py_1",
+		"order_id": "or_1",
+		"amount": {"currency": "ghs", "value": 2500},
+		"available_amount": {"currency": "ghs", "value": 1500},
+		"pending_amount": {"currency": "ghs", "value": 1000},
+		"spent_amount": {"currency": "ghs", "value": 0},
+		"allocations": [
+		    {
+			"id": "bta_1",
+			"type": "payout",
+			"status": "pending",
+			"payout": {
+			    "id": "po_1",
+			    "amount": {"currency": "ghs", "value": 1000},
+			},
+			"created_at": "2026-09-02T12:01:00Z",
+			"updated_at": "2026-09-02T12:01:00Z",
+		    }
+		],
+		"created_at": "2026-09-02T12:00:00Z",
+	    }
+	)
+
+	self.assertEqual(1500, response.available_amount.value)
+	self.assertEqual("payout", response.allocations[0].type)
+	self.assertEqual("po_1", response.allocations[0].payout.id)

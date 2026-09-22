@@ -44,6 +44,15 @@ class BalanceTransaction(ApiModel):
     """Semantic source or cause of the transaction, not its direction. Required. Python type: ``Literal['payment', 'refund']``; wire name: ``type``; JSON type: string. Constraints: allowed values ``payment``, ``refund``"""
     payout_configuration: PaymentPayoutConfiguration | None = field(init=False)
     """The payout configuration associated with this balance transaction. Optional; nullable. Python type: ``PaymentPayoutConfiguration | None``; wire name: ``payout_configuration``; JSON type: object"""
+    allocations: list[BalanceTransactionAllocation] | None = field(init=False)
+    """All current pending and completed allocations. Released allocations are omitted. Python type: ``list[BalanceTransactionAllocation] | None``; wire name: ``allocations``; JSON type: array"""
+    available_amount: BalanceTransactionAmount | None = field(init=False)
+    """Amount still available for a refund or payout. Python type: ``BalanceTransactionAmount | None``; wire name: ``available_amount``; JSON type: object"""
+    pending_amount: BalanceTransactionAmount | None = field(init=False)
+    """Amount reserved by unresolved refunds and payouts. Python type: ``BalanceTransactionAmount | None``; wire name: ``pending_amount``; JSON type: object"""
+    spent_amount: BalanceTransactionAmount | None = field(init=False)
+    """Amount permanently consumed by completed allocations. Python type: ``BalanceTransactionAmount | None``; wire name: ``spent_amount``; JSON type: object"""
 
 from inttegro.balance_transaction.amount import Amount as BalanceTransactionAmount
+from inttegro.balance_transaction.allocation import Allocation as BalanceTransactionAllocation
 from inttegro.payment.payout_configuration import PayoutConfiguration as PaymentPayoutConfiguration
