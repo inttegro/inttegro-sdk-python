@@ -25,6 +25,8 @@ class Payout(ApiModel):
     """Monetary amount, represented by a currency and an integer minor-unit value. Optional; nullable. Python type: ``Amount | None``; wire name: ``amount``; JSON type: object (Amount)"""
     balance_transactions: list[PayoutBalanceTransaction] | None = field(init=False)
     """Balance transactions that contributed to this payout. Optional; nullable. Python type: ``list[PayoutBalanceTransaction] | None``; wire name: ``balance_transactions``; JSON type: array of objects"""
+    balance_transaction_id: str | None = field(init=False)
+    """The payout's own immutable debit balance transaction. Optional; nullable. Python type: ``str | None``; wire name: ``balance_transaction_id``; JSON type: string"""
     canceled_at: datetime | None = field(init=False)
     """When the payout was canceled. Optional; nullable. Python type: ``datetime | None``; wire name: ``canceled_at``; JSON type: string (date-time)"""
     custom_data: CustomData | None = field(init=False)
