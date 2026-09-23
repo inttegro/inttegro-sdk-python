@@ -23,8 +23,8 @@ class Payout(ApiModel):
     """
     amount: Amount | None = field(init=False)
     """Monetary amount, represented by a currency and an integer minor-unit value. Optional; nullable. Python type: ``Amount | None``; wire name: ``amount``; JSON type: object (Amount)"""
-    balance_transactions: list[str] | None = field(init=False)
-    """Balance transaction IDs linked to this payout. Optional; nullable. Python type: ``list[str] | None``; wire name: ``balance_transactions``; JSON type: array of string values"""
+    balance_transactions: list[PayoutBalanceTransaction] | None = field(init=False)
+    """Balance transactions that contributed to this payout. Optional; nullable. Python type: ``list[PayoutBalanceTransaction] | None``; wire name: ``balance_transactions``; JSON type: array of objects"""
     canceled_at: datetime | None = field(init=False)
     """When the payout was canceled. Optional; nullable. Python type: ``datetime | None``; wire name: ``canceled_at``; JSON type: string (date-time)"""
     custom_data: CustomData | None = field(init=False)
@@ -67,4 +67,5 @@ class Payout(ApiModel):
     """When the payout succeeded. Optional; nullable. Python type: ``datetime | None``; wire name: ``succeeded_at``; JSON type: string (date-time)"""
 
 from inttegro.payout.error import Error as PayoutError
+from inttegro.payout.balance_transaction import BalanceTransaction as PayoutBalanceTransaction
 from inttegro.custom_data import CustomData

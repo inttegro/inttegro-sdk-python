@@ -14,6 +14,7 @@ from inttegro.chime import EmailMailboxInput, EmailMessageInput
 from inttegro.customer import CreateRequest as CreateCustomerRequest
 from inttegro.customer import Customer
 from inttegro.purchase_intent import UpdateRequest
+from inttegro.payout import Payout
 from inttegro.refund import (
     PaymentMethodSettlement,
     Refund,
@@ -31,6 +32,29 @@ class StaticTransport:
 
 
 class TypedModelTest(unittest.TestCase):
+    def test_payout_decodes_balance_transaction_contributions(self):
+        payout = Payout.from_dict(
+            {
+                "id": "po_1",
+                "destination_id": "fa_1",
+                "execute_after": "2026-09-02T12:00:00Z",
+                "initiated_at": "2026-09-02T11:00:00Z",
+                "max_amount": {"currency": "ghs", "value": 5000},
+                "status": "processing",
+                "balance_transactions": [
+                    {
+                        "id": "bt_1",
+                        "amount": {"currency": "ghs", "value": 5000},
+                        "allocated_amount": {"currency": "ghs", "value": 2000},
+                    }
+                ],
+            }
+        )
+
+        self.assertEqual("bt_1", payout.balance_transactions[0].id)
+        self.assertEqual(5000, payout.balance_transactions[0].amount.value)
+        self.assertEqual(2000, payout.balance_transactions[0].allocated_amount.value)
+
     def test_customer_addresses_and_custom_data_keep_semantic_types(self):
         request = CreateCustomerRequest(
             name="Ama Mensah",
@@ -244,3 +268,35 @@ class TypedModelTest(unittest.TestCase):
 
         self.assertFalse(hasattr(response, "refund_id"))
         self.assertNotIn("refund_id", response)
+
+    def test_balance_transaction_decodes_public_allocations(self):
+        response = BalanceTransaction.from_dict(
+            {
+                "id": "bt_1",
+                "type": "payment",
+                "payment_id": "py_1",
+                "order_id": "or_1",
+                "amount": {"currency": "ghs", "value": 2500},
+                "available_amount": {"currency": "ghs", "value": 1500},
+                "pending_amount": {"currency": "ghs", "value": 1000},
+                "spent_amount": {"currency": "ghs", "value": 0},
+                "allocations": [
+                    {
+                        "id": "bta_1",
+                        "type": "payout",
+                        "status": "pending",
+                        "payout": {
+                            "id": "po_1",
+                            "amount": {"currency": "ghs", "value": 1000},
+                        },
+                        "created_at": "2026-09-02T12:01:00Z",
+                        "updated_at": "2026-09-02T12:01:00Z",
+                    }
+                ],
+                "created_at": "2026-09-02T12:00:00Z",
+            }
+        )
+
+        self.assertEqual(1500, response.available_amount.value)
+        self.assertEqual("payout", response.allocations[0].type)
+        self.assertEqual("po_1", response.allocations[0].payout.id)

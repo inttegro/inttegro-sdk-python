@@ -6,6 +6,8 @@ from importlib import import_module
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
+    from .allocation import Allocation as Allocation
+    from .allocation_use import AllocationUse as AllocationUse
     from .amount import Amount as Amount
     from .balance_transaction import BalanceTransaction as BalanceTransaction
     from .lookup_request import LookupRequest as LookupRequest
@@ -17,6 +19,8 @@ if TYPE_CHECKING:
 
 
 _EXPORTS: dict[str, tuple[str, str]] = {
+    "Allocation": ("inttegro.balance_transaction.allocation", "Allocation"),
+    "AllocationUse": ("inttegro.balance_transaction.allocation_use", "AllocationUse"),
     "Amount": ("inttegro.balance_transaction.amount", "Amount"),
     "BalanceTransaction": ("inttegro.balance_transaction.balance_transaction", "BalanceTransaction"),
     "LookupRequest": ("inttegro.balance_transaction.lookup_request", "LookupRequest"),
@@ -28,6 +32,8 @@ _EXPORTS: dict[str, tuple[str, str]] = {
 }
 
 __all__ = [
+    "Allocation",
+    "AllocationUse",
     "Amount",
     "BalanceTransaction",
     "LookupRequest",

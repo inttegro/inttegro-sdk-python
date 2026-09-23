@@ -3,6 +3,7 @@
 The primary returned object is ``inttegro.payout.Payout``. Related request types, nested response shapes, and string-backed enums are exported from this singular namespace. Public members load lazily, so importing one resource does not eagerly import the entire SDK."""
 
 from .cancel_request import CancelRequest as CancelRequest
+from .balance_transaction import BalanceTransaction as BalanceTransaction
 from .cancel_response import CancelResponse as CancelResponse
 from .disable_automatic_request import DisableAutomaticRequest as DisableAutomaticRequest
 from .disable_automatic_response import DisableAutomaticResponse as DisableAutomaticResponse
