@@ -71,6 +71,7 @@ class TypedModelTest(unittest.TestCase):
                 "billing_address": {"country": "gh", "city": "Accra"},
                 "created_at": "2026-09-02T12:00:00Z",
                 "custom_data": {"segment": "vip"},
+                "fingerprint": "cfp_v1_app_buyer",
                 "guest": False,
                 "id": "cu_1",
                 "name": "Ama Mensah",
@@ -78,6 +79,7 @@ class TypedModelTest(unittest.TestCase):
             }
         )
         self.assertIsInstance(customer.custom_data, CustomData)
+        self.assertEqual("cfp_v1_app_buyer", customer.fingerprint)
         self.assertEqual("Accra", customer.billing_address.city)
         self.assertEqual("Kumasi", customer.shipping_address.city)
 

@@ -29,6 +29,8 @@ class Customer(ApiModel):
     """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     email_address: str | None = field(init=False)
     """Customer or recipient email address. Optional; nullable. Python type: ``str | None``; wire name: ``email_address``; JSON type: string"""
+    fingerprint: str = field(init=False)
+    """Application-scoped value for spotting possible duplicate customer records. Required. Python type: ``str``; wire name: ``fingerprint``; JSON type: string"""
     guest: bool = field(init=False)
     """Whether guest. Required. Python type: ``bool``; wire name: ``guest``; JSON type: boolean"""
     id: str = field(init=False)
