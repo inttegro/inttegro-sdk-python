@@ -30,8 +30,8 @@ class BalanceTransaction(ApiModel):
     """When the balance transaction was created. Required. Python type: ``datetime``; wire name: ``created_at``; JSON type: string (date-time)"""
     id: str = field(init=False)
     """Unique identifier for this balance transaction. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
-    order_id: str = field(init=False)
-    """Identifier of the related order. Required. Python type: ``str``; wire name: ``order_id``; JSON type: string"""
+    order_id: str | None = field(init=False)
+    """Identifier of the related order. Omitted for payout debits. Optional; nullable. Python type: ``str | None``; wire name: ``order_id``; JSON type: string"""
     paid_at: datetime | None = field(init=False)
     """When payment completed successfully. Optional; nullable. Python type: ``datetime | None``; wire name: ``paid_at``; JSON type: string (date-time)"""
     payment_id: str | None = field(init=False)
@@ -40,8 +40,8 @@ class BalanceTransaction(ApiModel):
     """Identifier of the related payout. Optional; nullable. Python type: ``str | None``; wire name: ``payout_id``; JSON type: string"""
     refund_id: str | None = field(init=False)
     """Present when `type` is `refund`; omitted when `type` is `payment`. Optional; nullable. Python type: ``str | None``; wire name: ``refund_id``; JSON type: string"""
-    type: Literal['payment', 'refund'] = field(init=False)
-    """Semantic source or cause of the transaction, not its direction. Required. Python type: ``Literal['payment', 'refund']``; wire name: ``type``; JSON type: string. Constraints: allowed values ``payment``, ``refund``"""
+    type: Literal['payment', 'refund', 'payout'] = field(init=False)
+    """Semantic source or cause of the transaction, not its direction. Required. Python type: ``Literal['payment', 'refund', 'payout']``; wire name: ``type``; JSON type: string."""
     payout_configuration: PaymentPayoutConfiguration | None = field(init=False)
     """The payout configuration associated with this balance transaction. Optional; nullable. Python type: ``PaymentPayoutConfiguration | None``; wire name: ``payout_configuration``; JSON type: object"""
     allocations: list[BalanceTransactionAllocation] | None = field(init=False)

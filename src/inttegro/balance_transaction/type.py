@@ -19,3 +19,5 @@ class Type(WireEnum):
     """Wire value ``payment`` (payment) for semantic source or cause of the transaction, not its direction"""
     REFUND = "refund"
     """Wire value ``refund`` (refund) for semantic source or cause of the transaction, not its direction"""
+    PAYOUT = "payout"
+    """Wire value ``payout`` for an immutable successful-payout debit"""
