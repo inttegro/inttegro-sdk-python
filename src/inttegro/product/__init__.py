@@ -13,6 +13,8 @@ if TYPE_CHECKING:
     from .attribute_input import AttributeInput as AttributeInput
     from .catalog_with_price_data_input import CatalogWithPriceDataInput as CatalogWithPriceDataInput
     from .catalog_with_price_reference_input import CatalogWithPriceReferenceInput as CatalogWithPriceReferenceInput
+    from .catalog_with_customer_selected_price_input import CatalogWithCustomerSelectedPriceInput as CatalogWithCustomerSelectedPriceInput
+    from .customer_selected_price_input import CustomerSelectedPriceInput as CustomerSelectedPriceInput
     from .create_request import CreateRequest as CreateRequest
     from .delivery import Delivery as Delivery
     from .details_input import DetailsInput as DetailsInput
@@ -57,6 +59,8 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "AttributeInput": ("inttegro.product.attribute_input", "AttributeInput"),
     "CatalogWithPriceDataInput": ("inttegro.product.catalog_with_price_data_input", "CatalogWithPriceDataInput"),
     "CatalogWithPriceReferenceInput": ("inttegro.product.catalog_with_price_reference_input", "CatalogWithPriceReferenceInput"),
+    "CatalogWithCustomerSelectedPriceInput": ("inttegro.product.catalog_with_customer_selected_price_input", "CatalogWithCustomerSelectedPriceInput"),
+    "CustomerSelectedPriceInput": ("inttegro.product.customer_selected_price_input", "CustomerSelectedPriceInput"),
     "CreateRequest": ("inttegro.product.create_request", "CreateRequest"),
     "Delivery": ("inttegro.product.delivery", "Delivery"),
     "DetailsInput": ("inttegro.product.details_input", "DetailsInput"),
@@ -101,6 +105,8 @@ __all__ = [
     "AttributeInput",
     "CatalogWithPriceDataInput",
     "CatalogWithPriceReferenceInput",
+    "CatalogWithCustomerSelectedPriceInput",
+    "CustomerSelectedPriceInput",
     "CreateRequest",
     "Delivery",
     "DetailsInput",

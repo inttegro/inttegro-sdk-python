@@ -528,7 +528,8 @@ class InttegroClientTest(unittest.TestCase):
         client.products.create({"type": "physical", "name": "Product"})
         client.products.add_price({
             "product_id": "prod_1",
-            "amount": {"currency": "ghs", "value": 5000},
+            "type": "fixed_amount",
+            "fixed_amount": {"currency": "ghs", "value": 5000},
             "set_as_default": True,
         })
         client.products.set_default_unit_price({"product_id": "prod_1", "price_id": "pr_1"})
@@ -625,7 +626,10 @@ class InttegroClientTest(unittest.TestCase):
         self.assertEqual("or_123", purchase_intent.usage.order.id)
         client.purchase_intents.page({"page_number": 1, "page_size": 20})
 
-        client.prices.create({"currency": "ghs", "amount": 100})
+        client.prices.create({
+            "type": "fixed_amount",
+            "fixed_amount": {"currency": "ghs", "value": 100},
+        })
         client.prices.lookup("pr_1")
         client.prices.page({})
         client.prices.update({"price_id": "pr_1", "label": "Updated"})

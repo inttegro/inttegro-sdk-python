@@ -9,6 +9,8 @@ if TYPE_CHECKING:
     from .action_request import ActionRequest as ActionRequest
     from .embedded_product import EmbeddedProduct as EmbeddedProduct
     from .embedded_product_attributes_item import EmbeddedProductAttributesItem as EmbeddedProductAttributesItem
+    from .customer_selected_amount import CustomerSelectedAmount as CustomerSelectedAmount
+    from .customer_selected_amount_params import CustomerSelectedAmountParams as CustomerSelectedAmountParams
     from .inline import Inline as Inline
     from .inline_params import InlineParams as InlineParams
     from .lookup_request import LookupRequest as LookupRequest
@@ -19,6 +21,9 @@ if TYPE_CHECKING:
     from .params import Params as Params
     from .price import Price as Price
     from .response import Response as Response
+    from .suggested_amount import SuggestedAmount as SuggestedAmount
+    from .suggested_amount_params import SuggestedAmountParams as SuggestedAmountParams
+    from .type import Type as Type
     from .update_request import UpdateRequest as UpdateRequest
 
 
@@ -26,6 +31,8 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "ActionRequest": ("inttegro.price.action_request", "ActionRequest"),
     "EmbeddedProduct": ("inttegro.price.embedded_product", "EmbeddedProduct"),
     "EmbeddedProductAttributesItem": ("inttegro.price.embedded_product_attributes_item", "EmbeddedProductAttributesItem"),
+    "CustomerSelectedAmount": ("inttegro.price.customer_selected_amount", "CustomerSelectedAmount"),
+    "CustomerSelectedAmountParams": ("inttegro.price.customer_selected_amount_params", "CustomerSelectedAmountParams"),
     "Inline": ("inttegro.price.inline", "Inline"),
     "InlineParams": ("inttegro.price.inline_params", "InlineParams"),
     "LookupRequest": ("inttegro.price.lookup_request", "LookupRequest"),
@@ -36,6 +43,9 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "Params": ("inttegro.price.params", "Params"),
     "Price": ("inttegro.price.price", "Price"),
     "Response": ("inttegro.price.response", "Response"),
+    "SuggestedAmount": ("inttegro.price.suggested_amount", "SuggestedAmount"),
+    "SuggestedAmountParams": ("inttegro.price.suggested_amount_params", "SuggestedAmountParams"),
+    "Type": ("inttegro.price.type", "Type"),
     "UpdateRequest": ("inttegro.price.update_request", "UpdateRequest"),
 }
 
@@ -43,6 +53,8 @@ __all__ = [
     "ActionRequest",
     "EmbeddedProduct",
     "EmbeddedProductAttributesItem",
+    "CustomerSelectedAmount",
+    "CustomerSelectedAmountParams",
     "Inline",
     "InlineParams",
     "LookupRequest",
@@ -53,6 +65,9 @@ __all__ = [
     "Params",
     "Price",
     "Response",
+    "SuggestedAmount",
+    "SuggestedAmountParams",
+    "Type",
     "UpdateRequest",
 ]
 
