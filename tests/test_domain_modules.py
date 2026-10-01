@@ -23,12 +23,18 @@ from inttegro.money import Amount, Currency
 class DomainModuleTest(unittest.TestCase):
     def test_amount_and_price_types_preserve_request_and_response_shapes(self) -> None:
         inline_price_params = price.InlineParams(currency=Currency.GHS, value=3005)
-        catalog_params = price.Params(amount=inline_price_params, label="Retail")
+        catalog_params = price.Params(
+            type=price.Type.FIXED_AMOUNT,
+            fixed_amount=inline_price_params,
+            label="Retail",
+        )
         catalog_price = price.Price.from_dict(
             {
                 "id": "pr_123",
                 "active": True,
+                "type": "fixed_amount",
                 "nominal": {"currency": "ghs", "value": 3005},
+                "fixed_amount": {"currency": "ghs", "value": 3005},
                 "product_id": "prod_123",
                 "created_at": "2026-09-02T12:00:00Z",
             }
@@ -37,15 +43,103 @@ class DomainModuleTest(unittest.TestCase):
 
         self.assertEqual({"currency": "ghs", "value": 3005}, inline_price_params.to_dict())
         self.assertEqual(
-            {"amount": {"currency": "ghs", "value": 3005}, "label": "Retail"},
+            {
+                "type": "fixed_amount",
+                "fixed_amount": {"currency": "ghs", "value": 3005},
+                "label": "Retail",
+            },
             catalog_params.to_dict(),
         )
         self.assertIsInstance(catalog_price.nominal, Amount)
+        self.assertIsInstance(catalog_price.fixed_amount, Amount)
         self.assertEqual(Currency.GHS, catalog_price.nominal.currency)
         self.assertEqual("prod_123", catalog_price.product_id)
         self.assertEqual(Currency.EUR, inline_price.currency)
         self.assertEqual(Currency.GHS, Currency("GHS"))
         self.assertIsInstance(inline_price, price.Inline)
+
+        with self.assertRaises(ValueError):
+            price.Params(fixed_amount=inline_price_params)
+
+        product_price = product.AddPriceRequest(
+            product_id="prod_123",
+            type=price.Type.FIXED_AMOUNT,
+            fixed_amount=inline_price_params,
+        )
+        self.assertEqual(
+            {
+                "product_id": "prod_123",
+                "type": "fixed_amount",
+                "fixed_amount": {"currency": "ghs", "value": 3005},
+            },
+            product_price.to_dict(),
+        )
+
+        selected_params = price.Params(
+            product_id="prod_123",
+            type=price.Type.CUSTOMER_SELECTED_AMOUNT,
+            customer_selected_amount=price.CustomerSelectedAmountParams(
+                currency=Currency.GHS,
+                minimum=500,
+                suggested_amounts=[
+                    price.SuggestedAmountParams(
+                        id="supporter", value=1000, recommended=True
+                    )
+                ],
+            ),
+        )
+        self.assertEqual(
+            {
+                "product_id": "prod_123",
+                "type": "customer_selected_amount",
+                "customer_selected_amount": {
+                    "currency": "ghs",
+                    "minimum": 500,
+                    "suggested_amounts": [
+                        {"id": "supporter", "value": 1000, "recommended": True}
+                    ],
+                },
+            },
+            selected_params.to_dict(),
+        )
+
+        selected_price = price.Price.from_dict(
+            {
+                "id": "pr_selected",
+                "active": True,
+                "type": "customer_selected_amount",
+                "customer_selected_amount": {
+                    "currency": "ghs",
+                    "minimum": 500,
+                    "suggested_amounts": [
+                        {"id": "supporter", "value": 1000, "recommended": True}
+                    ],
+                },
+                "product_id": "prod_123",
+                "created_at": "2026-09-02T12:00:00Z",
+            }
+        )
+        self.assertEqual(1000, selected_price.customer_selected_amount.suggested_amounts[0].value)
+
+        catalog_product = product.CatalogWithCustomerSelectedPriceInput(
+            product_id="prod_123",
+            quantity=1,
+            customer_selected_price=product.CustomerSelectedPriceInput(
+                price_id="pr_selected",
+                selected_amount=price.InlineParams(currency=Currency.GHS, value=750),
+            ),
+        )
+        self.assertEqual(
+            {
+                "product_id": "prod_123",
+                "quantity": 1,
+                "customer_selected_price": {
+                    "price_id": "pr_selected",
+                    "selected_amount": {"currency": "ghs", "value": 750},
+                },
+            },
+            catalog_product.to_dict(),
+        )
 
     def test_payments_module_exposes_payment_lifecycle_types(self) -> None:
         payment_resource = payment.Payment.from_dict(
