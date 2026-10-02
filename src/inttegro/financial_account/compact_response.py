@@ -30,6 +30,8 @@ class CompactResponse(ApiModel):
     """Human-readable description of the compact response. Optional; nullable. Python type: ``str | None``; wire name: ``description``; JSON type: string"""
     disconnected_at: datetime | None = field(init=False)
     """Timestamp for disconnected at. Optional; nullable. Python type: ``datetime | None``; wire name: ``disconnected_at``; JSON type: string (date-time)"""
+    fingerprint: str | None = field(init=False)
+    """Application-scoped value for recognizing duplicate financial-account connections. Optional; nullable. Python type: ``str | None``; wire name: ``fingerprint``; JSON type: string"""
     id: str = field(init=False)
     """Unique identifier for this compact response. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
     label: str | None = field(init=False)
