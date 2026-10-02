@@ -2,8 +2,9 @@
 
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/inttegro/inttegro-sdk-python/badge)](https://scorecard.dev/viewer/?uri=github.com/inttegro/inttegro-sdk-python)
 
-The official Python client for building server-side Inttegro integrations, with
-native asynchronous and synchronous clients.
+Accept GHS payments, present Ghana Mobile Money checkout, and manage orders,
+refunds, and payouts with Inttegro's typed asynchronous and synchronous Python
+clients.
 
 [API documentation](https://python.inttegro.dev/) · [Integration guides](https://studio.inttegro.com/sdks/python)
 

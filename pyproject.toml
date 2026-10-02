@@ -1,11 +1,12 @@
 [tool.poetry]
 name = "inttegro"
-version = "11.2.0"
-description = "Official Python SDK for the Inttegro API"
+version = "11.2.1"
+description = "Typed Python SDK for Inttegro GHS checkout and Ghana Mobile Money payments"
 authors = ["Inttegro Engineering <engineering@inttegro.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{ include = "inttegro", from = "src" }]
+keywords = ["checkout", "commerce", "fintech", "ghana", "ghs", "mobile-money", "payments", "sdk"]
 
 [tool.poetry.urls]
 Homepage = "https://studio.inttegro.com"
