@@ -4,6 +4,9 @@ The primary returned object is ``inttegro.purchase_intent.PurchaseIntent``. Rela
 
 from .cancel_request import CancelRequest as CancelRequest
 from .create_request import CreateRequest as CreateRequest
+from .create_request_presentation import CreateRequestPresentation as CreateRequestPresentation
+from .create_request_presentation_buy_page import CreateRequestPresentationBuyPage as CreateRequestPresentationBuyPage
+from .create_request_presentation_buy_page_text import CreateRequestPresentationBuyPageText as CreateRequestPresentationBuyPageText
 from .create_request_price import CreateRequestPrice as CreateRequestPrice
 from .create_request_price_original import CreateRequestPriceOriginal as CreateRequestPriceOriginal
 from .create_request_product import CreateRequestProduct as CreateRequestProduct
@@ -16,6 +19,9 @@ from .page import Page as Page
 from .page_request import PageRequest as PageRequest
 from .page_response import PageResponse as PageResponse
 from .price import Price as Price
+from .presentation import Presentation as Presentation
+from .presentation_buy_page import PresentationBuyPage as PresentationBuyPage
+from .presentation_buy_page_text import PresentationBuyPageText as PresentationBuyPageText
 from .product import Product as Product
 from .product_attributes_item import ProductAttributesItem as ProductAttributesItem
 from .purchase_intent import PurchaseIntent as PurchaseIntent
@@ -23,6 +29,9 @@ from .quantity import Quantity as Quantity
 from .response import Response as Response
 from .status import Status as Status
 from .update_request import UpdateRequest as UpdateRequest
+from .update_request_presentation import UpdateRequestPresentation as UpdateRequestPresentation
+from .update_request_presentation_buy_page import UpdateRequestPresentationBuyPage as UpdateRequestPresentationBuyPage
+from .update_request_presentation_buy_page_text import UpdateRequestPresentationBuyPageText as UpdateRequestPresentationBuyPageText
 from .update_request_quantity import UpdateRequestQuantity as UpdateRequestQuantity
 from .usage import Usage as Usage
 from .usage_order import UsageOrder as UsageOrder

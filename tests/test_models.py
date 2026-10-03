@@ -13,7 +13,18 @@ from inttegro.balance_transaction import BalanceTransaction
 from inttegro.chime import EmailMailboxInput, EmailMessageInput
 from inttegro.customer import CreateRequest as CreateCustomerRequest
 from inttegro.customer import Customer
-from inttegro.purchase_intent import UpdateRequest
+from inttegro.purchase_intent import (
+    CreateRequest as CreatePurchaseIntentRequest,
+    CreateRequestPresentation,
+    CreateRequestPresentationBuyPage,
+    CreateRequestPresentationBuyPageText,
+    CreateRequestQuantity,
+    PurchaseIntent,
+    UpdateRequest,
+    UpdateRequestPresentation,
+    UpdateRequestPresentationBuyPage,
+    UpdateRequestPresentationBuyPageText,
+)
 from inttegro.payout import Payout
 from inttegro.refund import (
     PaymentMethodSettlement,
@@ -32,6 +43,56 @@ class StaticTransport:
 
 
 class TypedModelTest(unittest.TestCase):
+    def test_purchase_intent_presentation_round_trips(self):
+        request = CreatePurchaseIntentRequest(
+            quantity=CreateRequestQuantity(min=1),
+            presentation=CreateRequestPresentation(
+                buy_page=CreateRequestPresentationBuyPage(
+                    text=CreateRequestPresentationBuyPageText(
+                        amount_field_label="Your contribution"
+                    )
+                )
+            ),
+        )
+        self.assertEqual(
+            "Your contribution",
+            request.to_dict()["presentation"]["buy_page"]["text"]["amount_field_label"],
+        )
+
+        update = UpdateRequest(
+            id="sale_123",
+            presentation=UpdateRequestPresentation(
+                buy_page=UpdateRequestPresentationBuyPage(
+                    text=UpdateRequestPresentationBuyPageText(
+                        primary_action_label=None
+                    )
+                )
+            ),
+        )
+        self.assertIsNone(
+            update.to_dict()["presentation"]["buy_page"]["text"]["primary_action_label"]
+        )
+
+        intent = PurchaseIntent.from_dict(
+            {
+                "allow_variants": False,
+                "created_at": "2026-09-09T12:00:00Z",
+                "id": "sale_123",
+                "presentation": {
+                    "buy_page": {
+                        "text": {"checkout_section_title": "Support this cause"}
+                    }
+                },
+                "quantity": {"min": 1},
+                "status": "active",
+                "usage": {"multi_use": True},
+            }
+        )
+        self.assertEqual(
+            "Support this cause",
+            intent.presentation.buy_page.text.checkout_section_title,
+        )
+
     def test_payout_decodes_balance_transaction_contributions(self):
         payout = Payout.from_dict(
             {

@@ -34,6 +34,8 @@ class PurchaseIntent(ApiModel):
     """Merchant identity captured for the hosted checkout. Individual fields are omitted when unavailable. Optional; nullable. Python type: ``PurchaseIntentMerchant | None``; wire name: ``merchant``; JSON type: object (PurchaseIntentMerchant)"""
     price: PurchaseIntentPrice | None = field(init=False)
     """The price associated with this purchase intent. Optional; nullable. Python type: ``PurchaseIntentPrice | None``; wire name: ``price``; JSON type: object (PurchaseIntentPrice)"""
+    presentation: PurchaseIntentPresentation | None = field(init=False)
+    """Merchant-authored Buy page presentation settings. Optional; nullable. Python type: ``PurchaseIntentPresentation | None``; wire name: ``presentation``; JSON type: object"""
     product: PurchaseIntentProduct | None = field(init=False)
     """The product associated with this purchase intent. Optional; nullable. Python type: ``PurchaseIntentProduct | None``; wire name: ``product``; JSON type: object (PurchaseIntentProduct)"""
     quantity: PurchaseIntentQuantity = field(init=False)
@@ -65,6 +67,7 @@ class PurchaseIntent(ApiModel):
 
 from inttegro.purchase_intent.merchant import Merchant as PurchaseIntentMerchant
 from inttegro.purchase_intent.price import Price as PurchaseIntentPrice
+from inttegro.purchase_intent.presentation import Presentation as PurchaseIntentPresentation
 from inttegro.purchase_intent.product import Product as PurchaseIntentProduct
 from inttegro.purchase_intent.quantity import Quantity as PurchaseIntentQuantity
 from inttegro.purchase_intent.usage import Usage as PurchaseIntentUsage

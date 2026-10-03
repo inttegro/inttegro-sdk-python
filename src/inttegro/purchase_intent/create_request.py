@@ -31,6 +31,8 @@ class CreateRequest(ApiRequest):
     """Optional link-use policy. Omit to create a reusable Buy link. Optional. Python type: ``CreatePurchaseIntentRequestUsage``; wire name: ``usage``; JSON type: object"""
     expires_at: datetime | UnsetType = field(default=UNSET)
     """Future RFC3339 timestamp after which the Buy link stops accepting purchases. Optional. Python type: ``datetime``; wire name: ``expires_at``; JSON type: string (date-time)"""
+    presentation: CreatePurchaseIntentRequestPresentation | UnsetType = field(default=UNSET)
+    """Optional merchant-authored copy for the hosted Buy page. Optional. Python type: ``CreatePurchaseIntentRequestPresentation``; wire name: ``presentation``; JSON type: object"""
     quantity: CreatePurchaseIntentRequestQuantity
     """Quantity bounds the Buy link should enforce. Omit max when the Buy link has no upper quantity bound. When present, max must be greater than or equal to min. Required. Python type: ``CreatePurchaseIntentRequestQuantity``; wire name: ``quantity``; JSON type: object"""
 
@@ -38,3 +40,4 @@ from inttegro.purchase_intent.create_request_price import CreateRequestPrice as 
 from inttegro.purchase_intent.create_request_product import CreateRequestProduct as CreatePurchaseIntentRequestProduct
 from inttegro.purchase_intent.create_request_quantity import CreateRequestQuantity as CreatePurchaseIntentRequestQuantity
 from inttegro.purchase_intent.create_request_usage import CreateRequestUsage as CreatePurchaseIntentRequestUsage
+from inttegro.purchase_intent.create_request_presentation import CreateRequestPresentation as CreatePurchaseIntentRequestPresentation

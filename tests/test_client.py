@@ -220,6 +220,7 @@ OPENAPI_CAPABILITY_URL_PATHS = {
 }
 OPENAPI_CLIENT_CHECKOUT_PATHS = {
     "/checkout/lookup",
+    "/checkout/select_amount",
     "/checkout/pay",
     "/checkout/request_confirmation",
     "/checkout/confirm_payment",
