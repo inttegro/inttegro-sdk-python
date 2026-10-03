@@ -29,5 +29,8 @@ class UpdateRequest(ApiRequest):
     """Alias for id. If both are present, this value takes precedence. Optional. Python type: ``str``; wire name: ``purchase_intent_id``; JSON type: string. Constraints: minimum length 1"""
     reactivate: bool | UnsetType = field(default=UNSET)
     """Clears the state that prevents new purchases. For canceled Buy links this removes inactive_at. For expired Buy links this clears an existing elapsed expires_at value. It does not remove the order claim from a used single-use intent. Optional. Python type: ``bool``; wire name: ``reactivate``; JSON type: boolean"""
+    presentation: UpdatePurchaseIntentRequestPresentation | UnsetType = field(default=UNSET)
+    """Sparse hosted Buy page copy update. Optional. Python type: ``UpdatePurchaseIntentRequestPresentation``; wire name: ``presentation``; JSON type: object"""
 
 from inttegro.purchase_intent.update_request_quantity import UpdateRequestQuantity as UpdatePurchaseIntentRequestQuantity
+from inttegro.purchase_intent.update_request_presentation import UpdateRequestPresentation as UpdatePurchaseIntentRequestPresentation

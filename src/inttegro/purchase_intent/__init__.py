@@ -8,6 +8,9 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from .cancel_request import CancelRequest as CancelRequest
     from .create_request import CreateRequest as CreateRequest
+    from .create_request_presentation import CreateRequestPresentation as CreateRequestPresentation
+    from .create_request_presentation_buy_page import CreateRequestPresentationBuyPage as CreateRequestPresentationBuyPage
+    from .create_request_presentation_buy_page_text import CreateRequestPresentationBuyPageText as CreateRequestPresentationBuyPageText
     from .create_request_price import CreateRequestPrice as CreateRequestPrice
     from .create_request_price_original import CreateRequestPriceOriginal as CreateRequestPriceOriginal
     from .create_request_product import CreateRequestProduct as CreateRequestProduct
@@ -20,6 +23,9 @@ if TYPE_CHECKING:
     from .page_request import PageRequest as PageRequest
     from .page_response import PageResponse as PageResponse
     from .price import Price as Price
+    from .presentation import Presentation as Presentation
+    from .presentation_buy_page import PresentationBuyPage as PresentationBuyPage
+    from .presentation_buy_page_text import PresentationBuyPageText as PresentationBuyPageText
     from .product import Product as Product
     from .product_attributes_item import ProductAttributesItem as ProductAttributesItem
     from .purchase_intent import PurchaseIntent as PurchaseIntent
@@ -27,6 +33,9 @@ if TYPE_CHECKING:
     from .response import Response as Response
     from .status import Status as Status
     from .update_request import UpdateRequest as UpdateRequest
+    from .update_request_presentation import UpdateRequestPresentation as UpdateRequestPresentation
+    from .update_request_presentation_buy_page import UpdateRequestPresentationBuyPage as UpdateRequestPresentationBuyPage
+    from .update_request_presentation_buy_page_text import UpdateRequestPresentationBuyPageText as UpdateRequestPresentationBuyPageText
     from .update_request_quantity import UpdateRequestQuantity as UpdateRequestQuantity
     from .usage import Usage as Usage
     from .usage_order import UsageOrder as UsageOrder
@@ -38,6 +47,9 @@ if TYPE_CHECKING:
 _EXPORTS: dict[str, tuple[str, str]] = {
     "CancelRequest": ("inttegro.purchase_intent.cancel_request", "CancelRequest"),
     "CreateRequest": ("inttegro.purchase_intent.create_request", "CreateRequest"),
+    "CreateRequestPresentation": ("inttegro.purchase_intent.create_request_presentation", "CreateRequestPresentation"),
+    "CreateRequestPresentationBuyPage": ("inttegro.purchase_intent.create_request_presentation_buy_page", "CreateRequestPresentationBuyPage"),
+    "CreateRequestPresentationBuyPageText": ("inttegro.purchase_intent.create_request_presentation_buy_page_text", "CreateRequestPresentationBuyPageText"),
     "CreateRequestPrice": ("inttegro.purchase_intent.create_request_price", "CreateRequestPrice"),
     "CreateRequestPriceOriginal": ("inttegro.purchase_intent.create_request_price_original", "CreateRequestPriceOriginal"),
     "CreateRequestProduct": ("inttegro.purchase_intent.create_request_product", "CreateRequestProduct"),
@@ -50,6 +62,9 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "PageRequest": ("inttegro.purchase_intent.page_request", "PageRequest"),
     "PageResponse": ("inttegro.purchase_intent.page_response", "PageResponse"),
     "Price": ("inttegro.purchase_intent.price", "Price"),
+    "Presentation": ("inttegro.purchase_intent.presentation", "Presentation"),
+    "PresentationBuyPage": ("inttegro.purchase_intent.presentation_buy_page", "PresentationBuyPage"),
+    "PresentationBuyPageText": ("inttegro.purchase_intent.presentation_buy_page_text", "PresentationBuyPageText"),
     "Product": ("inttegro.purchase_intent.product", "Product"),
     "ProductAttributesItem": ("inttegro.purchase_intent.product_attributes_item", "ProductAttributesItem"),
     "PurchaseIntent": ("inttegro.purchase_intent.purchase_intent", "PurchaseIntent"),
@@ -57,6 +72,9 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "Response": ("inttegro.purchase_intent.response", "Response"),
     "Status": ("inttegro.purchase_intent.status", "Status"),
     "UpdateRequest": ("inttegro.purchase_intent.update_request", "UpdateRequest"),
+    "UpdateRequestPresentation": ("inttegro.purchase_intent.update_request_presentation", "UpdateRequestPresentation"),
+    "UpdateRequestPresentationBuyPage": ("inttegro.purchase_intent.update_request_presentation_buy_page", "UpdateRequestPresentationBuyPage"),
+    "UpdateRequestPresentationBuyPageText": ("inttegro.purchase_intent.update_request_presentation_buy_page_text", "UpdateRequestPresentationBuyPageText"),
     "UpdateRequestQuantity": ("inttegro.purchase_intent.update_request_quantity", "UpdateRequestQuantity"),
     "Usage": ("inttegro.purchase_intent.usage", "Usage"),
     "UsageOrder": ("inttegro.purchase_intent.usage_order", "UsageOrder"),
@@ -68,6 +86,9 @@ _EXPORTS: dict[str, tuple[str, str]] = {
 __all__ = [
     "CancelRequest",
     "CreateRequest",
+    "CreateRequestPresentation",
+    "CreateRequestPresentationBuyPage",
+    "CreateRequestPresentationBuyPageText",
     "CreateRequestPrice",
     "CreateRequestPriceOriginal",
     "CreateRequestProduct",
@@ -80,6 +101,9 @@ __all__ = [
     "PageRequest",
     "PageResponse",
     "Price",
+    "Presentation",
+    "PresentationBuyPage",
+    "PresentationBuyPageText",
     "Product",
     "ProductAttributesItem",
     "PurchaseIntent",
@@ -87,6 +111,9 @@ __all__ = [
     "Response",
     "Status",
     "UpdateRequest",
+    "UpdateRequestPresentation",
+    "UpdateRequestPresentationBuyPage",
+    "UpdateRequestPresentationBuyPageText",
     "UpdateRequestQuantity",
     "Usage",
     "UsageOrder",
