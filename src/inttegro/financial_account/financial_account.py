@@ -30,8 +30,8 @@ class FinancialAccount(ApiModel):
     """Merchant-defined string values attached to a resource. SDKs expose this as a semantic collection rather than a raw map. Optional; nullable. Python type: ``CustomData | None``; wire name: ``custom_data``; JSON type: object (CustomData)"""
     description: str | None = field(init=False)
     """Human-readable description of the financial account. Optional; nullable. Python type: ``str | None``; wire name: ``description``; JSON type: string"""
-    fingerprint: str | None = field(init=False)
-    """Application-scoped value for recognizing duplicate financial-account connections. Optional; nullable. Python type: ``str | None``; wire name: ``fingerprint``; JSON type: string"""
+    fingerprint: str = field(init=False)
+    """A stable identifier for the underlying financial account within your application. Use it to recognize when the same account has been connected more than once. Required. Python type: ``str``; wire name: ``fingerprint``; JSON type: string"""
     id: str = field(init=False)
     """Unique identifier for this financial account. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
     institution: FinancialInstitution | None = field(init=False)
