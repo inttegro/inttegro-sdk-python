@@ -16,6 +16,8 @@ if TYPE_CHECKING:
     from .enable_automatic_request import EnableAutomaticRequest as EnableAutomaticRequest
     from .enable_automatic_response import EnableAutomaticResponse as EnableAutomaticResponse
     from .error import Error as Error
+    from .failure import Failure as Failure
+    from .failure_reason import FailureReason as FailureReason
     from .get_settings_request import GetSettingsRequest as GetSettingsRequest
     from .get_settings_response import GetSettingsResponse as GetSettingsResponse
     from .lookup_request import LookupRequest as LookupRequest
@@ -46,6 +48,8 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "EnableAutomaticRequest": ("inttegro.payout.enable_automatic_request", "EnableAutomaticRequest"),
     "EnableAutomaticResponse": ("inttegro.payout.enable_automatic_response", "EnableAutomaticResponse"),
     "Error": ("inttegro.payout.error", "Error"),
+    "Failure": ("inttegro.payout.failure", "Failure"),
+    "FailureReason": ("inttegro.payout.failure_reason", "FailureReason"),
     "GetSettingsRequest": ("inttegro.payout.get_settings_request", "GetSettingsRequest"),
     "GetSettingsResponse": ("inttegro.payout.get_settings_response", "GetSettingsResponse"),
     "LookupRequest": ("inttegro.payout.lookup_request", "LookupRequest"),
@@ -76,6 +80,8 @@ __all__ = [
     "EnableAutomaticRequest",
     "EnableAutomaticResponse",
     "Error",
+    "Failure",
+    "FailureReason",
     "GetSettingsRequest",
     "GetSettingsResponse",
     "LookupRequest",

@@ -12,6 +12,8 @@ from .destinations_input import DestinationsInput as DestinationsInput
 from .enable_automatic_request import EnableAutomaticRequest as EnableAutomaticRequest
 from .enable_automatic_response import EnableAutomaticResponse as EnableAutomaticResponse
 from .error import Error as Error
+from .failure import Failure as Failure
+from .failure_reason import FailureReason as FailureReason
 from .get_settings_request import GetSettingsRequest as GetSettingsRequest
 from .get_settings_response import GetSettingsResponse as GetSettingsResponse
 from .lookup_request import LookupRequest as LookupRequest

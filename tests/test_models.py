@@ -101,7 +101,13 @@ class TypedModelTest(unittest.TestCase):
                 "execute_after": "2026-09-02T12:00:00Z",
                 "initiated_at": "2026-09-02T11:00:00Z",
                 "max_amount": {"currency": "ghs", "value": 5000},
-                "status": "processing",
+                "status": "failed",
+                "failed_at": "2026-09-02T12:05:00Z",
+                "failure": {
+                    "reason": "temporarily_unavailable",
+                    "detail": "Payout processing was temporarily unavailable.",
+                    "retryable": True,
+                },
                 "balance_transactions": [
                     {
                         "id": "bt_1",
@@ -115,6 +121,9 @@ class TypedModelTest(unittest.TestCase):
         self.assertEqual("bt_1", payout.balance_transactions[0].id)
         self.assertEqual(5000, payout.balance_transactions[0].amount.value)
         self.assertEqual(2000, payout.balance_transactions[0].allocated_amount.value)
+        self.assertEqual("failed", payout.status)
+        self.assertEqual("temporarily_unavailable", payout.failure.reason)
+        self.assertTrue(payout.failure.retryable)
 
     def test_customer_addresses_and_custom_data_keep_semantic_types(self):
         request = CreateCustomerRequest(
