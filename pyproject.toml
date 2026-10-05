@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "inttegro"
-version = "11.3.0"
+version = "12.0.0"
 description = "Official Python SDK for the Inttegro API"
 authors = ["Inttegro Engineering <engineering@inttegro.com>"]
 license = "MIT"

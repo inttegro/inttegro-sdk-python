@@ -34,7 +34,7 @@ class Payout(ApiModel):
     destination_id: str = field(init=False)
     """Financial account receiving the funds. Required. Python type: ``str``; wire name: ``destination_id``; JSON type: string"""
     error: PayoutError | None = field(init=False)
-    """Public failure details when execution fails. Optional; nullable. Python type: ``PayoutError | None``; wire name: ``error``; JSON type: object"""
+    """Deprecated compatibility projection. Use ``failure`` for stable, caller-safe information. Optional; nullable. Python type: ``PayoutError | None``; wire name: ``error``; JSON type: object"""
     execute_after: datetime = field(init=False)
     """Earliest moment payout execution may begin. Required. Python type: ``datetime``; wire name: ``execute_after``; JSON type: string (date-time)"""
     executed_by: str | None = field(init=False)
@@ -42,7 +42,9 @@ class Payout(ApiModel):
     expected_at: datetime | None = field(init=False)
     """Expected completion time. Optional; nullable. Python type: ``datetime | None``; wire name: ``expected_at``; JSON type: string (date-time)"""
     failed_at: datetime | None = field(init=False)
-    """When the payout entered its unsuccessful terminal state. Optional; nullable. Python type: ``datetime | None``; wire name: ``failed_at``; JSON type: string (date-time)"""
+    """When the payout entered the failed state. Optional; nullable. Python type: ``datetime | None``; wire name: ``failed_at``; JSON type: string (date-time)"""
+    failure: PayoutFailure | None = field(init=False)
+    """Caller-safe terminal failure information. Optional; nullable. Python type: ``PayoutFailure | None``; wire name: ``failure``; JSON type: object"""
     id: str = field(init=False)
     """Unique payout identifier. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
     initiated_at: datetime = field(init=False)
@@ -63,11 +65,12 @@ class Payout(ApiModel):
     """When the transfer was sent. Optional; nullable. Python type: ``datetime | None``; wire name: ``sent_at``; JSON type: string (date-time)"""
     source_id: str | None = field(init=False)
     """Source identifier associated with the payout. Optional; nullable. Python type: ``str | None``; wire name: ``source_id``; JSON type: string"""
-    status: Literal['initialized', 'scheduled', 'processing', 'executing', 'succeeded', 'invalid', 'canceled'] = field(init=False)
-    """Current payout lifecycle state. Required. Python type: ``Literal['initialized', 'scheduled', 'processing', 'executing', 'succeeded', 'invalid', 'canceled']``; wire name: ``status``; JSON type: string. Constraints: allowed values ``initialized``, ``scheduled``, ``processing``, ``executing``, ``succeeded``, ``invalid``, ``canceled``"""
+    status: Literal['initialized', 'scheduled', 'processing', 'executing', 'succeeded', 'failed', 'canceled'] = field(init=False)
+    """Current payout lifecycle state. Required. Python type: ``Literal['initialized', 'scheduled', 'processing', 'executing', 'succeeded', 'failed', 'canceled']``; wire name: ``status``; JSON type: string."""
     succeeded_at: datetime | None = field(init=False)
     """When the payout succeeded. Optional; nullable. Python type: ``datetime | None``; wire name: ``succeeded_at``; JSON type: string (date-time)"""
 
 from inttegro.payout.error import Error as PayoutError
+from inttegro.payout.failure import Failure as PayoutFailure
 from inttegro.payout.balance_transaction import BalanceTransaction as PayoutBalanceTransaction
 from inttegro.custom_data import CustomData
