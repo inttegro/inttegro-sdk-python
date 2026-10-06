@@ -53,6 +53,8 @@ if TYPE_CHECKING:
     from .payout_settings_request_destination import PayoutSettingsRequestDestination as PayoutSettingsRequestDestination
     from .product_line_item import ProductLineItem as ProductLineItem
     from .product_line_item_product import ProductLineItemProduct as ProductLineItemProduct
+    from .receipt import Receipt as Receipt
+    from .receipt_format import ReceiptFormat as ReceiptFormat
     from .shipping_line_item import ShippingLineItem as ShippingLineItem
     from .shipping_line_item_shipping import ShippingLineItemShipping as ShippingLineItemShipping
     from .status import Status as Status
@@ -109,6 +111,8 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "PayoutSettingsRequestDestination": ("inttegro.order.payout_settings_request_destination", "PayoutSettingsRequestDestination"),
     "ProductLineItem": ("inttegro.order.product_line_item", "ProductLineItem"),
     "ProductLineItemProduct": ("inttegro.order.product_line_item_product", "ProductLineItemProduct"),
+    "Receipt": ("inttegro.order.receipt", "Receipt"),
+    "ReceiptFormat": ("inttegro.order.receipt_format", "ReceiptFormat"),
     "ShippingLineItem": ("inttegro.order.shipping_line_item", "ShippingLineItem"),
     "ShippingLineItemShipping": ("inttegro.order.shipping_line_item_shipping", "ShippingLineItemShipping"),
     "Status": ("inttegro.order.status", "Status"),
@@ -165,6 +169,8 @@ __all__ = [
     "PayoutSettingsRequestDestination",
     "ProductLineItem",
     "ProductLineItemProduct",
+    "Receipt",
+    "ReceiptFormat",
     "ShippingLineItem",
     "ShippingLineItemShipping",
     "Status",
