@@ -35,3 +35,9 @@ class LookupResponseApp(ApiModel):
     """Last update timestamp. Optional; nullable. Python type: ``datetime | None``; wire name: ``updated_at``; JSON type: string (date-time)"""
     archived_at: datetime | None = field(init=False)
     """Archive timestamp (if archived). Optional; nullable. Python type: ``datetime | None``; wire name: ``archived_at``; JSON type: string (date-time)"""
+    capabilities: dict[str, object] = field(init=False)
+    """Public capabilities currently available to this app. Required. Python type: ``dict[str, object]``; wire name: ``capabilities``; JSON type: object"""
+    relationship: ApplicationRelationship | None = field(init=False)
+    """Direct placement relationship for this app. Optional; nullable. Python type: ``ApplicationRelationship | None``; wire name: ``relationship``; JSON type: object"""
+
+from inttegro.app.relationship import Relationship as ApplicationRelationship
