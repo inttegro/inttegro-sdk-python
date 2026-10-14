@@ -26,8 +26,11 @@ class SettingsMutation(ApiModel):
     """Updated foreign-exchange setting. Optional; nullable. Python type: ``bool | None``; wire name: ``fx_enabled``; JSON type: boolean."""
     id: str | None = field(init=False)
     """Payout settings identifier. Optional; nullable. Python type: ``str | None``; wire name: ``id``; JSON type: string"""
+    limits: PayoutSettingsLimits = field(init=False)
+    """Platform limits applied to payouts. Required. Python type: ``PayoutSettingsLimits``; wire name: ``limits``; JSON type: object."""
     schedule: PayoutSettingsMutationSchedule | None = field(init=False)
     """Updated payout schedule. Optional; nullable. Python type: ``PayoutSettingsMutationSchedule | None``; wire name: ``schedule``; JSON type: object"""
 
 from inttegro.payout.settings_mutation_schedule import SettingsMutationSchedule as PayoutSettingsMutationSchedule
 from inttegro.payout.destinations import Destinations as PayoutDestinations
+from inttegro.payout.settings_limits import SettingsLimits as PayoutSettingsLimits

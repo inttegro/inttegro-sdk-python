@@ -24,8 +24,11 @@ class SettingsLookup(ApiModel):
     """Supported currency-to-financial-account assignments. Required. Python type: ``PayoutDestinations``; wire name: ``destinations``; JSON type: object (PayoutDestinations)."""
     fx_enabled: bool | None = field(init=False)
     """Present only when foreign exchange is enabled in stored settings. Optional; nullable. Python type: ``bool | None``; wire name: ``fx_enabled``; JSON type: boolean"""
+    limits: PayoutSettingsLimits = field(init=False)
+    """Platform limits applied to payouts. Required. Python type: ``PayoutSettingsLimits``; wire name: ``limits``; JSON type: object."""
     schedule: PayoutSettingsLookupSchedule | None = field(init=False)
     """Active payout schedule. Optional; nullable. Python type: ``PayoutSettingsLookupSchedule | None``; wire name: ``schedule``; JSON type: object"""
 
 from inttegro.payout.settings_lookup_schedule import SettingsLookupSchedule as PayoutSettingsLookupSchedule
 from inttegro.payout.destinations import Destinations as PayoutDestinations
+from inttegro.payout.settings_limits import SettingsLimits as PayoutSettingsLimits
