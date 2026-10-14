@@ -2,6 +2,7 @@
 
 The primary returned object is ``inttegro.payout.Payout``. Related request types, nested response shapes, and string-backed enums are exported from this singular namespace. Public members load lazily, so importing one resource does not eagerly import the entire SDK."""
 
+from .amount_limits import AmountLimits as AmountLimits
 from .cancel_request import CancelRequest as CancelRequest
 from .balance_transaction import BalanceTransaction as BalanceTransaction
 from .cancel_response import CancelResponse as CancelResponse
@@ -27,6 +28,7 @@ from .set_destinations_response import SetDestinationsResponse as SetDestination
 from .settings_lookup import SettingsLookup as SettingsLookup
 from .settings_lookup_schedule import SettingsLookupSchedule as SettingsLookupSchedule
 from .settings_lookup_schedule_aging_spec import SettingsLookupScheduleAgingSpec as SettingsLookupScheduleAgingSpec
+from .settings_limits import SettingsLimits as SettingsLimits
 from .settings_mutation import SettingsMutation as SettingsMutation
 from .settings_mutation_schedule import SettingsMutationSchedule as SettingsMutationSchedule
 from .settings_mutation_schedule_spec import SettingsMutationScheduleSpec as SettingsMutationScheduleSpec

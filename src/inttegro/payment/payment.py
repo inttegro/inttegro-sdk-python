@@ -37,6 +37,8 @@ class Payment(ApiModel):
     """The billing details associated with this payment. Optional; nullable. Python type: ``PaymentBillingDetails | None``; wire name: ``billing_details``; JSON type: object"""
     customer: OrderCustomer | None = field(init=False)
     """The customer associated with this payment. Optional; nullable. Python type: ``OrderCustomer | None``; wire name: ``customer``; JSON type: object"""
+    receipt: OrderReceipt | None = field(init=False)
+    """Receipt issued for a paid order payment. Optional; nullable. Python type: ``OrderReceipt | None``; wire name: ``receipt``; JSON type: object"""
     latest_attempt: PaymentAttempt | None = field(init=False)
     """Most recent payment attempt details. Optional; nullable. Python type: ``PaymentAttempt | None``; wire name: ``latest_attempt``; JSON type: object"""
     next_action: PaymentNextAction | None = field(init=False)
@@ -82,6 +84,7 @@ class Payment(ApiModel):
 
 from inttegro.balance_transaction.balance_transaction import BalanceTransaction
 from inttegro.order.customer import Customer as OrderCustomer
+from inttegro.order.receipt import Receipt as OrderReceipt
 from inttegro.payment.attempt import Attempt as PaymentAttempt
 from inttegro.payment.billing_details import BillingDetails as PaymentBillingDetails
 from inttegro.payment.error import Error as PaymentError

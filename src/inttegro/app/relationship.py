@@ -26,27 +26,21 @@ class Relationship(ApiModel):
     """Order that consumed the Buy link. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
     kind: Literal['placement'] = field(init=False)
     """The kind associated with this relationship. Optional. Python type: ``Literal['placement']``; wire name: ``kind``; JSON type: string"""
-    policy_version: str = field(init=False)
-    """The policy version associated with this relationship. Optional. Python type: ``str``; wire name: ``policy_version``; JSON type: string"""
+    parent: RelationshipParent = field(init=False)
+    """Application that directly contains the app. Required. Python type: ``RelationshipParent``; wire name: ``parent``; JSON type: object"""
     status: Literal['active', 'inactive', 'suspended', 'revoked'] = field(init=False)
     """Current lifecycle status of the relationship. Optional. Python type: ``Literal['active', 'inactive', 'suspended', 'revoked']``; wire name: ``status``; JSON type: string"""
-    actor_app_id: str = field(init=False)
-    """Identifier of the related actor app. Optional. Python type: ``str``; wire name: ``actor_app_id``; JSON type: string"""
-    creator_app_id: str = field(init=False)
-    """Identifier of the related creator app. Optional. Python type: ``str``; wire name: ``creator_app_id``; JSON type: string"""
-    placement_parent_app_id: str = field(init=False)
-    """Identifier of the related placement parent app. Optional. Python type: ``str``; wire name: ``placement_parent_app_id``; JSON type: string"""
-    subject_app_id: str = field(init=False)
-    """Identifier of the related subject app. Optional. Python type: ``str``; wire name: ``subject_app_id``; JSON type: string"""
-    child_app_id: str = field(init=False)
-    """Identifier of the related child app. Optional. Python type: ``str``; wire name: ``child_app_id``; JSON type: string"""
-    child_standing: str = field(init=False)
-    """The child standing associated with this relationship. Optional. Python type: ``str``; wire name: ``child_standing``; JSON type: string"""
-    relationship_policy: ApplicationRelationshipPolicy = field(init=False)
-    """The relationship policy associated with this relationship. Optional. Python type: ``ApplicationRelationshipPolicy``; wire name: ``relationship_policy``; JSON type: object"""
-    retained_creator_authority_exists: bool = field(init=False)
-    """Whether retained creator authority exists. Optional. Python type: ``bool``; wire name: ``retained_creator_authority_exists``; JSON type: boolean"""
     created_at: datetime = field(init=False)
     """When order creation consumed the single-use Buy link. Required. Python type: ``datetime``; wire name: ``created_at``; JSON type: string (date-time)"""
 
-from inttegro.app.relationship_policy import RelationshipPolicy as ApplicationRelationshipPolicy
+
+@dataclass(frozen=True, slots=True, init=False, repr=False, eq=False)
+class RelationshipParent(ApiModel):
+    """Public identity of the app that directly contains another app."""
+
+    id: str = field(init=False)
+    """Parent app identifier. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
+    name: str = field(init=False)
+    """Current parent app name. Required. Python type: ``str``; wire name: ``name``; JSON type: string"""
+    alias: str | None = field(init=False)
+    """Current parent app alias. Optional; nullable. Python type: ``str | None``; wire name: ``alias``; JSON type: string"""

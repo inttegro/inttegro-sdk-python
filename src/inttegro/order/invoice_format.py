@@ -24,7 +24,5 @@ class InvoiceFormat(ApiModel):
     """The web associated with this invoice format. Required. Python type: ``OrderDocumentFormat``; wire name: ``web``; JSON type: object (OrderDocumentFormat)"""
     pdf: OrderDocumentFormat = field(init=False)
     """The pdf associated with this invoice format. Required. Python type: ``OrderDocumentFormat``; wire name: ``pdf``; JSON type: object (OrderDocumentFormat)"""
-    receipt: OrderDocumentFormat | None = field(init=False)
-    """The receipt associated with this invoice format. Optional; nullable. Python type: ``OrderDocumentFormat | None``; wire name: ``receipt``; JSON type: object (OrderDocumentFormat)"""
 
 from inttegro.order.document_format import DocumentFormat as OrderDocumentFormat
