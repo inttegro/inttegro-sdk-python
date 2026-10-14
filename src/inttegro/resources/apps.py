@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from ..http_client import HttpClient
+from inttegro.app.capabilities import Capabilities
 
 
 class Apps:
@@ -46,6 +47,10 @@ class Apps:
             TimeoutError: The configured request deadline elapsed.
         """
         return self.http.post("/apps/lookup", {})
+
+    def capabilities(self) -> Capabilities:
+        """Return the authenticated application's payment and payout capabilities."""
+        return self.http.post("/apps/capabilities", {})
 
     def update(self, payload: dict):
         """Update one or more attributes of the configured API key's application.

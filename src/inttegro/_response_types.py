@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from inttegro.app.app import App as Application
+from inttegro.app.capabilities import Capabilities as ApplicationCapabilities
 from inttegro.balance.balance import Balance as BalanceSnapshot
 from inttegro.balance_transaction.balance_transaction import BalanceTransaction
 from inttegro.balance_transaction.page import Page as BalanceTransactionPage
@@ -73,7 +74,7 @@ def _resource(model: Any, field: str) -> ResponseShape:
 
 
 RESPONSE_TYPES_BY_PATH: dict[str, ResponseShape] = {
-    '/apps/create': _resource(Application, 'app'), '/apps/lookup': _resource(Application, 'app'), '/apps/update': _resource(Application, 'app'),
+    '/apps/capabilities': _resource(ApplicationCapabilities, 'capabilities'), '/apps/create': _resource(Application, 'app'), '/apps/lookup': _resource(Application, 'app'), '/apps/update': _resource(Application, 'app'),
     '/balance_transactions/lookup': _resource(BalanceTransaction, 'transaction'), '/balance_transactions/page': _resource(BalanceTransactionPage, 'page'), '/balances': _resource(BalanceSnapshot, 'balances'),
     '/broadcasts/cancel': _resource(BroadcastDetail, 'broadcast'), '/broadcasts/lookup': _resource(BroadcastDetail, 'broadcast'),
     '/chimes/broadcast': _resource(BroadcastCreationDetail, 'broadcast'), '/chimes/lookup': _resource(Chime, 'chime'), '/chimes/page': _resource(ChimePage, 'page'), '/chimes/schedule': _resource(ScheduleCreationDetail, 'scheduled_chime'), '/chimes/send': _resource(Chime, 'chime'),

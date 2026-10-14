@@ -586,6 +586,7 @@ class InttegroClientTest(unittest.TestCase):
 
         client.apps.create({"name": "My App"})
         client.apps.lookup()
+        client.apps.capabilities()
         client.apps.update({"alias": "my-app"})
 
         client.keys.generate({"label": "Integration"})

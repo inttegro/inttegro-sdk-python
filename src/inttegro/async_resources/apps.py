@@ -2,6 +2,7 @@
 """Apps resource for managing the authenticated Inttegro application."""
 from __future__ import annotations
 from ..async_http_client import AsyncHttpClient
+from inttegro.app.capabilities import Capabilities
 
 class AsyncApps:
     """Application creation, lookup, and update operations.
@@ -44,6 +45,10 @@ class AsyncApps:
             TimeoutError: The configured request deadline elapsed.
         """
         return await self.http.post('/apps/lookup', {})
+
+    async def capabilities(self) -> Capabilities:
+        """Return the authenticated application's payment and payout capabilities."""
+        return await self.http.post('/apps/capabilities', {})
 
     async def update(self, payload: dict):
         """Update one or more attributes of the configured API key's application.

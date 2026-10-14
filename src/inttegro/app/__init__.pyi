@@ -3,6 +3,10 @@
 The primary returned object is ``inttegro.app.App``. Related request types, nested response shapes, and string-backed enums are exported from this singular namespace. Public members load lazily, so importing one resource does not eagerly import the entire SDK."""
 
 from .app import App as App
+from .capabilities import Capabilities as Capabilities
+from .capabilities import Capability as Capability
+from .capabilities import CapabilityRequirement as CapabilityRequirement
+from .capabilities import CapabilityRequirements as CapabilityRequirements
 from .create_request import CreateRequest as CreateRequest
 from .create_request_relationship_policy import CreateRequestRelationshipPolicy as CreateRequestRelationshipPolicy
 from .create_response import CreateResponse as CreateResponse
