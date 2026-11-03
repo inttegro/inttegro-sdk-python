@@ -22,6 +22,8 @@ class SettingsLookupScheduleAgingSpec(ApiModel):
     """
     abide: str = field(init=False)
     """The abide associated with this settings lookup schedule aging spec. Required. Python type: ``str``; wire name: ``abide``; JSON type: string"""
+    public_id: str = field(init=False)
+    """The public identifier associated with this settings lookup schedule aging spec. Required. Python type: ``str``; wire name: ``public_id``; JSON type: string"""
     label: str = field(init=False)
     """The label associated with this settings lookup schedule aging spec. Required. Python type: ``str``; wire name: ``label``; JSON type: string"""
     t_plus: str = field(init=False)
