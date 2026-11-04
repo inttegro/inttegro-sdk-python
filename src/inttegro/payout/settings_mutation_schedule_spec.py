@@ -22,8 +22,8 @@ class SettingsMutationScheduleSpec(ApiModel):
     """
     abide: str = field(init=False)
     """The abide associated with this settings mutation schedule spec. Required. Python type: ``str``; wire name: ``abide``; JSON type: string"""
-    id: str = field(init=False)
-    """Unique identifier for this settings mutation schedule spec. Required. Python type: ``str``; wire name: ``id``; JSON type: string"""
+    public_id: str = field(init=False)
+    """Public identifier for this settings mutation schedule spec. Required. Python type: ``str``; wire name: ``public_id``; JSON type: string"""
     label: str = field(init=False)
     """The label associated with this settings mutation schedule spec. Required. Python type: ``str``; wire name: ``label``; JSON type: string"""
     t_plus: str = field(init=False)
