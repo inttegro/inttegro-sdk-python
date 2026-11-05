@@ -41,6 +41,9 @@ class App(ApiModel):
     """The secret key associated with this app. Optional; nullable. Python type: ``ApplicationSecretKey | None``; wire name: ``secret_key``; JSON type: object"""
     relationship: ApplicationRelationship | None = field(init=False)
     """The relationship associated with this app. Optional; nullable. Python type: ``ApplicationRelationship | None``; wire name: ``relationship``; JSON type: object"""
+    operating_policy: ApplicationOperatingPolicy | None = field(init=False)
+    """Gated immutable operating-policy snapshot. Optional; nullable. Python type: ``ApplicationOperatingPolicy | None``; wire name: ``operating_policy``; JSON type: object"""
 
 from inttegro.app.relationship import Relationship as ApplicationRelationship
 from inttegro.app.secret_key import SecretKey as ApplicationSecretKey
+from inttegro.operating_policy import Snapshot as ApplicationOperatingPolicy

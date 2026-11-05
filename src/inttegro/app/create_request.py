@@ -6,6 +6,7 @@ Generated from the Inttegro API contract; do not edit by hand.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from inttegro._request_base import ApiRequest, UNSET, UnsetType
+from inttegro.operating_policy import Selection as OperatingPolicySelection
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -30,5 +31,7 @@ class CreateRequest(ApiRequest):
     """The relationship policy associated with this create request. Optional. Python type: ``CreateApplicationRequestRelationshipPolicy``; wire name: ``relationship_policy``; JSON type: object"""
     name: str
     """Human-readable name of the create request. Required. Python type: ``str``; wire name: ``name``; JSON type: string"""
+    operating_policy: OperatingPolicySelection | UnsetType = field(default=UNSET)
+    """Named or inline operating policy. Optional. Python type: ``OperatingPolicySelection``; wire name: ``operating_policy``; JSON type: object"""
 
 from inttegro.app.create_request_relationship_policy import CreateRequestRelationshipPolicy as CreateApplicationRequestRelationshipPolicy

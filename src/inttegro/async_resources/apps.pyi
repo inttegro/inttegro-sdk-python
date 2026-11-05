@@ -5,6 +5,7 @@ from ..async_http_client import AsyncHttpClient
 from inttegro.app.app import App
 from inttegro.app.create_request import CreateRequest
 from inttegro.app.update_request import UpdateRequest
+from inttegro.app.capabilities import Capabilities
 
 class AsyncApps:
 
@@ -15,6 +16,9 @@ class AsyncApps:
         ...
 
     async def lookup(self) -> App:
+        ...
+
+    async def capabilities(self) -> Capabilities:
         ...
 
     async def update(self, payload: UpdateRequest) -> App:

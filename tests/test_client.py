@@ -85,6 +85,30 @@ PURCHASE_INTENT_BODY = {
         "single_use": True,
     },
 }
+POLICY_TIMESTAMPS = {
+    "created_at": "2026-11-05T10:00:00Z",
+    "updated_at": "2026-11-05T10:00:00Z",
+    "version_created_at": "2026-11-05T10:00:00Z",
+}
+OPERATING_POLICY_BODY = {
+    "id": "op_1",
+    "version": 1,
+    "active_version": 1,
+    "name": "Default",
+    "capabilities": {
+        "payments": {"currencies": ["ghs"]},
+        "payouts": {
+            "enabled": False,
+            "bt_aging_spec": {
+                "public_id": "bt_aging_spec_immediate",
+                "t_plus": "0h",
+            },
+        },
+    },
+    "children_policy_id": "cp_1",
+    "children_policy_version": 1,
+    **POLICY_TIMESTAMPS,
+}
 
 
 class TransportRecorder:
@@ -132,6 +156,29 @@ class TransportRecorder:
             }
         elif path.startswith("/purchase_intents/"):
             response = {"purchase_intent": PURCHASE_INTENT_BODY}
+        elif path == "/children_policies/lookup":
+            response = {
+                "children_policy": {
+                    "id": "cp_1",
+                    "owner_application_id": "app_1",
+                    "version": 1,
+                    "active_version": 1,
+                    "name": "Default",
+                    "capabilities": {
+                        "payments": {"currencies": ["ghs"]},
+                        "payouts": {
+                            "enabled": [False],
+                            "bt_aging_spec": [{
+                                "public_id": "bt_aging_spec_immediate",
+                                "t_plus": "0h",
+                            }],
+                        },
+                    },
+                    **POLICY_TIMESTAMPS,
+                }
+            }
+        elif path.startswith("/operating_policies/"):
+            response = {"operating_policy": OPERATING_POLICY_BODY}
         elif path.startswith("/orders/"):
             response = {"order": ORDER_BODY}
         else:
@@ -588,6 +635,18 @@ class InttegroClientTest(unittest.TestCase):
         client.apps.lookup()
         client.apps.capabilities()
         client.apps.update({"alias": "my-app"})
+
+        client.children_policies.lookup()
+        client.operating_policies.create({
+            "name": "Default",
+            "capabilities": {"payments": {"currencies": ["ghs"]}},
+        })
+        client.operating_policies.lookup("op_1")
+        client.operating_policies.update({
+            "operating_policy_id": "op_1",
+            "expected_version": 1,
+            "name": "Default v2",
+        })
 
         client.keys.generate({"label": "Integration"})
         client.keys.page({})
