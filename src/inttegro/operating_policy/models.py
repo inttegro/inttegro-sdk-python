@@ -99,6 +99,19 @@ class CreateRequest(ApiRequest):
 class LookupRequest(ApiRequest):
     """Parameters for looking up an operating policy."""
     operating_policy_id: str
+    version: int | UnsetType = field(default=UNSET)
+
+    def __post_init__(self) -> None:
+        if isinstance(self.version, int) and self.version < 1:
+            raise ValueError("version must be greater than or equal to 1")
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class PageRequest(ApiRequest):
+    """Selects one operating policy and controls version pagination."""
+    operating_policy_id: str
+    number: int | UnsetType = field(default=UNSET)
+    size: int | UnsetType = field(default=UNSET)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -199,3 +212,14 @@ class OperatingPolicy(ApiModel):
     created_at: datetime = field(init=False)
     updated_at: datetime = field(init=False)
     version_created_at: datetime = field(init=False)
+
+
+@dataclass(frozen=True, slots=True, init=False, repr=False, eq=False)
+class Page(ApiModel):
+    """One page of immutable operating-policy versions, ordered newest first."""
+    number: int = field(init=False)
+    size: int = field(init=False)
+    count: int = field(init=False)
+    total: int = field(init=False)
+    has_more: bool = field(init=False)
+    versions: list[OperatingPolicy] = field(init=False)

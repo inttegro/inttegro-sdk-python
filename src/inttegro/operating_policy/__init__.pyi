@@ -11,6 +11,8 @@ from .models import Limits as Limits
 from .models import LimitsInput as LimitsInput
 from .models import LookupRequest as LookupRequest
 from .models import OperatingPolicy as OperatingPolicy
+from .models import Page as Page
+from .models import PageRequest as PageRequest
 from .models import PaymentMethodCapabilities as PaymentMethodCapabilities
 from .models import PaymentMethodCapabilitiesInput as PaymentMethodCapabilitiesInput
 from .models import PaymentMethodsCapabilities as PaymentMethodsCapabilities
