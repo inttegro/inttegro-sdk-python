@@ -26,6 +26,8 @@ from .resources.spec import Spec
 from .resources.balances import Balances
 from .resources.upload_requests import UploadRequests
 from .resources.apps import Apps
+from .resources.children_policies import ChildrenPolicies
+from .resources.operating_policies import OperatingPolicies
 from .error_reporting import ErrorReporter, ErrorReportingPolicy
 
 if TYPE_CHECKING:
@@ -118,6 +120,8 @@ class InttegroClient:
     spec: Spec
     balances: Balances
     upload_requests: UploadRequests
+    children_policies: ChildrenPolicies
+    operating_policies: OperatingPolicies
 
     def __init__(
         self,
@@ -204,3 +208,5 @@ class InttegroClient:
         self.spec = Spec(self.http)
         self.balances = Balances(self.http)
         self.upload_requests = UploadRequests(self.http)
+        self.children_policies = ChildrenPolicies(self.http)
+        self.operating_policies = OperatingPolicies(self.http)

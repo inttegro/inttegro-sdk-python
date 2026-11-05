@@ -1,0 +1,6 @@
+from ..http_client import HttpClient
+from inttegro.children_policy import ChildrenPolicy
+
+class ChildrenPolicies:
+    def __init__(self, http: HttpClient) -> None: ...
+    def lookup(self) -> ChildrenPolicy: ...

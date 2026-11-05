@@ -29,6 +29,7 @@ from .errors import (
 )
 from . import (
     app,
+    children_policy,
     balance,
     balance_transaction,
     bank_account,
@@ -44,6 +45,7 @@ from . import (
     money,
     order,
     otp,
+    operating_policy,
     payment,
     payment_method,
     payout,
@@ -81,6 +83,7 @@ __all__ = [
     "TimeoutError",
     "TraceReportContext",
     "app",
+    "children_policy",
     "balance",
     "balance_transaction",
     "bank_account",
@@ -96,6 +99,7 @@ __all__ = [
     "money",
     "order",
     "otp",
+    "operating_policy",
     "payment",
     "payment_method",
     "payout",

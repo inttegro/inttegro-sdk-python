@@ -4,6 +4,8 @@ from typing import TYPE_CHECKING
 
 from .async_http_client import AsyncHTTPClient, AsyncHttpClient, AsyncTransport
 from .async_resources.apps import AsyncApps
+from .async_resources.children_policies import AsyncChildrenPolicies
+from .async_resources.operating_policies import AsyncOperatingPolicies
 from .async_resources.balance_transactions import AsyncBalanceTransactions
 from .async_resources.balances import AsyncBalances
 from .async_resources.broadcasts import AsyncBroadcasts
@@ -69,6 +71,8 @@ class AsyncInttegroClient:
     spec: AsyncSpec
     balances: AsyncBalances
     upload_requests: AsyncUploadRequests
+    children_policies: AsyncChildrenPolicies
+    operating_policies: AsyncOperatingPolicies
 
     def __init__(
         self,
@@ -124,6 +128,8 @@ class AsyncInttegroClient:
         self.spec = AsyncSpec(self.http)
         self.balances = AsyncBalances(self.http)
         self.upload_requests = AsyncUploadRequests(self.http)
+        self.children_policies = AsyncChildrenPolicies(self.http)
+        self.operating_policies = AsyncOperatingPolicies(self.http)
 
     async def __aenter__(self) -> AsyncInttegroClient:
         return self

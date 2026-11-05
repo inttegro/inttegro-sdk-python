@@ -39,5 +39,8 @@ class LookupResponseApp(ApiModel):
     """Public capabilities currently available to this app. Required. Python type: ``dict[str, object]``; wire name: ``capabilities``; JSON type: object"""
     relationship: ApplicationRelationship | None = field(init=False)
     """Direct placement relationship for this app. Optional; nullable. Python type: ``ApplicationRelationship | None``; wire name: ``relationship``; JSON type: object"""
+    operating_policy: ApplicationOperatingPolicy | None = field(init=False)
+    """Gated immutable operating-policy snapshot. Optional; nullable. Python type: ``ApplicationOperatingPolicy | None``; wire name: ``operating_policy``; JSON type: object"""
 
 from inttegro.app.relationship import Relationship as ApplicationRelationship
+from inttegro.operating_policy import Snapshot as ApplicationOperatingPolicy
