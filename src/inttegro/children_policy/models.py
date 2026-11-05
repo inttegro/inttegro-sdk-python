@@ -71,7 +71,6 @@ class Capabilities(ApiModel):
 class ChildrenPolicy(ApiModel):
     """Latest active children policy assigned to an application."""
     id: str = field(init=False)
-    owner_application_id: str = field(init=False)
     version: int = field(init=False)
     active_version: int = field(init=False)
     name: str = field(init=False)

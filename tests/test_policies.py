@@ -30,7 +30,6 @@ class PolicyTransport:
             body = {
                 "children_policy": {
                     "id": "cp_123",
-                    "owner_application_id": "app_123",
                     "version": 1,
                     "active_version": 1,
                     "name": "Default",
