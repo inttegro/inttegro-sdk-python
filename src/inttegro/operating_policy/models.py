@@ -82,6 +82,10 @@ class InlineSelection(ApiRequest):
 
 Selection: TypeAlias = IDSelection | InlineSelection
 
+# This module is an implementation detail; the package initializer re-exports
+# the public selection alias explicitly.
+__all__ = ("Selection",)
+
 
 @dataclass(frozen=True, slots=True, kw_only=True)
 class CreateRequest(ApiRequest):
