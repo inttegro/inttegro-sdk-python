@@ -37,6 +37,8 @@ class App(ApiModel):
     """Archive timestamp (if archived). Optional; nullable. Python type: ``datetime | None``; wire name: ``archived_at``; JSON type: string (date-time)"""
     capabilities: dict[str, object] = field(init=False)
     """Public capabilities currently available to this app. Required. Python type: ``dict[str, object]``; wire name: ``capabilities``; JSON type: object"""
+    children_policy: ChildrenPolicy | None = field(init=False)
+    """Active children policy assigned to this app. Optional; nullable. Python type: ``ChildrenPolicy | None``; wire name: ``children_policy``; JSON type: object"""
     secret_key: ApplicationSecretKey | None = field(init=False)
     """The secret key associated with this app. Optional; nullable. Python type: ``ApplicationSecretKey | None``; wire name: ``secret_key``; JSON type: object"""
     relationship: ApplicationRelationship | None = field(init=False)
@@ -46,4 +48,5 @@ class App(ApiModel):
 
 from inttegro.app.relationship import Relationship as ApplicationRelationship
 from inttegro.app.secret_key import SecretKey as ApplicationSecretKey
+from inttegro.children_policy import ChildrenPolicy
 from inttegro.operating_policy import Snapshot as ApplicationOperatingPolicy

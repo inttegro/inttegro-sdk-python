@@ -9,18 +9,18 @@ from inttegro.operating_policy import BTAgingSpec as OperatingPolicyBTAgingSpec
 
 
 class PolicyWireNamesTest(unittest.TestCase):
-    def test_aging_specs_expose_public_id(self) -> None:
+    def test_aging_specs_expose_id(self) -> None:
         children = ChildrenPolicyBTAgingSpec.from_dict(
-            {"public_id": "bt_aging_spec_immediate", "t_plus": "0h"}
+            {"id": "bt_aging_spec_immediate", "t_plus": "0h"}
         )
         operating = OperatingPolicyBTAgingSpec.from_dict(
-            {"public_id": "bt_aging_spec_168_hourly", "t_plus": "168h"}
+            {"id": "bt_aging_spec_168_hourly", "t_plus": "168h"}
         )
 
-        self.assertEqual("bt_aging_spec_immediate", children.public_id)
-        self.assertEqual("bt_aging_spec_168_hourly", operating.public_id)
+        self.assertEqual("bt_aging_spec_immediate", children.id)
+        self.assertEqual("bt_aging_spec_168_hourly", operating.id)
         self.assertEqual(
-            {"public_id": "bt_aging_spec_168_hourly", "t_plus": "168h"},
+            {"id": "bt_aging_spec_168_hourly", "t_plus": "168h"},
             operating.to_dict(),
         )
 

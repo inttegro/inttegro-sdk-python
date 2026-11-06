@@ -42,7 +42,7 @@ class Limits(ApiModel):
 @dataclass(frozen=True, slots=True, init=False, repr=False, eq=False)
 class BTAgingSpec(ApiModel):
     """Platform-owned balance-transaction aging option."""
-    public_id: str = field(init=False)
+    id: str = field(init=False)
     t_plus: str = field(init=False)
 
 
