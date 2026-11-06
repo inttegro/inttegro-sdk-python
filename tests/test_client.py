@@ -90,6 +90,23 @@ POLICY_TIMESTAMPS = {
     "updated_at": "2026-11-05T10:00:00Z",
     "version_created_at": "2026-11-05T10:00:00Z",
 }
+CHILDREN_POLICY_BODY = {
+    "id": "cp_1",
+    "version": 1,
+    "active_version": 1,
+    "name": "Default",
+    "capabilities": {
+        "payments": {"currencies": ["ghs"]},
+        "payouts": {
+            "enabled": [False],
+            "bt_aging_spec": [{
+                "id": "bt_aging_spec_immediate",
+                "t_plus": "0h",
+            }],
+        },
+    },
+    **POLICY_TIMESTAMPS,
+}
 OPERATING_POLICY_BODY = {
     "id": "op_1",
     "version": 1,
@@ -100,7 +117,7 @@ OPERATING_POLICY_BODY = {
         "payouts": {
             "enabled": False,
             "bt_aging_spec": {
-                "public_id": "bt_aging_spec_immediate",
+                "id": "bt_aging_spec_immediate",
                 "t_plus": "0h",
             },
         },
@@ -157,26 +174,25 @@ class TransportRecorder:
         elif path.startswith("/purchase_intents/"):
             response = {"purchase_intent": PURCHASE_INTENT_BODY}
         elif path == "/children_policies/lookup":
-            response = {
-                "children_policy": {
-                    "id": "cp_1",
-                    "owner_application_id": "app_1",
-                    "version": 1,
-                    "active_version": 1,
-                    "name": "Default",
-                    "capabilities": {
-                        "payments": {"currencies": ["ghs"]},
-                        "payouts": {
-                            "enabled": [False],
-                            "bt_aging_spec": [{
-                                "public_id": "bt_aging_spec_immediate",
-                                "t_plus": "0h",
-                            }],
-                        },
-                    },
-                    **POLICY_TIMESTAMPS,
-                }
-            }
+            response = {"children_policy": CHILDREN_POLICY_BODY}
+        elif path == "/children_policies/page":
+            response = {"page": {
+                "number": 1,
+                "size": 1,
+                "count": 1,
+                "total": 1,
+                "has_more": False,
+                "versions": [CHILDREN_POLICY_BODY],
+            }}
+        elif path == "/operating_policies/page":
+            response = {"page": {
+                "number": 1,
+                "size": 1,
+                "count": 1,
+                "total": 1,
+                "has_more": False,
+                "versions": [OPERATING_POLICY_BODY],
+            }}
         elif path.startswith("/operating_policies/"):
             response = {"operating_policy": OPERATING_POLICY_BODY}
         elif path.startswith("/orders/"):
@@ -637,11 +653,15 @@ class InttegroClientTest(unittest.TestCase):
         client.apps.update({"alias": "my-app"})
 
         client.children_policies.lookup()
+        client.children_policies.page()
         client.operating_policies.create({
             "name": "Default",
             "capabilities": {"payments": {"currencies": ["ghs"]}},
         })
         client.operating_policies.lookup("op_1")
+        client.operating_policies.page(
+            inttegro.operating_policy.PageRequest(operating_policy_id="op_1")
+        )
         client.operating_policies.update({
             "operating_policy_id": "op_1",
             "expected_version": 1,

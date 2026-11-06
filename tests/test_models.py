@@ -25,7 +25,7 @@ from inttegro.purchase_intent import (
     UpdateRequestPresentationBuyPage,
     UpdateRequestPresentationBuyPageText,
 )
-from inttegro.payout import Payout
+from inttegro.payout import BalanceTransactionStatus, Payout
 from inttegro.refund import (
     PaymentMethodSettlement,
     Refund,
@@ -113,6 +113,7 @@ class TypedModelTest(unittest.TestCase):
                         "id": "bt_1",
                         "amount": {"currency": "ghs", "value": 5000},
                         "allocated_amount": {"currency": "ghs", "value": 2000},
+                        "status": "reserved",
                     }
                 ],
             }
@@ -121,6 +122,10 @@ class TypedModelTest(unittest.TestCase):
         self.assertEqual("bt_1", payout.balance_transactions[0].id)
         self.assertEqual(5000, payout.balance_transactions[0].amount.value)
         self.assertEqual(2000, payout.balance_transactions[0].allocated_amount.value)
+        self.assertEqual(
+            BalanceTransactionStatus.RESERVED,
+            payout.balance_transactions[0].status,
+        )
         self.assertEqual("failed", payout.status)
         self.assertEqual("temporarily_unavailable", payout.failure.reason)
         self.assertTrue(payout.failure.retryable)

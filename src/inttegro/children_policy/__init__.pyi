@@ -3,6 +3,9 @@ from .models import BTAgingSpec as BTAgingSpec
 from .models import Capabilities as Capabilities
 from .models import ChildrenPolicy as ChildrenPolicy
 from .models import Limits as Limits
+from .models import LookupRequest as LookupRequest
+from .models import Page as Page
+from .models import PageRequest as PageRequest
 from .models import PaymentMethodCapabilities as PaymentMethodCapabilities
 from .models import PaymentMethodsCapabilities as PaymentMethodsCapabilities
 from .models import PaymentsCapabilities as PaymentsCapabilities

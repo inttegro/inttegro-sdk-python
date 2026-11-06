@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from .amount_limits import AmountLimits as AmountLimits
     from .balance_transaction import BalanceTransaction as BalanceTransaction
+    from .balance_transaction_status import BalanceTransactionStatus as BalanceTransactionStatus
     from .cancel_request import CancelRequest as CancelRequest
     from .cancel_response import CancelResponse as CancelResponse
     from .disable_automatic_request import DisableAutomaticRequest as DisableAutomaticRequest
@@ -42,6 +43,7 @@ if TYPE_CHECKING:
 _EXPORTS: dict[str, tuple[str, str]] = {
     "AmountLimits": ("inttegro.payout.amount_limits", "AmountLimits"),
     "BalanceTransaction": ("inttegro.payout.balance_transaction", "BalanceTransaction"),
+    "BalanceTransactionStatus": ("inttegro.payout.balance_transaction_status", "BalanceTransactionStatus"),
     "CancelRequest": ("inttegro.payout.cancel_request", "CancelRequest"),
     "CancelResponse": ("inttegro.payout.cancel_response", "CancelResponse"),
     "DisableAutomaticRequest": ("inttegro.payout.disable_automatic_request", "DisableAutomaticRequest"),
@@ -76,6 +78,7 @@ _EXPORTS: dict[str, tuple[str, str]] = {
 __all__ = [
     "AmountLimits",
     "BalanceTransaction",
+    "BalanceTransactionStatus",
     "CancelRequest",
     "CancelResponse",
     "DisableAutomaticRequest",

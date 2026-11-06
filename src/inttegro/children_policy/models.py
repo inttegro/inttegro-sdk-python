@@ -6,6 +6,24 @@ from dataclasses import dataclass, field
 from datetime import datetime
 
 from inttegro._model_base import ApiModel
+from inttegro._request_base import ApiRequest, UNSET, UnsetType
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class LookupRequest(ApiRequest):
+    """Optionally selects one exact children-policy version."""
+    version: int | UnsetType = field(default=UNSET)
+
+    def __post_init__(self) -> None:
+        if isinstance(self.version, int) and self.version < 1:
+            raise ValueError("version must be greater than or equal to 1")
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class PageRequest(ApiRequest):
+    """Controls children-policy version pagination."""
+    number: int | UnsetType = field(default=UNSET)
+    size: int | UnsetType = field(default=UNSET)
 
 
 @dataclass(frozen=True, slots=True, init=False, repr=False, eq=False)
@@ -24,7 +42,7 @@ class Limits(ApiModel):
 @dataclass(frozen=True, slots=True, init=False, repr=False, eq=False)
 class BTAgingSpec(ApiModel):
     """Platform-owned balance-transaction aging option."""
-    public_id: str = field(init=False)
+    id: str = field(init=False)
     t_plus: str = field(init=False)
 
 
@@ -71,7 +89,6 @@ class Capabilities(ApiModel):
 class ChildrenPolicy(ApiModel):
     """Latest active children policy assigned to an application."""
     id: str = field(init=False)
-    owner_application_id: str = field(init=False)
     version: int = field(init=False)
     active_version: int = field(init=False)
     name: str = field(init=False)
@@ -80,3 +97,14 @@ class ChildrenPolicy(ApiModel):
     created_at: datetime = field(init=False)
     updated_at: datetime = field(init=False)
     version_created_at: datetime = field(init=False)
+
+
+@dataclass(frozen=True, slots=True, init=False, repr=False, eq=False)
+class Page(ApiModel):
+    """One page of immutable children-policy versions, ordered newest first."""
+    number: int = field(init=False)
+    size: int = field(init=False)
+    count: int = field(init=False)
+    total: int = field(init=False)
+    has_more: bool = field(init=False)
+    versions: list[ChildrenPolicy] = field(init=False)
