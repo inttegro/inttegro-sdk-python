@@ -641,7 +641,7 @@ class InttegroClientTest(unittest.TestCase):
             "recipient": "+233",
             "sender": "Acme",
             "service_name": "Acme Bank",
-            "idempotency_key": "otp_login_1700000000",
+            "request_meta": {"idempotency_key": "otp_login_1700000000"},
         })
         client.otp.verify({"transaction_id": "txn_1", "recipient": "+233", "token": "123456"})
         client.otp.lookup({"transaction_id": "txn_1"})
@@ -778,10 +778,9 @@ class InttegroClientTest(unittest.TestCase):
         recorder = TransportRecorder()
         client = InttegroClient(api_key="test", base_url="https://api.inttegro.com", transport=recorder)
 
-        client.orders.create({"number": "ORDER-1", "idempotency_key": "legacy"})
+        client.orders.create({"number": "ORDER-1"})
 
         body = json.loads(recorder.requests[0].data.decode("utf-8"))
-        self.assertNotIn("idempotency_key", body)
         self.assertRegex(body["request_meta"]["idempotency_key"], UUID_V7_RE)
 
     def test_typed_request_objects_serialize_nested_values_and_omit_unset_fields(self):
@@ -838,7 +837,6 @@ class InttegroClientTest(unittest.TestCase):
         for request in recorder.requests:
             body = json.loads(request.data.decode("utf-8"))
             self.assertNotIn("request_meta", body)
-            self.assertNotIn("idempotency_key", body)
 
     def test_message_templates_create_uses_request_meta_idempotency_by_default(self):
         recorder = TransportRecorder()
