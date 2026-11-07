@@ -92,14 +92,6 @@ class AsyncClientTest(unittest.IsolatedAsyncioTestCase):
         key = payload["request_meta"]["idempotency_key"]
         self.assertRegex(key, r"^[0-9a-f-]{36}$")
 
-    async def test_mutations_reject_top_level_idempotency_key(self) -> None:
-        recorder = AsyncTransportRecorder()
-        async with AsyncInttegroClient(api_key="sk_test_async", transport=recorder) as client:
-            with self.assertRaisesRegex(ValueError, "top-level idempotency_key is not supported"):
-                await client.orders.create({"idempotency_key": "legacy", "line_items": []})
-
-        self.assertEqual([], recorder.requests)
-
     async def test_httpx_transport_maps_api_errors(self) -> None:
         async def handler(request: httpx.Request) -> httpx.Response:
             return httpx.Response(

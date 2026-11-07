@@ -298,13 +298,7 @@ class HttpClient:
         encoded = encode_request_value(body)
         if not isinstance(encoded, dict):
             raise TypeError("request body must encode to a JSON object")
-        payload = dict(encoded)
-        if "idempotency_key" in payload:
-            raise ValueError(
-                "top-level idempotency_key is not supported; use "
-                "request_meta.idempotency_key or the Idempotency-Key header"
-            )
-        return payload
+        return dict(encoded)
 
     def _is_idempotent_mutation_path(self, path_or_url: str) -> bool:
         path = urllib.parse.urlparse(path_or_url).path if path_or_url.startswith(("http://", "https://")) else path_or_url

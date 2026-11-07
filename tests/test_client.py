@@ -774,13 +774,14 @@ class InttegroClientTest(unittest.TestCase):
         with self.assertRaises(AuthenticationError):
             client.orders.lookup("or_1")
 
-    def test_mutating_posts_reject_top_level_idempotency_key(self):
+    def test_mutating_posts_generate_request_meta_idempotency_key(self):
         recorder = TransportRecorder()
         client = InttegroClient(api_key="test", base_url="https://api.inttegro.com", transport=recorder)
 
-        with self.assertRaisesRegex(ValueError, "top-level idempotency_key is not supported"):
-            client.orders.create({"number": "ORDER-1", "idempotency_key": "legacy"})
-        self.assertEqual([], recorder.requests)
+        client.orders.create({"number": "ORDER-1"})
+
+        body = json.loads(recorder.requests[0].data.decode("utf-8"))
+        self.assertRegex(body["request_meta"]["idempotency_key"], UUID_V7_RE)
 
     def test_typed_request_objects_serialize_nested_values_and_omit_unset_fields(self):
         recorder = TransportRecorder()
@@ -836,7 +837,6 @@ class InttegroClientTest(unittest.TestCase):
         for request in recorder.requests:
             body = json.loads(request.data.decode("utf-8"))
             self.assertNotIn("request_meta", body)
-            self.assertNotIn("idempotency_key", body)
 
     def test_message_templates_create_uses_request_meta_idempotency_by_default(self):
         recorder = TransportRecorder()
