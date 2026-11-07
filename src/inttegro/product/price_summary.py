@@ -31,8 +31,6 @@ class PriceSummary(ApiModel):
     """Short label for this price. Optional; nullable. Python type: ``str | None``; wire name: ``label``; JSON type: string"""
     type: PriceType = field(init=False)
     """Price definition discriminator. Required. Python type: ``PriceType``; wire name: ``type``; JSON type: string (PriceType)"""
-    nominal: Amount | None = field(init=False)
-    """Deprecated fixed-price compatibility alias. Present only for fixed prices. Python type: ``Amount | None``; wire name: ``nominal``; JSON type: object (Amount)"""
     fixed_amount: Amount | None = field(init=False)
     """Fixed amount present only for fixed prices. Python type: ``Amount | None``; wire name: ``fixed_amount``; JSON type: object (Amount)"""
     customer_selected_amount: CustomerSelectedAmount | None = field(init=False)
