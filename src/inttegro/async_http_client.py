@@ -176,7 +176,7 @@ class AsyncHttpClient:
     ) -> Any:
         with self.telemetry.operation(path, "POST", self.base_url, VERSION) as span:
             request_headers = dict(headers or {})
-            request_body = self._without_top_level_idempotency(body or {})
+            request_body = self._validated_request_body(body or {})
             if self._is_idempotent_mutation_path(path) and not self._has_header(request_headers, "Idempotency-Key"):
                 request_body = self._with_request_meta_idempotency(request_body)
             data = json.dumps(request_body).encode("utf-8")
@@ -220,7 +220,7 @@ class AsyncHttpClient:
 
     async def post_binary_json(self, path: str, body: RequestBody) -> tuple[bytes, dict[str, str]]:
         with self.telemetry.operation(path, "POST", self.base_url, VERSION) as span:
-            encoded = self._without_top_level_idempotency(body)
+            encoded = self._validated_request_body(body)
             req = self._json_request("POST", path, json.dumps(encoded).encode("utf-8"), {})
             req.headers["Accept"] = "application/octet-stream"
             self.telemetry.prepare(span, req)
@@ -267,7 +267,7 @@ class AsyncHttpClient:
             url = self._build_url(path, query)
             encoded: RequestBody | dict[str, Any] | None = body
             if encoded is not None:
-                encoded = self._without_top_level_idempotency(encoded)
+                encoded = self._validated_request_body(encoded)
             if method.upper() == "POST" and self._is_idempotent_mutation_path(path):
                 encoded = self._with_request_meta_idempotency(encoded or {})
             data = json.dumps(encoded).encode("utf-8") if encoded is not None else None
@@ -336,8 +336,8 @@ class AsyncHttpClient:
     def _with_request_meta_idempotency(self, body: dict[str, Any]) -> dict[str, Any]:
         return self._codec._with_request_meta_idempotency(body)
 
-    def _without_top_level_idempotency(self, body: RequestBody) -> dict[str, Any]:
-        return self._codec._without_top_level_idempotency(body)
+    def _validated_request_body(self, body: RequestBody) -> dict[str, Any]:
+        return self._codec._validated_request_body(body)
 
     def _is_idempotent_mutation_path(self, path_or_url: str) -> bool:
         return self._codec._is_idempotent_mutation_path(path_or_url)

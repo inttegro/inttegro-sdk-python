@@ -19,4 +19,4 @@ class RequestMetaInput(ApiRequest):
     API contract schema: ``RefundRequestMetaInput``.
     """
     idempotency_key: str | UnsetType = field(default=UNSET)
-    """Body-level compatibility key. Prefer the `Idempotency-Key` header for new integrations. Optional. Python type: ``str``; wire name: ``idempotency_key``; JSON type: string. Constraints: minimum length 1; maximum length 255"""
+    """Stable retry key carried inside ``request_meta``. It must match the ``Idempotency-Key`` header when both are provided. Optional. Python type: ``str``; wire name: ``idempotency_key``; JSON type: string. Constraints: minimum length 1; maximum length 255"""

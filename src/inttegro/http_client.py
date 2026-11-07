@@ -125,7 +125,7 @@ class HttpClient:
     ) -> Any:
         with self.telemetry.operation(path, "POST", self.base_url, VERSION) as span:
             request_headers = dict(headers or {})
-            request_body = self._without_top_level_idempotency(body or {})
+            request_body = self._validated_request_body(body or {})
             if self._is_idempotent_mutation_path(path) and not self._has_header(request_headers, "Idempotency-Key"):
                 request_body = self._with_request_meta_idempotency(request_body)
             data = json.dumps(request_body).encode("utf-8")
@@ -176,7 +176,7 @@ class HttpClient:
 
     def post_binary_json(self, path: str, body: RequestBody) -> tuple[bytes, dict[str, str]]:
         with self.telemetry.operation(path, "POST", self.base_url, VERSION) as span:
-            body = self._without_top_level_idempotency(body)
+            body = self._validated_request_body(body)
             data = json.dumps(body).encode("utf-8")
             req = urllib.request.Request(url=self._build_url(path, None), data=data, method="POST")
             req.add_header("Accept", "application/octet-stream")
@@ -226,7 +226,7 @@ class HttpClient:
         with self.telemetry.operation(path, method, self.base_url, VERSION) as span:
             url = self._build_url(path, query)
             if body is not None:
-                body = self._without_top_level_idempotency(body)
+                body = self._validated_request_body(body)
             if method.upper() == "POST" and self._is_idempotent_mutation_path(path):
                 body = self._with_request_meta_idempotency(body or {})
             data = json.dumps(body).encode("utf-8") if body is not None else None
@@ -283,7 +283,7 @@ class HttpClient:
         return url
 
     def _with_request_meta_idempotency(self, body: dict[str, Any]) -> dict[str, Any]:
-        payload = self._without_top_level_idempotency(body)
+        payload = self._validated_request_body(body)
         request_meta_value = payload.get("request_meta")
         request_meta = dict(request_meta_value) if isinstance(request_meta_value, dict) else {}
         existing_key = request_meta.get("idempotency_key")
@@ -294,12 +294,16 @@ class HttpClient:
         payload["request_meta"] = request_meta
         return payload
 
-    def _without_top_level_idempotency(self, body: RequestBody) -> dict[str, Any]:
+    def _validated_request_body(self, body: RequestBody) -> dict[str, Any]:
         encoded = encode_request_value(body)
         if not isinstance(encoded, dict):
             raise TypeError("request body must encode to a JSON object")
         payload = dict(encoded)
-        payload.pop("idempotency_key", None)
+        if "idempotency_key" in payload:
+            raise ValueError(
+                "top-level idempotency_key is not supported; use "
+                "request_meta.idempotency_key or the Idempotency-Key header"
+            )
         return payload
 
     def _is_idempotent_mutation_path(self, path_or_url: str) -> bool:
