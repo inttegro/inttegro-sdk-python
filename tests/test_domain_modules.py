@@ -33,7 +33,6 @@ class DomainModuleTest(unittest.TestCase):
                 "id": "pr_123",
                 "active": True,
                 "type": "fixed_amount",
-                "nominal": {"currency": "ghs", "value": 3005},
                 "fixed_amount": {"currency": "ghs", "value": 3005},
                 "product_id": "prod_123",
                 "created_at": "2026-09-02T12:00:00Z",
@@ -50,9 +49,8 @@ class DomainModuleTest(unittest.TestCase):
             },
             catalog_params.to_dict(),
         )
-        self.assertIsInstance(catalog_price.nominal, Amount)
         self.assertIsInstance(catalog_price.fixed_amount, Amount)
-        self.assertEqual(Currency.GHS, catalog_price.nominal.currency)
+        self.assertEqual(Currency.GHS, catalog_price.fixed_amount.currency)
         self.assertEqual("prod_123", catalog_price.product_id)
         self.assertEqual(Currency.EUR, inline_price.currency)
         self.assertEqual(Currency.GHS, Currency("GHS"))

@@ -34,8 +34,6 @@ class Price(ApiModel):
     """Whether this price is active and usable in new flows. Required. Python type: ``bool``; wire name: ``active``; JSON type: boolean"""
     type: Type = field(init=False)
     """Price definition discriminator. Required. Python type: ``Type``; wire name: ``type``; JSON type: string (PriceType)"""
-    nominal: Amount | None = field(init=False)
-    """Deprecated fixed-price compatibility alias. Present only for fixed prices. Python type: ``Amount | None``; wire name: ``nominal``; JSON type: object (Amount)"""
     fixed_amount: Amount | None = field(init=False)
     """Fixed amount present only for fixed prices. Python type: ``Amount | None``; wire name: ``fixed_amount``; JSON type: object (Amount)"""
     customer_selected_amount: CustomerSelectedAmount | None = field(init=False)
