@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from .chime import Chime as Chime
-    from .email_event import EmailEvent as EmailEvent
     from .email_mailbox import EmailMailbox as EmailMailbox
     from .email_mailbox_input import EmailMailboxInput as EmailMailboxInput
     from .email_message import EmailMessage as EmailMessage
@@ -40,7 +39,6 @@ if TYPE_CHECKING:
 
 _EXPORTS: dict[str, tuple[str, str]] = {
     "Chime": ("inttegro.chime.chime", "Chime"),
-    "EmailEvent": ("inttegro.chime.email_event", "EmailEvent"),
     "EmailMailbox": ("inttegro.chime.email_mailbox", "EmailMailbox"),
     "EmailMailboxInput": ("inttegro.chime.email_mailbox_input", "EmailMailboxInput"),
     "EmailMessage": ("inttegro.chime.email_message", "EmailMessage"),
@@ -73,7 +71,6 @@ _EXPORTS: dict[str, tuple[str, str]] = {
 
 __all__ = [
     "Chime",
-    "EmailEvent",
     "EmailMailbox",
     "EmailMailboxInput",
     "EmailMessage",

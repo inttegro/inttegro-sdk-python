@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from ..http_client import HttpClient
+from inttegro.payment_method.update_request import UpdateRequest
 
 
 def _stable_payment_method_request_meta(action: str, payment_method_id: str) -> dict:
@@ -320,7 +321,7 @@ class PaymentMethods:
         """
         return self.http.post("/payment_methods/page", payload or {})
 
-    def update(self, payload: dict):
+    def update(self, payload: UpdateRequest):
         """
         Update mutable payment method fields.
 

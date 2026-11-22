@@ -13,7 +13,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Callable, Dict, NoReturn, Optional
 
-from ._model_base import ApiModel, ModelDecodeError, decode_value
+from ._model_base import ApiModel, decode_value
 from ._request_base import ApiRequest, encode_request_value
 from ._response_types import response_type_for_path
 from .errors import APIError, AuthenticationError, NetworkError, RateLimitError, TimeoutError
@@ -363,13 +363,8 @@ class HttpClient:
             normalized_path = urllib.parse.urlparse(path).path if path else ""
             response_shape = response_type_for_path(normalized_path)
             if response_shape is not None:
-                try:
-                    value = payload if response_shape.field is None else payload[response_shape.field]
-                    return decode_value(response_shape.model, value)
-                except (ModelDecodeError, KeyError):
-                    # Preserve unexpected wire data for forward compatibility. Valid
-                    # documented payloads always decode to the endpoint's domain type.
-                    pass
+                value = payload if response_shape.field is None else payload[response_shape.field]
+                return decode_value(response_shape.model, value)
             return DynamicValue(payload)
         return self._handle_error(status, headers, body, parsed)
 

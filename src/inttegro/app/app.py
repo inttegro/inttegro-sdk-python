@@ -35,8 +35,8 @@ class App(ApiModel):
     """Last update timestamp. Optional; nullable. Python type: ``datetime | None``; wire name: ``updated_at``; JSON type: string (date-time)"""
     archived_at: datetime | None = field(init=False)
     """Archive timestamp (if archived). Optional; nullable. Python type: ``datetime | None``; wire name: ``archived_at``; JSON type: string (date-time)"""
-    capabilities: dict[str, object] = field(init=False)
-    """Public capabilities currently available to this app. Required. Python type: ``dict[str, object]``; wire name: ``capabilities``; JSON type: object"""
+    capabilities: CapabilityProjection = field(init=False)
+    """Known public capabilities currently available to this app. Required. Python type: ``CapabilityProjection``; wire name: ``capabilities``; JSON type: object"""
     children_policy: ChildrenPolicy | None = field(init=False)
     """Active children policy assigned to this app. Optional; nullable. Python type: ``ChildrenPolicy | None``; wire name: ``children_policy``; JSON type: object"""
     secret_key: ApplicationSecretKey | None = field(init=False)
@@ -47,6 +47,7 @@ class App(ApiModel):
     """Gated immutable operating-policy snapshot. Optional; nullable. Python type: ``ApplicationOperatingPolicy | None``; wire name: ``operating_policy``; JSON type: object"""
 
 from inttegro.app.relationship import Relationship as ApplicationRelationship
+from inttegro.app.capabilities import CapabilityProjection
 from inttegro.app.secret_key import SecretKey as ApplicationSecretKey
 from inttegro.children_policy import ChildrenPolicy
 from inttegro.operating_policy import Snapshot as ApplicationOperatingPolicy

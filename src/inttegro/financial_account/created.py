@@ -6,7 +6,7 @@ Generated from the Inttegro API contract; do not edit by hand.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Literal
+from typing import Literal
 from inttegro._model_base import ApiModel
 
 
@@ -50,8 +50,8 @@ class Created(ApiModel):
     """The supplied associated with this created. Optional; nullable. Python type: ``ResourceSupply | None``; wire name: ``supplied``; JSON type: object (ResourceSupply)"""
     type: Literal['wallet', 'bank_account', 'dosh_account'] = field(init=False)
     """Discriminator identifying the created type. Required. Python type: ``Literal['wallet', 'bank_account', 'dosh_account']``; wire name: ``type``; JSON type: string. Constraints: allowed values ``wallet``, ``bank_account``, ``dosh_account``"""
-    verification: dict[str, Any] | None = field(init=False)
-    """The verification associated with this created. Optional; nullable. Python type: ``dict[str, Any] | None``; wire name: ``verification``; JSON type: object (FinancialAccountVerification)"""
+    verification: Verification | None = field(init=False)
+    """Verification state associated with this created account. Optional; nullable. Python type: ``Verification | None``; wire name: ``verification``; JSON type: object (FinancialAccountVerification)"""
     bank_account: FinancialAccountBankCreateResponse | None = field(init=False)
     """The bank account associated with this created. Optional; nullable. Python type: ``FinancialAccountBankCreateResponse | None``; wire name: ``bank_account``; JSON type: object (FinancialAccountBankCreateResponse)"""
     owner: FinancialAccountOwnerCreateResponse | None = field(init=False)
@@ -67,3 +67,4 @@ from inttegro.wallet.wallet import Wallet as FinancialAccountWallet
 from inttegro.financial_account.financial_institution import FinancialInstitution
 from inttegro.shared.resource_supply import ResourceSupply
 from inttegro.custom_data import CustomData
+from inttegro.financial_account.verification import Verification

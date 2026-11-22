@@ -46,3 +46,11 @@ class Capabilities(ApiModel):
 
     payments: Capability = field(init=False)
     payouts: Capability = field(init=False)
+
+
+@dataclass(frozen=True, slots=True, init=False, repr=False, eq=False)
+class CapabilityProjection(ApiModel):
+    """Known capability states currently exposed on an app resource."""
+
+    payments: Capability | None = field(init=False)
+    payouts: Capability | None = field(init=False)

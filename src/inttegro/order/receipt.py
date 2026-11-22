@@ -12,4 +12,6 @@ class Receipt(ApiModel):
 
     format: ReceiptFormat = field(init=False)
     number: str | None = field(init=False)
-    delivery_summary: dict[str, object] | None = field(init=False)
+    delivery_summary: DocumentDeliverySummary | None = field(init=False)
+
+from inttegro.order.document_delivery_summary import DocumentDeliverySummary

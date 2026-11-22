@@ -3,7 +3,6 @@
 The primary returned object is ``inttegro.chime.Chime``. Related request types, nested response shapes, and string-backed enums are exported from this singular namespace. Public members load lazily, so importing one resource does not eagerly import the entire SDK."""
 
 from .chime import Chime as Chime
-from .email_event import EmailEvent as EmailEvent
 from .email_mailbox import EmailMailbox as EmailMailbox
 from .email_mailbox_input import EmailMailboxInput as EmailMailboxInput
 from .email_message import EmailMessage as EmailMessage

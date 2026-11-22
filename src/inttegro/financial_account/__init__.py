@@ -20,6 +20,7 @@ if TYPE_CHECKING:
     from .disable_request import DisableRequest as DisableRequest
     from .disconnect_response import DisconnectResponse as DisconnectResponse
     from .dosh_request import DoshRequest as DoshRequest
+    from .dosh_account import DoshAccount as DoshAccount
     from .dosh_request_pull_configuration import DoshRequestPullConfiguration as DoshRequestPullConfiguration
     from .dosh_request_push_configuration import DoshRequestPushConfiguration as DoshRequestPushConfiguration
     from .enable_pull_request import EnablePullRequest as EnablePullRequest
@@ -43,6 +44,8 @@ if TYPE_CHECKING:
     from .update_request import UpdateRequest as UpdateRequest
     from .update_response import UpdateResponse as UpdateResponse
     from .updated import Updated as Updated
+    from .verification import Verification as Verification
+    from .verification import VerificationRequest as VerificationRequest
     from .wallet_request import WalletRequest as WalletRequest
     from .wallet_request_pull_configuration import WalletRequestPullConfiguration as WalletRequestPullConfiguration
     from .wallet_request_push_configuration import WalletRequestPushConfiguration as WalletRequestPushConfiguration
@@ -63,6 +66,7 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "DisableRequest": ("inttegro.financial_account.disable_request", "DisableRequest"),
     "DisconnectResponse": ("inttegro.financial_account.disconnect_response", "DisconnectResponse"),
     "DoshRequest": ("inttegro.financial_account.dosh_request", "DoshRequest"),
+    "DoshAccount": ("inttegro.financial_account.dosh_account", "DoshAccount"),
     "DoshRequestPullConfiguration": ("inttegro.financial_account.dosh_request_pull_configuration", "DoshRequestPullConfiguration"),
     "DoshRequestPushConfiguration": ("inttegro.financial_account.dosh_request_push_configuration", "DoshRequestPushConfiguration"),
     "EnablePullRequest": ("inttegro.financial_account.enable_pull_request", "EnablePullRequest"),
@@ -86,6 +90,8 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "UpdateRequest": ("inttegro.financial_account.update_request", "UpdateRequest"),
     "UpdateResponse": ("inttegro.financial_account.update_response", "UpdateResponse"),
     "Updated": ("inttegro.financial_account.updated", "Updated"),
+    "Verification": ("inttegro.financial_account.verification", "Verification"),
+    "VerificationRequest": ("inttegro.financial_account.verification", "VerificationRequest"),
     "WalletRequest": ("inttegro.financial_account.wallet_request", "WalletRequest"),
     "WalletRequestPullConfiguration": ("inttegro.financial_account.wallet_request_pull_configuration", "WalletRequestPullConfiguration"),
     "WalletRequestPushConfiguration": ("inttegro.financial_account.wallet_request_push_configuration", "WalletRequestPushConfiguration"),
@@ -106,6 +112,7 @@ __all__ = [
     "DisableRequest",
     "DisconnectResponse",
     "DoshRequest",
+    "DoshAccount",
     "DoshRequestPullConfiguration",
     "DoshRequestPushConfiguration",
     "EnablePullRequest",
@@ -129,6 +136,8 @@ __all__ = [
     "UpdateRequest",
     "UpdateResponse",
     "Updated",
+    "Verification",
+    "VerificationRequest",
     "WalletRequest",
     "WalletRequestPullConfiguration",
     "WalletRequestPushConfiguration",
