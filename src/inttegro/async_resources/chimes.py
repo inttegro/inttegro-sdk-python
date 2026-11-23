@@ -80,6 +80,10 @@ class AsyncChimes:
         """
         return await self.http.post('/chimes/page', payload or {})
 
+    async def settings(self):
+        """Retrieve the effective, non-secret Chime delivery settings."""
+        return await self.http.post('/chimes/settings', {})
+
     async def schedule(self, payload: dict):
         """
         Schedule a notification for future delivery.

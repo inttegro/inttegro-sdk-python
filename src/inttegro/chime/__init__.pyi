@@ -29,5 +29,8 @@ from .response import Response as Response
 from .saved_customer_recipient_input import SavedCustomerRecipientInput as SavedCustomerRecipientInput
 from .send_request import SendRequest as SendRequest
 from .send_request_request_meta import SendRequestRequestMeta as SendRequestRequestMeta
+from .settings import EmailSettings as EmailSettings
+from .settings import Settings as Settings
+from .settings import SMSSettings as SMSSettings
 from .transmission import Transmission as Transmission
 from .transport import Transport as Transport

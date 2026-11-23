@@ -615,6 +615,7 @@ class InttegroClientTest(unittest.TestCase):
         client.chimes.send({"message": "hi"})
         client.chimes.lookup("ch_1")
         client.chimes.page({})
+        client.chimes.settings()
         client.chimes.schedule({
             "recipients": ["+233544998605"],
             "full_message": "later",
