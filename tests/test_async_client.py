@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import httpx
 
 from inttegro import AsyncInttegroClient, AuthenticationError, InttegroClient
+from inttegro._response_types import response_type_for_path
 from inttegro.order import Order
 
 
@@ -35,7 +36,13 @@ class AsyncTransportRecorder:
         if path.startswith("/orders/"):
             response = {"order": ORDER_BODY}
         else:
-            response = body or {"ok": True}
+            response_shape = response_type_for_path(path)
+            if response_shape is None:
+                response = body or {"ok": True}
+            elif response_shape.field is None:
+                response = {}
+            else:
+                response = {response_shape.field: {}}
         return 200, {"content-type": "application/json"}, json.dumps(response)
 
 

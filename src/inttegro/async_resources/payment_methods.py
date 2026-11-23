@@ -2,6 +2,7 @@
 """Payment methods resource for tokenizing and managing payment instruments."""
 from __future__ import annotations
 from ..async_http_client import AsyncHttpClient
+from inttegro.payment_method.update_request import UpdateRequest
 
 def _stable_payment_method_request_meta(action: str, payment_method_id: str) -> dict:
     return {'idempotency_key': f'payment_methods_{action}_{payment_method_id}'}
@@ -309,7 +310,7 @@ class AsyncPaymentMethods:
         """
         return await self.http.post('/payment_methods/page', payload or {})
 
-    async def update(self, payload: dict):
+    async def update(self, payload: UpdateRequest):
         """
         Update mutable payment method fields.
 

@@ -5,7 +5,7 @@ Generated from the Inttegro API contract; do not edit by hand.
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import Any, Literal
+from typing import Literal
 from inttegro._request_base import ApiRequest, UNSET, UnsetType
 
 
@@ -37,11 +37,12 @@ class DoshRequest(ApiRequest):
     """Merchant-defined external reference for the dosh request. Required. Python type: ``str``; wire name: ``reference``; JSON type: string. Constraints: minimum length 5; maximum length 40"""
     type: Literal['dosh_account', FinancialAccountType.DOSH_ACCOUNT]
     """Discriminator identifying the dosh request type. Required. Python type: ``Literal['dosh_account', FinancialAccountType.DOSH_ACCOUNT]``; wire name: ``type``; JSON type: string. Constraints: allowed values ``dosh_account``"""
-    dosh_account: dict[str, Any]
-    """Dosh account marker. Dosh credentials and internal identifiers are not supplied by callers or returned publicly. Required. Python type: ``dict[str, Any]``; wire name: ``dosh_account``; JSON type: object (DoshAccount)"""
+    dosh_account: DoshAccount
+    """Dosh account marker; credentials and internal identifiers are not supplied. Required. Python type: ``DoshAccount``; wire name: ``dosh_account``; JSON type: object (DoshAccount)"""
 
 from inttegro.financial_account.dosh_request_pull_configuration import DoshRequestPullConfiguration as FinancialAccountDoshRequestPullConfiguration
 from inttegro.financial_account.dosh_request_push_configuration import DoshRequestPushConfiguration as FinancialAccountDoshRequestPushConfiguration
 from inttegro.bank_account.owner_params import OwnerParams as FinancialAccountOwnerInput
 from inttegro.financial_account.type import Type as FinancialAccountType
 from inttegro.custom_data import CustomDataInput
+from inttegro.financial_account.dosh_account import DoshAccount

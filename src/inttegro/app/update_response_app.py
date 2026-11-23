@@ -33,9 +33,10 @@ class UpdateResponseApp(ApiModel):
     """When the update response app was created. Required. Python type: ``datetime``; wire name: ``created_at``; JSON type: string (date-time)"""
     updated_at: datetime | None = field(init=False)
     """When the update response app was last updated. Optional; nullable. Python type: ``datetime | None``; wire name: ``updated_at``; JSON type: string (date-time)"""
-    capabilities: dict[str, object] = field(init=False)
-    """Public capabilities currently available to this app. Required. Python type: ``dict[str, object]``; wire name: ``capabilities``; JSON type: object"""
+    capabilities: CapabilityProjection = field(init=False)
+    """Known public capabilities currently available to this app. Required. Python type: ``CapabilityProjection``; wire name: ``capabilities``; JSON type: object"""
     operating_policy: ApplicationOperatingPolicy | None = field(init=False)
     """Gated immutable operating-policy snapshot. Optional; nullable. Python type: ``ApplicationOperatingPolicy | None``; wire name: ``operating_policy``; JSON type: object"""
 
 from inttegro.operating_policy import Snapshot as ApplicationOperatingPolicy
+from inttegro.app.capabilities import CapabilityProjection

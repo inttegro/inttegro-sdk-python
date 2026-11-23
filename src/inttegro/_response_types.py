@@ -17,6 +17,7 @@ from inttegro.broadcast.broadcast import Broadcast as BroadcastDetail
 from inttegro.price.price import Price as CatalogPrice
 from inttegro.chime.chime import Chime
 from inttegro.chime.page import Page as ChimePage
+from inttegro.chime.settings import Settings as ChimeSettings
 from inttegro.shared.country_specification import CountrySpecification
 from inttegro.customer.customer import Customer
 from inttegro.customer.page import Page as CustomerPage
@@ -81,7 +82,7 @@ RESPONSE_TYPES_BY_PATH: dict[str, ResponseShape] = {
     '/operating_policies/create': _resource(OperatingPolicy, 'operating_policy'), '/operating_policies/lookup': _resource(OperatingPolicy, 'operating_policy'), '/operating_policies/page': _resource(OperatingPolicyPage, 'page'), '/operating_policies/update': _resource(OperatingPolicy, 'operating_policy'),
     '/balance_transactions/lookup': _resource(BalanceTransaction, 'transaction'), '/balance_transactions/page': _resource(BalanceTransactionPage, 'page'), '/balances': _resource(BalanceSnapshot, 'balances'),
     '/broadcasts/cancel': _resource(BroadcastDetail, 'broadcast'), '/broadcasts/lookup': _resource(BroadcastDetail, 'broadcast'),
-    '/chimes/broadcast': _resource(BroadcastCreationDetail, 'broadcast'), '/chimes/lookup': _resource(Chime, 'chime'), '/chimes/page': _resource(ChimePage, 'page'), '/chimes/schedule': _resource(ScheduleCreationDetail, 'scheduled_chime'), '/chimes/send': _resource(Chime, 'chime'),
+    '/chimes/broadcast': _resource(BroadcastCreationDetail, 'broadcast'), '/chimes/lookup': _resource(Chime, 'chime'), '/chimes/page': _resource(ChimePage, 'page'), '/chimes/schedule': _resource(ScheduleCreationDetail, 'scheduled_chime'), '/chimes/send': _resource(Chime, 'chime'), '/chimes/settings': _resource(ChimeSettings, 'settings'),
     '/customers/create': _resource(Customer, 'customer'), '/customers/lookup': _resource(Customer, 'customer'), '/customers/page': _resource(CustomerPage, 'page'), '/customers/update': _resource(Customer, 'customer'),
     '/customers/search': _resource(ResourceSearchPage, 'search'),
     '/file_links/create': ResponseShape(FileLinkCreation), '/file_links/lookup': _resource(FileLink, 'file_link'), '/file_links/page': _resource(FileLinkPage, 'page'), '/file_links/revoke': _resource(FileLink, 'file_link'),

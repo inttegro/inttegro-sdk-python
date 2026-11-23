@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from inttegro import CustomData, CustomDataInput, CustomDataPatch, InttegroClient
 from inttegro.balance_transaction import BalanceTransaction
-from inttegro.chime import EmailMailboxInput, EmailMessageInput
+from inttegro.chime import EmailMailboxInput, EmailMessageInput, Transmission
 from inttegro.customer import CreateRequest as CreateCustomerRequest
 from inttegro.customer import Customer
 from inttegro.purchase_intent import (
@@ -215,7 +215,7 @@ class TypedModelTest(unittest.TestCase):
         with self.assertRaises(FrozenInstanceError):
             response.id = "rf_2"
 
-    def test_models_preserve_unknown_fields_and_round_trip(self):
+    def test_models_discard_undeclared_fields(self):
         response = Refund.from_dict(
             {
                 "id": "rf_1",
@@ -235,11 +235,32 @@ class TypedModelTest(unittest.TestCase):
             }
         )
 
-        self.assertEqual({"enabled": True}, response["future_field"])
-        self.assertEqual({"enabled": True}, response.to_dict()["future_field"])
+        with self.assertRaises(KeyError):
+            _ = response["future_field"]
+        self.assertNotIn("future_field", response.to_dict())
         self.assertEqual("2026-09-02T12:00:00Z", response.to_dict()["created_at"])
         self.assertEqual("unknown", response.failure.reason)
         self.assertEqual(False, response.failure.retryable)
+
+    def test_chime_transmission_does_not_expose_provider_details(self):
+        transmission = Transmission.from_dict(
+            {
+                "address": "ada@example.com",
+                "created_at": "2026-11-17T12:01:00Z",
+                "initialized_at": "2026-11-17T12:01:00Z",
+                "mechanism": "email",
+                "status": "failed",
+                "failed_at": "2026-11-17T12:02:00Z",
+                "gateway": "ses",
+                "provider_message_id": "provider-message-id",
+                "bounce_type": "Permanent",
+            }
+        )
+
+        self.assertEqual("failed", transmission.status)
+        self.assertNotIn("gateway", transmission.to_dict())
+        self.assertNotIn("provider_message_id", transmission.to_dict())
+        self.assertNotIn("bounce_type", transmission.to_dict())
 
     def test_refund_settlement_is_discriminated_and_strict(self):
         refund = Refund.from_dict(

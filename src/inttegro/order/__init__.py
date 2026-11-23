@@ -6,6 +6,9 @@ from importlib import import_module
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
+    from .document_delivery_summary import DocumentDeliveryChannelSummary as DocumentDeliveryChannelSummary
+    from .document_delivery_summary import DocumentDeliverySummary as DocumentDeliverySummary
+    from .document_delivery_summary import DocumentDeliverySummaryChannels as DocumentDeliverySummaryChannels
     from .address import Address as Address
     from .cancel_request import CancelRequest as CancelRequest
     from .checkout_settings import CheckoutSettings as CheckoutSettings
@@ -64,6 +67,9 @@ if TYPE_CHECKING:
 
 
 _EXPORTS: dict[str, tuple[str, str]] = {
+    "DocumentDeliveryChannelSummary": ("inttegro.order.document_delivery_summary", "DocumentDeliveryChannelSummary"),
+    "DocumentDeliverySummary": ("inttegro.order.document_delivery_summary", "DocumentDeliverySummary"),
+    "DocumentDeliverySummaryChannels": ("inttegro.order.document_delivery_summary", "DocumentDeliverySummaryChannels"),
     "Address": ("inttegro.order.address", "Address"),
     "CancelRequest": ("inttegro.order.cancel_request", "CancelRequest"),
     "CheckoutSettings": ("inttegro.order.checkout_settings", "CheckoutSettings"),
@@ -122,6 +128,9 @@ _EXPORTS: dict[str, tuple[str, str]] = {
 }
 
 __all__ = [
+    "DocumentDeliveryChannelSummary",
+    "DocumentDeliverySummary",
+    "DocumentDeliverySummaryChannels",
     "Address",
     "CancelRequest",
     "CheckoutSettings",

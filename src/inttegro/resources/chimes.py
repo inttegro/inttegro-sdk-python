@@ -82,6 +82,10 @@ class Chimes:
         """
         return self.http.post("/chimes/page", payload or {})
 
+    def settings(self):
+        """Retrieve the effective, non-secret Chime delivery settings."""
+        return self.http.post("/chimes/settings", {})
+
     def schedule(self, payload: dict):
         """
         Schedule a notification for future delivery.

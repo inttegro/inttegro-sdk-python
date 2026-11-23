@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from .capabilities import Capability as Capability
     from .capabilities import CapabilityRequirement as CapabilityRequirement
     from .capabilities import CapabilityRequirements as CapabilityRequirements
+    from .capabilities import CapabilityProjection as CapabilityProjection
     from .create_request import CreateRequest as CreateRequest
     from .create_request_relationship_policy import CreateRequestRelationshipPolicy as CreateRequestRelationshipPolicy
     from .create_response import CreateResponse as CreateResponse
@@ -34,6 +35,7 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "Capability": ("inttegro.app.capabilities", "Capability"),
     "CapabilityRequirement": ("inttegro.app.capabilities", "CapabilityRequirement"),
     "CapabilityRequirements": ("inttegro.app.capabilities", "CapabilityRequirements"),
+    "CapabilityProjection": ("inttegro.app.capabilities", "CapabilityProjection"),
     "CreateRequest": ("inttegro.app.create_request", "CreateRequest"),
     "CreateRequestRelationshipPolicy": ("inttegro.app.create_request_relationship_policy", "CreateRequestRelationshipPolicy"),
     "CreateResponse": ("inttegro.app.create_response", "CreateResponse"),
@@ -57,6 +59,7 @@ __all__ = [
     "Capability",
     "CapabilityRequirement",
     "CapabilityRequirements",
+    "CapabilityProjection",
     "CreateRequest",
     "CreateRequestRelationshipPolicy",
     "CreateResponse",

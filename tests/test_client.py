@@ -10,6 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import inttegro
+from inttegro._response_types import response_type_for_path
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import SimpleSpanProcessor
 from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
@@ -198,7 +199,13 @@ class TransportRecorder:
         elif path.startswith("/orders/"):
             response = {"order": ORDER_BODY}
         else:
-            response = body or {"ok": True}
+            response_shape = response_type_for_path(path)
+            if response_shape is None:
+                response = body or {"ok": True}
+            elif response_shape.field is None:
+                response = {}
+            else:
+                response = {response_shape.field: {}}
         return 200, {"content-type": "application/json"}, json.dumps(response)
 
 
@@ -608,6 +615,7 @@ class InttegroClientTest(unittest.TestCase):
         client.chimes.send({"message": "hi"})
         client.chimes.lookup("ch_1")
         client.chimes.page({})
+        client.chimes.settings()
         client.chimes.schedule({
             "recipients": ["+233544998605"],
             "full_message": "later",

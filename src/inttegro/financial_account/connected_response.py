@@ -6,7 +6,7 @@ Generated from the Inttegro API contract; do not edit by hand.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Literal
+from typing import Literal
 from inttegro._model_base import ApiModel
 
 
@@ -50,12 +50,12 @@ class ConnectedResponse(ApiModel):
     """The supplied associated with this connected response. Optional; nullable. Python type: ``ResourceSupply | None``; wire name: ``supplied``; JSON type: object (ResourceSupply)"""
     type: Literal['wallet', 'bank_account', 'dosh_account'] = field(init=False)
     """Discriminator identifying the connected response type. Required. Python type: ``Literal['wallet', 'bank_account', 'dosh_account']``; wire name: ``type``; JSON type: string. Constraints: allowed values ``wallet``, ``bank_account``, ``dosh_account``"""
-    verification: dict[str, Any] | None = field(init=False)
-    """The verification associated with this connected response. Optional; nullable. Python type: ``dict[str, Any] | None``; wire name: ``verification``; JSON type: object (FinancialAccountVerification)"""
+    verification: Verification | None = field(init=False)
+    """Verification state associated with this connected response. Optional; nullable. Python type: ``Verification | None``; wire name: ``verification``; JSON type: object (FinancialAccountVerification)"""
     bank_account: FinancialAccountBank | None = field(init=False)
     """The bank account associated with this connected response. Optional; nullable. Python type: ``FinancialAccountBank | None``; wire name: ``bank_account``; JSON type: object (FinancialAccountBankResponse)"""
-    dosh_account: dict[str, Any] | None = field(init=False)
-    """Dosh account marker. Dosh credentials and internal identifiers are not supplied by callers or returned publicly. Optional; nullable. Python type: ``dict[str, Any] | None``; wire name: ``dosh_account``; JSON type: object (DoshAccount)"""
+    dosh_account: DoshAccount | None = field(init=False)
+    """Dosh account marker; credentials and internal identifiers are not exposed. Optional; nullable. Python type: ``DoshAccount | None``; wire name: ``dosh_account``; JSON type: object (DoshAccount)"""
     owner: FinancialAccountOwner | None = field(init=False)
     """The owner associated with this connected response. Optional; nullable. Python type: ``FinancialAccountOwner | None``; wire name: ``owner``; JSON type: object (FinancialAccountOwnerResponse)"""
     wallet: FinancialAccountWallet | None = field(init=False)
@@ -69,3 +69,5 @@ from inttegro.wallet.wallet import Wallet as FinancialAccountWallet
 from inttegro.financial_account.financial_institution import FinancialInstitution
 from inttegro.shared.resource_supply import ResourceSupply
 from inttegro.custom_data import CustomData
+from inttegro.financial_account.dosh_account import DoshAccount
+from inttegro.financial_account.verification import Verification

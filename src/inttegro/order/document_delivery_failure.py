@@ -23,5 +23,3 @@ class DocumentDeliveryFailure(ApiModel):
     """
     channel: Literal['email', 'sms'] | None = field(init=False)
     """Delivery channel. Optional; nullable. Python type: ``Literal['email', 'sms'] | None``; wire name: ``channel``; JSON type: string. Constraints: allowed values ``email``, ``sms``"""
-    error: str | None = field(init=False)
-    """Provider or Chime error for this channel. Optional; nullable. Python type: ``str | None``; wire name: ``error``; JSON type: string"""

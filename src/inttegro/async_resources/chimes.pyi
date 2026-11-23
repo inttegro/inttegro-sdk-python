@@ -5,6 +5,7 @@ from ..async_http_client import AsyncHttpClient
 from inttegro.broadcast.creation_detail import CreationDetail as BroadcastCreation
 from inttegro.chime.chime import Chime
 from inttegro.chime.page import Page
+from inttegro.chime.settings import Settings
 from inttegro.schedule.creation_detail import CreationDetail as ScheduleCreation
 from inttegro.chime.send_request import SendRequest
 from inttegro.chime.page_request import PageRequest
@@ -23,6 +24,9 @@ class AsyncChimes:
         ...
 
     async def page(self, payload: PageRequest | None=None) -> Page:
+        ...
+
+    async def settings(self) -> Settings:
         ...
 
     async def schedule(self, payload: ChimeRequest) -> ScheduleCreation:

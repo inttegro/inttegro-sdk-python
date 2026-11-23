@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from .chime import Chime as Chime
-    from .email_event import EmailEvent as EmailEvent
     from .email_mailbox import EmailMailbox as EmailMailbox
     from .email_mailbox_input import EmailMailboxInput as EmailMailboxInput
     from .email_message import EmailMessage as EmailMessage
@@ -34,13 +33,15 @@ if TYPE_CHECKING:
     from .saved_customer_recipient_input import SavedCustomerRecipientInput as SavedCustomerRecipientInput
     from .send_request import SendRequest as SendRequest
     from .send_request_request_meta import SendRequestRequestMeta as SendRequestRequestMeta
+    from .settings import EmailSettings as EmailSettings
+    from .settings import Settings as Settings
+    from .settings import SMSSettings as SMSSettings
     from .transmission import Transmission as Transmission
     from .transport import Transport as Transport
 
 
 _EXPORTS: dict[str, tuple[str, str]] = {
     "Chime": ("inttegro.chime.chime", "Chime"),
-    "EmailEvent": ("inttegro.chime.email_event", "EmailEvent"),
     "EmailMailbox": ("inttegro.chime.email_mailbox", "EmailMailbox"),
     "EmailMailboxInput": ("inttegro.chime.email_mailbox_input", "EmailMailboxInput"),
     "EmailMessage": ("inttegro.chime.email_message", "EmailMessage"),
@@ -67,13 +68,15 @@ _EXPORTS: dict[str, tuple[str, str]] = {
     "SavedCustomerRecipientInput": ("inttegro.chime.saved_customer_recipient_input", "SavedCustomerRecipientInput"),
     "SendRequest": ("inttegro.chime.send_request", "SendRequest"),
     "SendRequestRequestMeta": ("inttegro.chime.send_request_request_meta", "SendRequestRequestMeta"),
+    "EmailSettings": ("inttegro.chime.settings", "EmailSettings"),
+    "Settings": ("inttegro.chime.settings", "Settings"),
+    "SMSSettings": ("inttegro.chime.settings", "SMSSettings"),
     "Transmission": ("inttegro.chime.transmission", "Transmission"),
     "Transport": ("inttegro.chime.transport", "Transport"),
 }
 
 __all__ = [
     "Chime",
-    "EmailEvent",
     "EmailMailbox",
     "EmailMailboxInput",
     "EmailMessage",
@@ -100,6 +103,9 @@ __all__ = [
     "SavedCustomerRecipientInput",
     "SendRequest",
     "SendRequestRequestMeta",
+    "EmailSettings",
+    "Settings",
+    "SMSSettings",
     "Transmission",
     "Transport",
 ]

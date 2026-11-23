@@ -16,6 +16,7 @@ from .disable_push_response import DisablePushResponse as DisablePushResponse
 from .disable_request import DisableRequest as DisableRequest
 from .disconnect_response import DisconnectResponse as DisconnectResponse
 from .dosh_request import DoshRequest as DoshRequest
+from .dosh_account import DoshAccount as DoshAccount
 from .dosh_request_pull_configuration import DoshRequestPullConfiguration as DoshRequestPullConfiguration
 from .dosh_request_push_configuration import DoshRequestPushConfiguration as DoshRequestPushConfiguration
 from .enable_pull_request import EnablePullRequest as EnablePullRequest
@@ -39,6 +40,8 @@ from .type import Type as Type
 from .update_request import UpdateRequest as UpdateRequest
 from .update_response import UpdateResponse as UpdateResponse
 from .updated import Updated as Updated
+from .verification import Verification as Verification
+from .verification import VerificationRequest as VerificationRequest
 from .wallet_request import WalletRequest as WalletRequest
 from .wallet_request_pull_configuration import WalletRequestPullConfiguration as WalletRequestPullConfiguration
 from .wallet_request_push_configuration import WalletRequestPushConfiguration as WalletRequestPushConfiguration

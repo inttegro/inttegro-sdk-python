@@ -18,10 +18,13 @@ class ModelDecodeError(ValueError):
 
 
 class ApiModel:
-    """Read-only, typed API response with mapping-style access."""
+    """Read-only, typed API response with mapping-style access.
 
-    __slots__ = ("_extra", "_present_fields")
-    _extra: dict[str, Any]
+    Only fields declared by the public SDK model are retained. Undeclared wire
+    fields are ignored by the model's mapping interface.
+    """
+
+    __slots__ = ("_present_fields",)
     _present_fields: frozenset[str]
 
     @classmethod
@@ -35,19 +38,15 @@ class ApiModel:
         attribute = _attribute_for_wire_name(type(self), key)
         if attribute is not None and attribute in self._present_fields:
             return object.__getattribute__(self, attribute)
-        try:
-            return self._extra[key]
-        except KeyError:
-            raise KeyError(key) from None
+        raise KeyError(key)
 
     def __iter__(self) -> Iterator[str]:
         for model_field in fields(cast(Any, self)):
             if model_field.name in self._present_fields:
                 yield _wire_name(model_field)
-        yield from self._extra
 
     def __len__(self) -> int:
-        return len(self._present_fields) + len(self._extra)
+        return len(self._present_fields)
 
     def get(self, key: str, default: Any = None) -> Any:
         try:
@@ -149,7 +148,6 @@ def decode_value(annotation: Any, value: Any) -> Any:
                     f"missing={sorted(missing)!r}, unexpected={sorted(unexpected)!r}"
                 )
         object.__setattr__(instance, "_present_fields", frozenset(present))
-        object.__setattr__(instance, "_extra", {key: item for key, item in value.items() if key not in consumed})
         return instance
 
     if isinstance(annotation, type) and issubclass(annotation, Enum):
